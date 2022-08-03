@@ -27,7 +27,6 @@ export default function AdminLogin() {
   let userOrg = useRef('');
   let userPwd = useRef('');
   let userCheck = useRef('');
-  let userCode = useRef('');
 
   const transRegis = (event) => {
     navigate(`/adminsignup`);
@@ -49,6 +48,7 @@ export default function AdminLogin() {
 
 
   const handleSubmit = async (e) => {
+    console.log("clicked");
     e.preventDefault();
     const token = await recaptchaRef.current.executeAsync();
     console.log(token);
@@ -60,7 +60,6 @@ export default function AdminLogin() {
       org: userOrg.current.value,
       user_type: "0",
       reCaptcha_Token: token,
-      code: userCode.current.value,
       userCheck: userCheck.current.value,
     };
     console.log(msg);
@@ -183,20 +182,6 @@ export default function AdminLogin() {
               placeholder="Enter your password again"
               required="required"
               name="check"
-            />
-          </Labelbox>
-          <Labelbox className="form-group">
-            <Label htmlFor="code">
-            Invitation Code
-              </Label>
-            <Newinput
-              type="text"
-              className="form-control"
-              id="code"
-              ref={userCode}
-              placeholder="Invitation Code"
-              required="required"
-              name="code"
             />
           </Labelbox>
           <Labelbox>
