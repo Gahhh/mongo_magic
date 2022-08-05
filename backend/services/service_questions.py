@@ -99,7 +99,6 @@ def question_answer(req):
       
   office_data = data_process(office_list, question_set)
   data_centre_data = data_process(data_list, question_set)
-  
   result = engine(office_data, data_centre_data)
   demo_pack = {
     "score": "99",

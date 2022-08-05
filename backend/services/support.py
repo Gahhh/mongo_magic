@@ -12,10 +12,7 @@ db = db_connect()
 
 def support_question_add(req):
   try:
-    if req['email'] == 'default':
-      email = get_jwt_identity()
-    else:
-      email = req['email']
+    email = req['email']
     question = req['question']
     db_col = db['support']
     new_question = {

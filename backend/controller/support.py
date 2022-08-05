@@ -7,7 +7,7 @@ from services.support import support_question_add, support_question_list, suppor
 user_support_blueprint = Blueprint('support', __name__)
 
 @user_support_blueprint.route('/support/question', methods=['POST'])
-@jwt_required()
+@swag_from('../docs/support/add_question.yml', methods=['POST'])
 def add():
     return support_question_add(request.json)
 
