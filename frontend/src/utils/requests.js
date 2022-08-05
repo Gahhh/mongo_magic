@@ -88,3 +88,8 @@ export const regisRequest = (body) => {
     const res = apiRequest({ method: 'POST', url: '/users/register', body: body });
     return res;
 }
+
+export const getSupportQuestions = () => {
+    const res = apiRequest({ method: 'GET', url: '/support/list'});
+    return res;
+}
