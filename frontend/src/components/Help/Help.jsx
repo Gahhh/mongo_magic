@@ -1,6 +1,7 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 import logo from "../../assets/LogoBlue.png";
+import { Logoimg, Navbar, Atag, Span } from "./Helpcss";
 import './Help.css';
 
 const Help = () => {
@@ -33,30 +34,30 @@ const Help = () => {
 
   return(
     <div className='HelpContainer'>
-      <div className='Navbar'>
+      <Navbar>
         <div className='logo-title'>
-          <img className='LogoImage' src={logo} alt="logo"/>
+          <Logoimg src={logo} alt="logo" />
           <div className='title'>G'Tracker </div>
         </div>
-        <span className='Link'>
-          <a className='Atag' onClick={turnToHome}>Home</a>
-          <a className='Atag'>Ranking</a>
-          <a className='Atag'>Help</a>
-          <a className='Atag' onClick={turnToAbout}>About</a>
+        <Span>
+          <Atag onClick={turnToHome}>Home</Atag>
+          <Atag>Ranking</Atag>
+          <Atag>Help</Atag>
+          <Atag onClick={turnToAbout}>About</Atag>
           {
             localStorage.getItem('userToken') ?
               <div style={{margin:'1rem', lineHeight:'0'}}>
-                <a className='Atag' onClick={turnToDashboard}>Dashboard</a>
-                <a className='Atag' onClick={logout}>Logout</a>
+                <Atag onClick={turnToDashboard}>Dashboard</Atag>
+                <Atag onClick={logout}>Logout</Atag>
               </div>
               :
               <div style={{margin:'1rem', lineHeight:'0'}}>
-                <a className='Atag' onClick={turnToLogin}>Login</a>
-                <a className='Atag' onClick={turnToRegister}>Sign up</a>
+                <Atag onClick={turnToLogin}>Login</Atag>
+                <Atag onClick={turnToRegister}>Sign up</Atag>
               </div>
           }
-        </span>
-      </div>
+        </Span>
+      </Navbar>
       <h1 className='title'>How we work</h1>
       <div className='contents'>
         <ol>
