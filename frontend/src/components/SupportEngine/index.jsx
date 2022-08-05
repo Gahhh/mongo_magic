@@ -4,10 +4,10 @@ import SupportWindow from './SupportWindow'
 
 import Avatar from './Avatar'
 
-const SupportEngine = () => {
+const SupportEngine = (props) => {
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
@@ -25,7 +25,7 @@ const SupportEngine = () => {
 
     return (
         <div ref={wrapperRef}>
-            <SupportWindow visible={visible} setVisible={setVisible}/>
+            <SupportWindow prof={props.prof} visible={visible} setVisible={setVisible}/>
 
             <Avatar 
                 onClick={() => setVisible(!visible)}

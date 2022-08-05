@@ -145,12 +145,12 @@ const NavBar = (props) =>{
         navigate(`/users/${pageName}`);
     }
     
-    const handleMouseOn = (e) =>{
+    const handlePointerOn = (e) =>{
         switch (e.type) {
-            case 'mouseenter':
+            case 'pointerenter':
                 setLogoutHover(themeColor);
                 break;
-            case 'mouseleave':
+            case 'pointerleave':
                 setLogoutHover(undefined);
                 break;
             default:
@@ -197,17 +197,16 @@ const NavBar = (props) =>{
                         </Menu.Item>
                     </Menu>
                 </MainMenuContainer>
-                <div onClick={() => {userLogout()}} onMouseEnter={(e) => (handleMouseOn(e))} onMouseLeave={(e) => {handleMouseOn(e)}} style={{padding:'8px',cursor:'pointer', display:'flex', justifyContent:'right', position:'absolute', top:'700px', right:'5px'}}>
+                <div onClick={() => {userLogout()}} onPointerEnter={(e) => (handlePointerOn(e))} onPointerLeave={(e) => {handlePointerOn(e)}} style={{padding:'8px',cursor:'pointer', display:'flex', justifyContent:'right', position:'absolute', top:'700px', right:'5px'}}>
                     <b style={{ color:logoutHover, padding:'3px' }}>Logout</b>
-                    {/* <LogoutOutlined onMouseEnter={(e) => (handleLogoutMouseOn(e))} onMouseLeave={(e) => {handleLogoutMouseOff(e)}} style={{ fontSize:'20px',marginLeft:'5px', color:logoutHover  }}></LogoutOutlined> */}
-                    <LogoutOutlined onMouseEnter={(e) => (handleMouseOn(e))} onMouseLeave={(e) => {handleMouseOn(e)}} style={{ padding:'3px', fontSize:'20px', color:logoutHover  }}></LogoutOutlined>
+                    <LogoutOutlined onPointerEnter={(e) => (handlePointerOn(e))} onPointerLeave={(e) => {handlePointerOn(e)}} style={{ padding:'3px', fontSize:'20px', color:logoutHover  }}></LogoutOutlined>
                 </div>
                 </>
                 ) : (<></>)
             }
             </Sider>
     </>
-  );
+);
 
 }
 export default NavBar;

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import { styles } from "../styles"
 
@@ -10,11 +10,18 @@ import sendMail from "../../../utils/sendMail"
 
 import { Button, message, Input } from 'antd'
 
+import { sendSupportQuestion } from "../../../utils/requests"
+
 const EmailForm = props => {    
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState(props.prof?.email)
     const [content, setContent] = useState('')
     const [loading, setLoading] = useState(false)
     const [sent, setSent] = useState(false)
+
+    useEffect(() => {
+        setEmail(props.prof?.email)
+    } , [props.prof])
+
     return (
         <div 
             style={{
@@ -72,6 +79,7 @@ const EmailForm = props => {
                 >
                     <input 
                         placeholder='Your Email'
+                        defaultValue={props.prof?.email}
                         onChange={e => setEmail(e.target.value)}
                         style={styles.emailInput}
                     />
@@ -84,7 +92,25 @@ const EmailForm = props => {
                     <br/>
                     <Button onClick={() => {
                         props.setVisible(false);
+                        if (content.length < 0){
+                            {
+                            message.error('Please enter a message')
+                        }
+                            return;
+                        }
+                        sendSupportQuestion({'email':{email}, 'question':{content}}).then(
+                            res => {
+                                console.log(res);
+                                if (res.ok){
+                                    message.success('Message sent! Will get back to you soon')
+                                    setSent(true)
+                                }   else {
+                                    message.error('Oops! Something went wrong')
+                                }
+                            }
+                        )
                         sendMail(email, content).then(res => {
+                        console.log(email);
                         console.log(res);
                     })}} style={{ marginTop:'15px', borderColor:'#4D7393', borderRadius:'12px'}}>
                         Send

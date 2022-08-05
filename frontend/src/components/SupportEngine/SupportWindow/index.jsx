@@ -21,6 +21,7 @@ const SupportWindow = props => {
             }}
         >
             <EmailForm 
+                prof = {props.prof}
                 visible={user === null || chat === null}
                 setUser={user => setUser(user)} 
                 setChat={chat => setChat(chat)}

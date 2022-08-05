@@ -21,9 +21,13 @@ import NavBar from './components/Navbar';
 import HeaderBar from './components/HeaderBar';
 import AssessmentPage from './pages/AssessmentPage/AssessmentPage';
 import TestPage from './pages/TestPage';
-import AboutPage from "./pages/AboutPage";
-import HelpPage from "./pages/HelpPage";
+import AboutPage from './pages/AboutPage';
+import HelpPage from './pages/HelpPage';
 import SupportEngine from  './components/SupportEngine';
+import AdminSupport from './pages/AdminSupport';
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminNavbar from "./components/AdminNavbar";
+import AdminHeaderBar from "./components/AdminHeaderBar";
 
 export const ProfileContext = React.createContext();
 
@@ -80,13 +84,21 @@ function App() {
                 <Route path="profile" element={<><Layout><HeaderBar page='Profile'></HeaderBar><Profile /></Layout></>} />
                 <Route path="settings" element={<><Layout><HeaderBar page='Settings'></HeaderBar><Settings /></Layout></>} />
               </Route>
+              <Route path='/admin/' element={<><AdminNavbar page='Dashboard'></AdminNavbar><Outlet/></>}>
+                <Route path="dashboard" element={<Layout><AdminHeaderBar page='Dashboard'></AdminHeaderBar><AdminDashboard /></Layout>} />
+                <Route path="support"  element={<><Layout><AdminHeaderBar page='Support'></AdminHeaderBar><AdminSupport /></Layout></>} />
+                <Route path="analytics" element={<><Layout><AdminHeaderBar page='Analytics'></AdminHeaderBar><Analytics /></Layout></>} />
+                <Route path="ranking" element={<><Layout><AdminHeaderBar page='Ranking'></AdminHeaderBar><Ranking /></Layout></>} />
+                <Route path="profile" element={<><Layout><AdminHeaderBar page='Profile'></AdminHeaderBar><Profile /></Layout></>} />
+                <Route path="settings" element={<><Layout><AdminHeaderBar page='Settings'></AdminHeaderBar><Settings /></Layout></>} />
+              </Route>
               <Route path="*" element={<NotFound />} />
               <Route path="/newquiz" element={<Newquiz />} />
             </Routes>
           </ProfileContext.Provider>
         </Router>
         </>
-        <SupportEngine style={{ position:'fixed', bottom:'0', right:'0' }}></SupportEngine>
+        <SupportEngine prof={profile} style={{ position:'fixed', bottom:'0', right:'0' }}></SupportEngine>
       </Layout>
     </div>
   );
