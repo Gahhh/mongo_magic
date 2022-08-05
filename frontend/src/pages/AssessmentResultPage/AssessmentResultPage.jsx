@@ -308,7 +308,7 @@ const AssessmentResultPage = () => {
                         <div className='title'>G'Tracker </div>
                     </div>
                     <Span>
-                        <Atag>Home</Atag>
+                        <Atag onClick={() => (navigate('/'))}>Home</Atag>
                         <Atag>Ranking</Atag>
                         <Atag onClick={turnToHelp}>Help</Atag>
                         <Atag onClick={turnToAbout}>About</Atag>

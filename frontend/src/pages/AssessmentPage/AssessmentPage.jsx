@@ -124,33 +124,6 @@ const AssessmentPage = () => {
     // to test save function
     const [notSaved, setNotSaved] = useState(true);
 
-    // useEffect(() => {
-    //     if (notSaved) {
-    //         getQuestionList().then(res => {
-    //             if (res.ok) {
-    //                 res.json().then(
-    //                     data => {
-    //                         handleQuestionList(data.question_list);
-    //                         getSavedQuestion().then(savedQuestion => savedQuestion.json()
-    //                         ).then(savedQuestion => {
-    //                             if (Object.entries(savedQuestion).length > 0) {
-    //                                 setHasSavedAssessment(true);
-    //                                 setSavedAssessmentContent(savedQuestion[Object.keys(savedQuestion)[0]]);
-    //                             } else {
-    //                                 setHasSavedAssessment(false);
-    //                                 setOfficeList(['1']);
-    //                                 setdatacentreList(['1']);
-    //                                 setLoading(false);
-    //                             }
-    //                         }
-    //                         )
-    //                     }
-    //                 )
-    //             }
-    //         })
-    //     } else {
-    //     }
-    // }, [notSaved]);
     useEffect(() => {
         getQuestionList().then(res => {
             if (res.ok) {
@@ -211,7 +184,7 @@ const AssessmentPage = () => {
         } else {
             setOfficeFinished(false);
         }
-        if (assessmentAnswer[`data${datacentreList.length}`] && dataCentreUnfinishFlag === false) {
+        if (assessmentAnswer[`data`] && dataCentreUnfinishFlag === false) {
             setdatacentreFinished(true);
         } else {
             setdatacentreFinished(false);
@@ -394,7 +367,7 @@ const AssessmentPage = () => {
     const answerAllShits = () => {
         setPageStep(2);
         setOfficeList(['1','2']);
-        setdatacentreList(['1','2']);
+        setdatacentreList(['1']);
         setAssessmentAnswer({
             "office1": {
                 "62d7eb8720b23a61a4656ec2": "3211",
@@ -424,16 +397,7 @@ const AssessmentPage = () => {
                 "62dbbe8be82cdd10987ecd1c": "F",
                 "62dbbe9ae82cdd10987ecd1d": "F"
             },
-            "data1": {
-                "62dff0a2dd0aaca7f9e83a86": "T",
-                "62dff202dd0aaca7f9e83a88": "123",
-                "62dff13edd0aaca7f9e83a87": "2311",
-                "62dff2ecdd0aaca7f9e83a8b": "123",
-                "62dff22add0aaca7f9e83a89": "F",
-                "62e269bfe93d521d7ac25a12": "22",
-                "62e26a1ee93d521d7ac25a13": "F"
-            },
-            "data2": {
+            "data": {
                 "62dff0a2dd0aaca7f9e83a86": "F",
                 "62e8f46032a02279ec5058d6": "F"
             }
@@ -469,7 +433,7 @@ const AssessmentPage = () => {
                                             (pageStep === 1) ?
                                                 <>
                                                     {datacentreList.map((datacentre) =>
-                                                        <QuestionForm type={'datacentre'} setRemover={setRemover} key={`Data Centre${datacentre}`} collapseNumber={datacentreCollapseNumber} datacentreList={datacentreList} number={parseInt(datacentre)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListDataCenter}></QuestionForm>
+                                                        <QuestionForm type={'datacentre'} key={`Data Centre`} collapseNumber={datacentreCollapseNumber} datacentreList={datacentreList} number={parseInt(datacentre)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListDataCenter}></QuestionForm>
                                                     )}
                                                 </> :
                                                 (pageStep === 2) ?
@@ -506,7 +470,7 @@ const AssessmentPage = () => {
                                 <CaretLeftFilled style={{ fontSize: '20px' }}></CaretLeftFilled> Prev
                             </div>}
                             <div style={{ display: 'flex', order: '1', width: '80%', justifyContent: 'center' }}>
-                                {pageStep < 2 && <Button style={{ marginRight: '10px' }} onClick={unitAdder}>{pageStep === 0 ? <>Add Another Office</> : pageStep === 1 && <>Add Another Data Centre</>}</Button>}
+                                {pageStep < 1 && <Button style={{ marginRight: '10px' }} onClick={unitAdder}>Add Another Office</Button>}
                                 {/* {<Button disabled={pageStep===0 ? officeList.length=== 1 : datacentreList.length === 1} style={{ alignItems: 'flex-start', order:'2' }} onClick={removeLastUnit}>{pageStep === 0 ? <>Remove Last Office</> : <>Remove Last Data Center</>}</Button>} */}
                             </div>
                             <div onClick={pageStep === 0 ? officeFinished ? goNextPage : null : pageStep === 1 ? datacentreFinished ? goNextPage : null : null} style={{
