@@ -24,14 +24,11 @@ import TestPage from './pages/TestPage';
 import AboutPage from './pages/AboutPage';
 import HelpPage from './pages/HelpPage';
 import SupportEngine from  './components/SupportEngine';
-<<<<<<< Updated upstream
 import AdminSupport from './pages/AdminSupport';
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminNavbar from "./components/AdminNavbar";
 import AdminHeaderBar from "./components/AdminHeaderBar";
-=======
 import PublicRanking from './pages/PublicRanking';
->>>>>>> Stashed changes
 
 export const ProfileContext = React.createContext();
 

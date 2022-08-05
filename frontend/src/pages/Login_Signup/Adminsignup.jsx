@@ -88,13 +88,9 @@ export default function AdminLogin() {
         } else {
           res.json().then(body => {
             asyncLocalStorage.setItem('userToken', body.token).then(() =>
-<<<<<<< Updated upstream
-              navigate(`/admin/dashboard`)
-=======
               asyncLocalStorage.setItem('userType', "0").then(() =>
               navigate(`/admin/dashboard`)
             )
->>>>>>> Stashed changes
             )
           })
         }
