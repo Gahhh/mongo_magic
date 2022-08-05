@@ -70,7 +70,6 @@ const AssessmentPage = () => {
 
     const [pageStep, setPageStep] = useState(0);
     const [datacentreNumber, setdatacentreNumber] = useState(1);
-    const [datacentreCollapseNumber, setdatacentreCollapseNumber] = useState(1);
     const [datacentreList, setdatacentreList] = useState([]);
 
     const [officeFinished, setOfficeFinished] = useState(false);
@@ -106,7 +105,6 @@ const AssessmentPage = () => {
             }
             if (dList.length > 0) {
                 setdatacentreList(dList)
-                setdatacentreCollapseNumber(Object.keys(savedAssessmentContent).filter(item => item.substring(0, 4) === 'data').length);
             }
             setOfficeNumber(officeTotal);
             setdatacentreNumber(datacentreTotal);
@@ -204,12 +202,10 @@ const AssessmentPage = () => {
         switch (pageStep) {
             case 1:
                 setdatacentreList(prev => ([...prev, `${datacentreNumber + 1}`]));
-                setdatacentreCollapseNumber(datacentreCollapseNumber + 1);
                 setdatacentreNumber(datacentreNumber + 1);
                 break;
             default:
                 setOfficeList(prev => ([...prev, `${officeNumber + 1}`]));
-                setCollapseNumber(collapseNumber + 1);
                 setOfficeNumber(officeNumber + 1);
                 break;
         }
@@ -219,7 +215,6 @@ const AssessmentPage = () => {
         switch (pageStep) {
             case 1:
                 setdatacentreNumber(datacentreNumber - 1);
-                setdatacentreCollapseNumber(datacentreCollapseNumber - 1);
                 if (datacentreList.length > 1) {
                     setdatacentreList(prev => prev.slice(0, datacentreList.length - 1));
                     setdatacentreNumber(datacentreNumber - 1);
@@ -232,7 +227,6 @@ const AssessmentPage = () => {
                 break;
             default:
                 setOfficeNumber(officeNumber - 1);
-                setCollapseNumber(collapseNumber - 1);
                 if (officeList.length > 1) {
                     setOfficeList(prev => prev.slice(0, officeList.length - 1));
                     setOfficeNumber(officeNumber - 1);
@@ -433,7 +427,7 @@ const AssessmentPage = () => {
                                             (pageStep === 1) ?
                                                 <>
                                                     {datacentreList.map((datacentre) =>
-                                                        <QuestionForm type={'datacentre'} key={`Data Centre`} collapseNumber={datacentreCollapseNumber} datacentreList={datacentreList} number={parseInt(datacentre)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListDataCenter}></QuestionForm>
+                                                        <QuestionForm type={'datacentre'} key={`Data Centre`} collapseNumber={1} datacentreList={datacentreList} number={parseInt(datacentre)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListDataCenter}></QuestionForm>
                                                     )}
                                                 </> :
                                                 (pageStep === 2) ?

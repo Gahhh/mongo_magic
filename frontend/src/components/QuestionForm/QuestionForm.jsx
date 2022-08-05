@@ -27,12 +27,12 @@ const QuestionForm = (props) => {
 
     useEffect(() => {
         QuestionListRender([...props.qList]);
-        setCollapse(props.collapseNumber);
+        setCollapse(props?.collapseNumber);
     }, [props.officeList]);
 
     useEffect(() => {
         QuestionListRender([...props.qList]);
-        setCollapse(props.collapseNumber);
+        setCollapse(props?.collapseNumber);
     }, [props.datacentreList])
 
     useEffect(() => {
@@ -118,6 +118,8 @@ const QuestionForm = (props) => {
         ))
     }
 
+    console.log(props.number);
+
     return (
         <>
             <div className='questionFormContainer'>
@@ -128,7 +130,7 @@ const QuestionForm = (props) => {
                     }
                     </Divider>
                 <Collapse onChange={collapseChange} activeKey={collapse} accordion={true} bordered={true} ghost={true}>
-                    <Panel key={props.number}>
+                    <Panel key={props.type === 'office' ? props.number : 1}>
                         <QuestionContext.Provider value={providerAnswer}>
                             {
                                 (postCode) ? (<></>) :
