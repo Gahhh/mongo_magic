@@ -2,12 +2,12 @@ import { React } from "react";
 import { Layout } from 'antd';
 import '../App.css';
 import { checkToken } from '../utils/functions';
-import TextEffect from '/frontend/src/components/TextEffect'
+import TextEffect from '../components/TextEffect';
 import { useContext } from 'react';
-import { ProfileContext } from '/frontend/src/App';
+import { ProfileContext } from "../App";
 import HeaderBar from '../components/HeaderBar';
-import LoadingIcon from '/frontend/src/components/LoadingIcon';
-import themeColor from '.../config/theme';
+import LoadingIcon from '../components/LoadingIcon';
+import themeColor from '../config/theme';
 
 const { Content } = Layout;
 

@@ -70,7 +70,7 @@ export default function AdminLogin() {
         } else {
           res.json().then(body => {
             asyncLocalStorage.setItem('userToken', body.token).then(() =>
-              navigate(`/users/dashboard`)
+              navigate(`/admin/dashboard`)
             )
           })
         }

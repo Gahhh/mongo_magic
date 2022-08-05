@@ -56,6 +56,7 @@ const HeaderBar = (props) => {
     const [profile, setProfile] = useState(undefined);
     const prof = useContext(ProfileContext);
     const navigate = useNavigate();
+    console.log(profile)
     useEffect(() => {
         if (prof.providerProfile.profile && (!objectEqual(prof.providerProfile.profile, profile))) {
             setProfile(prof.providerProfile.profile);
