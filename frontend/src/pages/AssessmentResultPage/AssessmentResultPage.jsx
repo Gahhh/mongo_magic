@@ -332,7 +332,7 @@ const AssessmentResultPage = () => {
                             (<ContentContainer>
                                 <ContentContainerLeft>
                                     <div style={{ marginLeft: '25px', height: '400px', width: '100%', backgroundColor: `${themeColor_light}` }}>
-                                        <Image style={{ height: '400px', width:'100%', height:'400px'}} src={require('../../assets/resultBack_2.jpeg')}></Image>
+                                        <Image style={{ height: '400px', width:'100%'}} src={require('../../assets/resultBack_2.jpeg')}></Image>
                                     </div>
                                     <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
                                         Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext> Kg of Carbon Dioxide equivalent (tCO<sub>2</sub>e).

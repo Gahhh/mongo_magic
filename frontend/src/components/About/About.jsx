@@ -7,7 +7,8 @@ import yjj from '../../assets/yjj.jpg';
 import kw from '../../assets/kw.jpg';
 import jjl from '../../assets/jll.jpg'
 import wyf from '../../assets/wyf.jpg';
-import lige from '../../assets/lige.jpg';
+import lige from '../../assets/yyl.png';
+import {Atag, Logoimg, Navbar, Span} from "../Help/Helpcss";
 
 const About = () => {
   const navigate = useNavigate();
@@ -43,30 +44,30 @@ const About = () => {
 
   return (
     <div className='aboutContainer'>
-      <div className='Navbar'>
+      <Navbar>
         <div className='logo-title'>
-          <img className='LogoImage' src={logo} alt="logo"/>
+          <Logoimg src={logo} alt="logo" />
           <div className='title'>G'Tracker </div>
         </div>
-        <span className='Link'>
-          <a className='Atag' onClick={turnToHome}>Home</a>
-          <a className='Atag'>Ranking</a>
-          <a className='Atag' onClick={turnToHelp}>Help</a>
-          <a className='Atag' onClick={turnToAbout}>About</a>
+        <Span>
+          <Atag onClick={turnToHome}>Home</Atag>
+          <Atag>Ranking</Atag>
+          <Atag onClick={turnToHelp}>Help</Atag>
+          <Atag onClick={turnToAbout}>About</Atag>
           {
             localStorage.getItem('userToken') ?
               <div style={{margin:'1rem', lineHeight:'0'}}>
-                <a className='Atag' onClick={turnToDashboard}>Dashboard</a>
-                <a className='Atag' onClick={logout}>Logout</a>
+                <Atag onClick={turnToDashboard}>Dashboard</Atag>
+                <Atag onClick={logout}>Logout</Atag>
               </div>
               :
               <div style={{margin:'1rem', lineHeight:'0'}}>
-                <a className='Atag' onClick={turnToLogin}>Login</a>
-                <a className='Atag' onClick={turnToRegister}>Sign up</a>
+                <Atag onClick={turnToLogin}>Login</Atag>
+                <Atag onClick={turnToRegister}>Sign up</Atag>
               </div>
           }
-        </span>
-      </div>
+        </Span>
+      </Navbar>
       <h1 className='title'>Meet our team</h1>
       <p className='description'>We’re a passionate, action driven and unstoppable team on a mission to develop a cloud-based sustainability assessment platform for industry organisations.</p>
       <div className='memberLeft'>

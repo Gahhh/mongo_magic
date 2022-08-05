@@ -7,44 +7,6 @@ div.aboutContainer {
     align-items: center;
 }
 
-img.LogoImage {
-    width: 56px;
-    height:56px;
-}
-
-div.Navbar {
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 40px;
-    letter-spacing: 0.02em;
-    color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    max-width: 1200px;
-    margin: auto;
-    width: 100%;
-    justify-content: space-between;
-    padding-top: 1.2rem;
-}
-
-a.Atag {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
-    /* identical to box height */
-    text-align: center;
-    color: #183B56;
-    margin: 1rem;
-}
-
-span.Link {
-    right: 10%;
-    top: 1rem;
-    margin-left: 1rem;
-    display: flex;
-    flex-direction: row;
-}
-
 div.title {
     color: #4D7393;
 }
