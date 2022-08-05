@@ -97,7 +97,10 @@ def question_answer(req):
     if re.search(r'^data', ans):
       data_list.append(ans_pack[ans])
   office_data = data_process(office_list, question_set)
-  data_centre_data = data_process(data_list, question_set)
+  data_centre_data = data_process(data_list, question_set)[0]
+
+  if data_centre_data["is_data_centre"] == "F":
+    data_centre_data = {}
   result = engine(office_data, data_centre_data)
   time_now = str(datetime.now())
   score_detail = result['score_detail']
@@ -108,7 +111,6 @@ def question_answer(req):
     temp_set = result['suggestion'][key]
     result['suggestion'][key] = list(temp_set)
   data_id = db_col.insert_one(result).inserted_id
-  
   # demo_pack = {
   #   "score": "99",
   #   "co2":"1500",

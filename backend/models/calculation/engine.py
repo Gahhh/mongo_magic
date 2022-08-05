@@ -123,7 +123,6 @@ def engine(office, data):
     office_suggestion = get_suggest(data_energy_temp, office_suggestion)
     co2e += calculate_co2(data_elec_amount,data_green_energy_percent, 9)
     habitat += calculate_habitat(co2e)
-    tennis_area = calculate_tennis_area(habitat)
     if cloud_percentage > 0.89:
       data_score = 36
     if avg_data_energy < 2 and data_score < 25:
@@ -132,6 +131,7 @@ def engine(office, data):
     if scaled_data_score != 0:
       total_score *= scaled_data_score
   score_detail['energy'] = energy_score
+  tennis_area = calculate_tennis_area(habitat)
   pack = {
     "score": total_score,
      "co2": co2e,
