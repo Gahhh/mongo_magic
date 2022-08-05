@@ -344,7 +344,7 @@ const AssessmentResultPage = () => {
                                         <Button style={{ borderRadius: '5px', width: '150px', alignSelf: 'end', marginRight: '10px', marginBottom: '50px', color: '#4D7393', borderColor: '#89c5d1' }} onClick={downloadPdf} data-html2canvas-ignore="true">Save as PDF</Button>
                                     </div>
                                     <h3 style={{ display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '32px' }} >Result</h3>
-                                    <h1 style={{ marginLeft: '20px', color: '#4D7393' }}>Your Organisation's Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>99</ParamContext> in our assessment</h1>
+                                    <h1 style={{ marginLeft: '20px', color: '#4D7393' }}>Your Organisation's Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h1>
                                     <div>{bulletPoints()}</div>
                                     <div style={{ display: 'flex', height: '100%', width: 'auto', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
                                         <div style={{ position: 'relative', left: '-80px', alignSelf: 'flex-end', whiteSpace: 'nowrap', color: '#4D7393', fontWeight: '600', marginRight: '5px' }}>By G'Tracker</div>

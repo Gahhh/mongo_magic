@@ -16,7 +16,6 @@ const Settings = () => {
 
     return (
         <>
-        {/* <Navbar  page='Settings'></Navbar> */}
     </>
     );
 }
