@@ -10,6 +10,7 @@ parameters:
         - email
         - password
         - user_type
+        - reCaptcha_Token
       properties:
         email:
           type: string
@@ -20,6 +21,9 @@ parameters:
         user_type:
           type: string
           example: "1" 
+        reCaptcha_Token:
+          type: string
+          example: "asfdwegq33bg2gv4w5wg4wg"
 responses:
   200:
     description: Successful login
@@ -51,3 +55,4 @@ responses:
     examples:
       - {"message": "Invalid email or password"}
       - {"message": "Invalid user type"}
+      - {"message": "Invalid reCaptcha token"}

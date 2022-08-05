@@ -41,6 +41,10 @@ export const getQuestionList = (url = '/question/list') => {
     return res;
 }
 
+export const postAnswers = (body) => {
+    return apiRequest({ method: 'POST', url: '/question/answer', body: body });
+}
+
 export const australianPostCode = async (postCode) => {
     const request = {
         method: 'GET',
@@ -52,61 +56,31 @@ export const australianPostCode = async (postCode) => {
     } catch (error) {
         setTimeout(() => {
             return (postCode) => australianPostCode(postCode);
-        }, 1000) 
+        }, 1000)
     }
 }
 
-// const australianPostCodeWithTimeout = (postCode, input, timeout = 5000) => {
-//     const controller = new AbortController();
-//     setTimeout(() => {
-//         controller.abort();
-//     }, timeout);
-//     const request = {
-//         method: 'GET',
-//         signal: controller.signal
-//     };
-//     return fetch(`https://secure.geonames.org/postalCodeSearchJSON?postalcode=${postCode}&username=jinl9667&country=AU`, request);
-// }
+export const saveQuestion = (body, url = '/question/save') => {
+    const res = apiRequest({ method: 'POST', url: url, body: body });
+    return res;
+}
 
-// const wait = (timeout) =>
-//     new Promise((resolve) => {
-//         setTimeout(() => {
-//             resolve();
-//         }, timeout);
-// });
+export const getSavedQuestion = (url = '/question/load') => {
+    return apiRequest({ url: url });
+}
 
-// export const australianPostCodeWithRetry = async (postCode, timeout= 3000, retries = 3) => {
-//     let increasingTimeout = 2;
-//     let count = retries;
-
-//     while (count > 0) {
-//         try{
-//             return await australianPostCodeWithTimeout(postCode,`https://secure.geonames.org/postalCodeSearchJSON?postalcode=${postCode}&username=jinl9667&country=AU`, timeout);
-//         } catch (e) {
-//             if (e.name !== 'AbortError') throw e;
-//             count --;
-//             increasingTimeout = Math.pow(increasingTimeout, 2);
-//             console.warn(
-//                 `Retrying in ${increasingTimeout}ms`,
-//                 `${count} retries left`
-//             );
-//         };
-//         await wait(increasingTimeout);
-//     }
-
-//     return Promise.reject(new Error(`Failed after ${retries} retries`));
-// }
-
-
+export const getResult = (resultId) => {
+    return apiRequest({ url: `/question/result?id=${resultId}` });
+}
 
 
 export const loginRequest = (body) => {
-  const res = apiRequest({method:'POST',url:'/users/login', body:body});
-  return res;
+    const res = apiRequest({ method: 'POST', url: '/users/login', body: body });
+    return res;
 }
 
 
 export const regisRequest = (body) => {
-  const res = apiRequest({method:'POST',url:'/users/register', body:body});
-  return res;
+    const res = apiRequest({ method: 'POST', url: '/users/register', body: body });
+    return res;
 }

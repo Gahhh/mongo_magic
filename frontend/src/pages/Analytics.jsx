@@ -1,16 +1,20 @@
-import React from "react";
-import { Layout, Input } from 'antd';
+import React, { useContext } from "react";
+import { Layout } from 'antd';
+import BarChart from '../components/BarChart/BarChart';
+import { ProfileContext } from '../App';
+import LoadingIcon from "../components/LoadingIcon";
 
 const { Content }  = Layout;
 
 const Ranking = () => {
-
+    const prof = useContext(ProfileContext);
     return (
         <>
-        {/* <Navbar page='Analytics'></Navbar> */}
+            {prof.providerProfile.profile ? (
             <Content style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            </Content>
-    </>
+                <BarChart></BarChart>
+            </Content>) : (<Layout style={{ display: 'flex', justifyContent: 'center' }}><LoadingIcon></LoadingIcon></Layout>)}
+        </>
     )
 }
 export default Ranking;

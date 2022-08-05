@@ -21,7 +21,7 @@ Based on the postcode, we can determine the location of the office/data centre.
 We used the energy mix data from the federal government to determine the renewable energy mix in the user's area.
 The baseline we set is the national average of the percentage of gas + renawerable energy mix.
 Based on the calculation, the score of each state is calculated and listed below:
-National average: 5, NSW+ACT: 3, VIC: 5, QLD: 5, SA: 6, WA: 6, NT: 7, TAS: 9 which higher is better.   
+National average: 5, NSW: 5, ACT: 5, VIC: 2, QLD: 5, SA: 8, WA: 6, NT: 7, TAS: 10 which higher is better.   
 Reference:   
 https://www.energy.gov.au/data/states-and-territories
 
@@ -36,7 +36,7 @@ Kennedy, C.A. A comparison of the sustainability of public and private transport
 ## Question - Green star rating:   
 Today, 44 per cent of Australia’s CBD office space and 40 per cent of retail space is Green Star certified. [source: Green Star 2019/20](https://gbca-web.s3.amazonaws.com/media/documents/green-star-in-focus-2020-final-spreads-sml.pdf).    
 Therefore, we will heavily reward the user if the user's office building is Green Star certified.   
-As there are only 12 buildings in Australia received 6 stars, we will give 2 bonus points for the user if the user's office building is 6 stars on top of the full marks. For these haven't got certified, we will ask two questions about their HVAC system, for each question we will give 1 point, if the answer is true. 
+As there are only 12 buildings in Australia received 6 stars, we will give 5 bonus points for the user if the user's office building is 6 stars on top of the full marks. For these haven't got certified, we will ask two questions about their HVAC system, for each question we will give 1 point, if the answer is true. 
 
 ## Question - Electricity Usage:
 We will collect the electricity consumption data with the floor area and number of employees in a office. Also, two questions will be asked about the lighting system. Users will be given extra points if they have a sustainable lighting system.

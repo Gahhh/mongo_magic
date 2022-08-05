@@ -30,7 +30,6 @@ const AssessmentStepBar = (props) => {
                 <Step disabled={!props.officeFinished} title="Additional Info" />
                 <Step disabled={!props.datacentreFinished || !props.officeFinished} title="Privacy & More" />
                 {/* TODO */}
-                <Step title="Report" />
             </Steps>
         )
     }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { styles } from './styles'
+import support from './support.png'
 
 const Avatar = props => {
     const [hovered, setHovered] = useState(false)
@@ -24,7 +25,7 @@ const Avatar = props => {
                 className='transition-3'
                 style={{
                     ...styles.chatWithMeButton,
-                    ...{ border: hovered ? '1px solid white' : '4px solid #4D7393' }
+                    ...{ border: hovered ? '1px solid #4D7393' : '4px solid #89c5d1' },
                 }}
             />
         </div>

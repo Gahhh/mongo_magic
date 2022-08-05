@@ -1,0 +1,40 @@
+tags:
+  - Questions
+summary: Add temporary answer to the database
+security:
+  - Bearer: [Bearer] 
+  - APIKeyHeader: ['authorization']
+parameters:
+  - in: body
+    name: body
+    schema:
+      id: test_cache
+      required:
+        - data
+        - office
+      properties:
+        data:
+          type: object
+          example: {"62dff0a2dd0aaca7f9e83a86": "true"}
+        office:
+          type: object
+          example: {"62d7eb8720b23a61a4656ec2": "3121"}
+responses:
+  200:
+    description: temporary save answer
+    schema:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "Answer saved"
+  500:
+    description: Server error
+    schema:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "server error"

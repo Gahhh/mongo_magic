@@ -1,14 +1,15 @@
-import React, { useEffect, useState, createContext, useMemo } from 'react';
-import { Button, Divider, Row, Col, Checkbox } from 'antd';
+import React, { useEffect, useState, createContext, useMemo, useContext, useRef } from 'react';
+import { Button, Divider, Row, Col, Checkbox, message } from 'antd';
 import styled from 'styled-components';
 import themeColor from '../../config/theme';
-import { getQuestionList } from '../../utils/requests'
+import { getQuestionList, saveQuestion, getSavedQuestion, postAnswers } from '../../utils/requests'
 import AssessmentStepBar from '../../components/AssessmentStepBar/AssessmentStepBar';
 import QuestionForm from '../../components/QuestionForm/QuestionForm';
 import AssessmentModal from '../../components/AssessmentModal/AssessmentModal';
 import { CaretRightOutlined, CaretLeftFilled } from '@ant-design/icons';
 import LoadingIcon from '../../components/LoadingIcon';
 import './AssessmentPage.css';
+import { useNavigate } from 'react-router-dom';
 
 export const SaveButton = createContext();
 
@@ -77,149 +78,41 @@ const AssessmentPage = () => {
 
     const [remover, setRemover] = useState(false);
 
+    const navigate = useNavigate();
+
 
     const [termsAgreed, setTermsAgreed] = useState(false);
     //hooks about saving assessment
     const [usingSavedAssessment, setUsingSavedAssessment] = useState(false);
     const [hasSavedAssessment, setHasSavedAssessment] = useState(false);
+    const [savedAssessmentContent, setSavedAssessmentContent] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const saveButton = useMemo(() => ({ saving }), [saving]);
 
-    const getSavedAssessment = () => {
-        return new Promise((resolve, reject) => {
-            if (1 > 0.5) {
-                setTimeout(() => {
-                    resolve({
-                        "office1": {
-                            "62d7ecc120b23a61a4656ec3": "false",
-                            "62d7eb8720b23a61a4656ec2": "3121",
-                            "62dbbb56e82cdd10987ecd14": "123",
-                            "62dbbba0e82cdd10987ecd15": "123",
-                            "62dbbc12e82cdd10987ecd16": "true",
-                            "62dbbc98e82cdd10987ecd17": "4 Stars",
-                            "62dbbd6ee82cdd10987ecd1a": "123",
-                            "62dbbe4ee82cdd10987ecd1b": "20",
-                            "62dbbe8be82cdd10987ecd1c": "false",
-                            "62dbbe9ae82cdd10987ecd1d": "false"
-                        },
-                        "office2": {
-                            "62d7ecc120b23a61a4656ec3": "true",
-                            "62d7eb8720b23a61a4656ec2": "3211",
-                            "62dbbb56e82cdd10987ecd14": "123",
-                            "62dbbba0e82cdd10987ecd15": "123",
-                            "62dbbc12e82cdd10987ecd16": "false",
-                            "62dbbd0ae82cdd10987ecd18": "false",
-                            "62dbbd34e82cdd10987ecd19": "true",
-                            "62dbbd6ee82cdd10987ecd1a": "123",
-                            "62dbbe4ee82cdd10987ecd1b": "13",
-                            "62dbbe8be82cdd10987ecd1c": "true",
-                            "62dbbe9ae82cdd10987ecd1d": "true",
-                            "62dbbf7fe82cdd10987ecd1e": [
-                                "Lightrail"
-                            ]
-                        },
-                        "data1": {
-                            "62dff0a2dd0aaca7f9e83a86": "true",
-                            "62dff13edd0aaca7f9e83a87": "1231",
-                            "62dff202dd0aaca7f9e83a88": "321",
-                            "62dff22add0aaca7f9e83a89": "true",
-                            "62dff2a7dd0aaca7f9e83a8a": "1 Star",
-                            "62dff2ecdd0aaca7f9e83a8b": "123",
-                            "62e269bfe93d521d7ac25a12": "9",
-                            "62e26a1ee93d521d7ac25a13": "false"
-                        },
-                        "data2": {
-                            "62dff0a2dd0aaca7f9e83a86": "true",
-                            "62dff202dd0aaca7f9e83a88": "123",
-                            "62dff13edd0aaca7f9e83a87": "3211",
-                            "62dff22add0aaca7f9e83a89": "true",
-                            "62dff2a7dd0aaca7f9e83a8a": "1 Star",
-                            "62dff2ecdd0aaca7f9e83a8b": "123",
-                            "62e269bfe93d521d7ac25a12": "15",
-                            "62e26a1ee93d521d7ac25a13": "true"
-                        }
-                    })
-                }, Math.random() * 1000)
-            }
-            else {
-                setTimeout(() => {
-                    resolve({});
-                })
-            }
-        }
-        )
-    }
-
-    const getData = () => {
-        return new Promise((resolve, reject) => {
-            resolve({
-                "office1": {
-                    "62d7ecc120b23a61a4656ec3": "false",
-                    "62d7eb8720b23a61a4656ec2": "3121",
-                    "62dbbb56e82cdd10987ecd14": "123",
-                    "62dbbba0e82cdd10987ecd15": "123",
-                    "62dbbc12e82cdd10987ecd16": "true",
-                    "62dbbc98e82cdd10987ecd17": "4 Stars",
-                    "62dbbd6ee82cdd10987ecd1a": "123",
-                    "62dbbe4ee82cdd10987ecd1b": "20",
-                    "62dbbe8be82cdd10987ecd1c": "false",
-                    "62dbbe9ae82cdd10987ecd1d": "false"
-                },
-                "office2": {
-                    "62d7ecc120b23a61a4656ec3": "true",
-                    "62d7eb8720b23a61a4656ec2": "3211",
-                    "62dbbb56e82cdd10987ecd14": "123",
-                    "62dbbba0e82cdd10987ecd15": "123",
-                    "62dbbc12e82cdd10987ecd16": "false",
-                    "62dbbd0ae82cdd10987ecd18": "false",
-                    "62dbbd34e82cdd10987ecd19": "true",
-                    "62dbbd6ee82cdd10987ecd1a": "123",
-                    "62dbbe4ee82cdd10987ecd1b": "13",
-                    "62dbbe8be82cdd10987ecd1c": "true",
-                    "62dbbe9ae82cdd10987ecd1d": "true",
-                    "62dbbf7fe82cdd10987ecd1e": [
-                        "Lightrail"
-                    ]
-                },
-                "data1": {
-                    "62dff0a2dd0aaca7f9e83a86": "true",
-                    "62dff13edd0aaca7f9e83a87": "1231",
-                    "62dff202dd0aaca7f9e83a88": "321",
-                    "62dff22add0aaca7f9e83a89": "true",
-                    "62dff2a7dd0aaca7f9e83a8a": "1 Star",
-                    "62dff2ecdd0aaca7f9e83a8b": "123",
-                    "62e269bfe93d521d7ac25a12": "9",
-                    "62e26a1ee93d521d7ac25a13": "false"
-                },
-                "data2": {
-                    "62dff0a2dd0aaca7f9e83a86": "true",
-                    "62dff202dd0aaca7f9e83a88": "123",
-                    "62dff13edd0aaca7f9e83a87": "3211",
-                    "62dff22add0aaca7f9e83a89": "true",
-                    "62dff2a7dd0aaca7f9e83a8a": "1 Star",
-                    "62dff2ecdd0aaca7f9e83a8b": "123",
-                    "62e269bfe93d521d7ac25a12": "15",
-                    "62e26a1ee93d521d7ac25a13": "true"
-                }
-            })
-        })
-    }
+    const shouldAskForSavedUnswer = useRef(true);
 
     useEffect(() => {
         if (usingSavedAssessment) {
-            getData().then(testSample => {
-                setAssessmentAnswer(testSample);
-                // get forms data
-                setOfficeList(Object.keys(testSample).filter(item => item.substring(0, 6) === 'office').map(item => item.substring(6, item.length)));
-                setdatacentreList(Object.keys(testSample).filter(item => item.substring(0, 4) === 'data').map(item => item.substring(4, item.length)));
-                setOfficeNumber(Object.keys(testSample).filter(item => item.substring(0, 6) === 'office').length);
-                setdatacentreNumber(Object.keys(testSample).filter(item => item.substring(0, 4) === 'data').length);
-                setCollapseNumber(Object.keys(testSample).filter(item => item.substring(0, 6) === 'office').length);
-                setdatacentreCollapseNumber(Object.keys(testSample).filter(item => item.substring(0, 4) === 'data').length);
-                setLoading(false);
+            setAssessmentAnswer(savedAssessmentContent);
+            // get forms data
+            const officeTotal = Object.keys(savedAssessmentContent).filter(item => item.substring(0, 6) === 'office').length > 0 ? Object.keys(savedAssessmentContent).filter(item => item.substring(0, 6) === 'office').length : 1;
+            const datacentreTotal = Object.keys(savedAssessmentContent).filter(item => item.substring(0, 9) === 'datacentre').length > 0 ? Object.keys(savedAssessmentContent).filter(item => item.substring(0, 9) === 'datacentre').length : 1;
+            const oList = Object.keys(savedAssessmentContent).filter(item => item.substring(0, 6) === 'office').map(item => item.substring(6, item.length));
+            const dList = Object.keys(savedAssessmentContent).filter(item => item.substring(0, 4) === 'data').map(item => item.substring(4, item.length));
+            if (oList.length > 0) {
+                setOfficeList(oList)
+                setCollapseNumber(Object.keys(savedAssessmentContent).filter(item => item.substring(0, 6) === 'office').length);
             }
-            )
+            if (dList.length > 0) {
+                setdatacentreList(dList)
+                setdatacentreCollapseNumber(Object.keys(savedAssessmentContent).filter(item => item.substring(0, 4) === 'data').length);
+            }
+            setOfficeNumber(officeTotal);
+            setdatacentreNumber(datacentreTotal);
+            // setCollapseNumber(Object.keys(savedAssessmentContent).filter(item => item.substring(0, 6) === 'office').length);
+            // setdatacentreCollapseNumber(Object.keys(savedAssessmentContent).filter(item => item.substring(0, 4) === 'data').length);
+            setLoading(false);
         } else {
             setHasSavedAssessment(false);
             setOfficeList(['1']);
@@ -228,37 +121,70 @@ const AssessmentPage = () => {
         }
     }, [usingSavedAssessment]);
 
-
     // to test save function
     const [notSaved, setNotSaved] = useState(true);
-    console.log(usingSavedAssessment);
 
+    // useEffect(() => {
+    //     if (notSaved) {
+    //         getQuestionList().then(res => {
+    //             if (res.ok) {
+    //                 res.json().then(
+    //                     data => {
+    //                         handleQuestionList(data.question_list);
+    //                         getSavedQuestion().then(savedQuestion => savedQuestion.json()
+    //                         ).then(savedQuestion => {
+    //                             if (Object.entries(savedQuestion).length > 0) {
+    //                                 setHasSavedAssessment(true);
+    //                                 setSavedAssessmentContent(savedQuestion[Object.keys(savedQuestion)[0]]);
+    //                             } else {
+    //                                 setHasSavedAssessment(false);
+    //                                 setOfficeList(['1']);
+    //                                 setdatacentreList(['1']);
+    //                                 setLoading(false);
+    //                             }
+    //                         }
+    //                         )
+    //                     }
+    //                 )
+    //             }
+    //         })
+    //     } else {
+    //     }
+    // }, [notSaved]);
     useEffect(() => {
-        if (notSaved) {
-            getQuestionList().then(res => {
-                if (res.ok) {
-                    res.json().then(
-                        data => {
-                            handleQuestionList(data.question_list);
-                            getSavedAssessment().then(testSample => {
-                                if (Object.entries(testSample).length > 0) {
-                                    setHasSavedAssessment(true);
-                                } else {
-                                    setHasSavedAssessment(false);
-                                    setOfficeList(['1']);
-                                    setdatacentreList(['1']);
-                                    setLoading(false);
-                                }
-                            })
-                        }
-                    )
+        getQuestionList().then(res => {
+            if (res.ok) {
+                res.json().then(data => {
+                    handleQuestionList(data.question_list);
+                    // setHasSavedAssessment(false);
+                    // setOfficeList(['1']);
+                    // setdatacentreList(['1']);
+                    // setLoading(false);
                 }
-            })
-        } else {
-        }
-    }, [notSaved]);
+                )
+            }
+        })
+    }, [])
 
-    console.log(assessmentAnswer);
+    // This effect only runs once since backend does not save the data after sending once
+    useEffect(() => {
+        if (shouldAskForSavedUnswer.current) {
+            shouldAskForSavedUnswer.current = false;
+            setOfficeList(['1']);
+            setdatacentreList(['1']);
+            getSavedQuestion().then(savedQuestion => savedQuestion.json()
+            ).then(savedQuestion => {
+                if (savedQuestion.message === 'Does not find data') {
+                    setHasSavedAssessment(false);
+                    setLoading(false);
+                } else {
+                    setHasSavedAssessment(true);
+                    setSavedAssessmentContent(savedQuestion[Object.keys(savedQuestion)[0]]);
+                }
+            }
+            )
+        }
+    }, [])
 
 
     useEffect(() => {
@@ -353,7 +279,7 @@ const AssessmentPage = () => {
         let thisDepend = [];
         console.log(data);
         for (const key in data) {
-                if (JSON.stringify(data[key].depend) === '{}') {
+            if (JSON.stringify(data[key].depend) === '{}') {
                 switch (data[key].title) {
                     case '2':
                         datacentreList.push(data[key]);
@@ -434,12 +360,94 @@ const AssessmentPage = () => {
         }
     }
 
+    const saveAssessment = () => {
+        if (Object.entries(assessmentAnswer).length === 0) {
+            message.error('You have no finished form');
+            return;
+        }
+        saveQuestion(assessmentAnswer)
+            .then(res => {
+                if (res.ok) {
+                    message.success('Assessment saved successfully');
+                } else {
+                    console.log(res);
+                }
+            })
+    }
+
+    const onSubmit = () => {
+        postAnswers(assessmentAnswer)
+        .then(res => {
+            if(res.status === 200){
+                message.success('Assessment submitted successfully');
+                res.json().then(data => {
+                    console.log(data);
+                    const id = data.result_id;
+                    navigate(`/assessment/result/${id}`);
+                })
+            } else {
+                message.error('Error: Server error');
+            }
+        })
+    }
+
+    const answerAllShits = () => {
+        setPageStep(2);
+        setOfficeList(['1','2']);
+        setdatacentreList(['1','2']);
+        setAssessmentAnswer({
+            "office1": {
+                "62d7eb8720b23a61a4656ec2": "3211",
+                "62d7ecc120b23a61a4656ec3": "T",
+                "62dbbf7fe82cdd10987ecd1e": [
+                    "Lightrail"
+                ],
+                "62dbbba0e82cdd10987ecd15": "123",
+                "62dbbb56e82cdd10987ecd14": "123",
+                "62dbbc12e82cdd10987ecd16": "F",
+                "62dbbd34e82cdd10987ecd19": "T",
+                "62dbbd0ae82cdd10987ecd18": "T",
+                "62dbbd6ee82cdd10987ecd1a": "123",
+                "62dbbe4ee82cdd10987ecd1b": "14",
+                "62dbbe8be82cdd10987ecd1c": "F",
+                "62dbbe9ae82cdd10987ecd1d": "F"
+            },
+            "office2": {
+                "62d7eb8720b23a61a4656ec2": "3111",
+                "62d7ecc120b23a61a4656ec3": "F",
+                "62dbbb56e82cdd10987ecd14": "123",
+                "62dbbba0e82cdd10987ecd15": "123",
+                "62dbbc12e82cdd10987ecd16": "T",
+                "62dbbc98e82cdd10987ecd17": "4 Stars",
+                "62dbbd6ee82cdd10987ecd1a": "321",
+                "62dbbe4ee82cdd10987ecd1b": "18",
+                "62dbbe8be82cdd10987ecd1c": "F",
+                "62dbbe9ae82cdd10987ecd1d": "F"
+            },
+            "data1": {
+                "62dff0a2dd0aaca7f9e83a86": "T",
+                "62dff202dd0aaca7f9e83a88": "123",
+                "62dff13edd0aaca7f9e83a87": "2311",
+                "62dff2ecdd0aaca7f9e83a8b": "123",
+                "62dff22add0aaca7f9e83a89": "F",
+                "62e269bfe93d521d7ac25a12": "22",
+                "62e26a1ee93d521d7ac25a13": "F"
+            },
+            "data2": {
+                "62dff0a2dd0aaca7f9e83a86": "F",
+                "62e8f46032a02279ec5058d6": "F"
+            }
+        })
+    }
+
+    console.log(assessmentAnswer);
+
     return (
         <PageContainer>
             {(!loading) && ((pageStep === 0 && questionListOffice?.length > 0) || (pageStep === 1 && questionListDataCenter?.length > 0) || (pageStep === 2) || (pageStep === 3)) ? (
                 <><NavContainer>
-                    <h1>Navbar</h1>
-                    <h1>Navbar</h1>
+                    <Button onClick={saveAssessment}>Save Questions</Button>
+                    <Button onClick={answerAllShits}>一键答题</Button>
                     <h1>Navbar</h1>
                 </NavContainer>
                     <HeaderContainer>
@@ -483,7 +491,7 @@ const AssessmentPage = () => {
                                                         </Row>
                                                         <Row style={{ marginTop: '30px', alignSelf: 'center' }}>
                                                             <Col span={32}>
-                                                                <Button>Submit</Button>
+                                                                <Button disabled={!!!termsAgreed} onClick={onSubmit}>Submit</Button>
                                                             </Col>
                                                         </Row>
                                                     </div> : <>page4</>

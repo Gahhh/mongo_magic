@@ -4,6 +4,8 @@ from db.database import db_connect
 import hashlib
 from flask import make_response
 from flask_jwt_extended import create_access_token, get_jwt_identity
+from services.utils import get_approval
+
 
 db = db_connect()
 
@@ -15,7 +17,9 @@ def user_register(req):
   create_time = datetime.now()
   user_type = req['user_type']
   db_col = db['users']
-  
+  recaptcha = req['reCaptcha_Token']
+  if not get_approval(recaptcha):
+    return make_response(json.dumps({'message': 'Invalid reCaptcha'}), 400)
   if db_col.find_one({'email': email}):
     return make_response(json.dumps({'message': 'Email already exists'}), 400)
   
@@ -49,6 +53,9 @@ def user_login(req):
     password = req['password']
     type_in = req['user_type']
     db_col = db['users']
+    recaptcha = req['reCaptcha_Token']
+    if not get_approval(recaptcha):
+      return make_response(json.dumps({'message': 'Invalid reCaptcha'}), 400)
     if not email or not password:
       return make_response(json.dumps({'message': 'Missing required fields'}), 400)
     password_md5 = hashlib.md5(password.encode('utf-8')).hexdigest()

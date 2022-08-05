@@ -8,6 +8,7 @@ import EmailForm from "./EmailForm";
 const SupportWindow = props => {
     const [user, setUser] = useState(null)
     const [chat, setChat] = useState(null)
+    const [sent, setSent] = useState(false);
 
     return (
         <div 
@@ -22,7 +23,9 @@ const SupportWindow = props => {
             <EmailForm 
                 visible={user === null || chat === null}
                 setUser={user => setUser(user)} 
-                setChat={chat => setChat(chat)} 
+                setChat={chat => setChat(chat)}
+                setSent={setSent} 
+                setVisible={props.setVisible}
             />
 
             {/* <ChatEngine 

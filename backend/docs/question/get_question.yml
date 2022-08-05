@@ -1,6 +1,6 @@
 tags:
   - Questions
-summary: Add a question to the database
+summary: Get question list from the database
 security:
   - Bearer: [Bearer] 
   - APIKeyHeader: ['authorization']

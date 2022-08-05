@@ -45,13 +45,13 @@ function Profile() {
 
     let contentStyle = {
         padding: '24px',
-        background: '#fff',
-        minHeight: '100vh',
+        // background: '#fff',
+        // minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'rgb(241,241,241)',
-        height: '100vh',
+        // backgroundColor: 'rgb(241,241,241)',
+        // height: '100vh',
     };
 
     let avatarStyle = {
@@ -75,6 +75,10 @@ function Profile() {
         maxCount: 1,
         onChange(info) {
             if ((info.file.type === 'image/jpeg' || info.file.type === 'image/png') && info.file.status !== 'removed') {
+                if (info.file.size > 999999) {
+                    message.error('Image size should be less than 1MB');
+                    return;
+                }
                 fileToDataUrl(info.file.originFileObj)
                     .then(response => {
                         setImgUrl(response);

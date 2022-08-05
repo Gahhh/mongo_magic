@@ -36,3 +36,4 @@ swagger_config = {
     "swagger_ui": True,
     "specs_route": "/"
 }
+

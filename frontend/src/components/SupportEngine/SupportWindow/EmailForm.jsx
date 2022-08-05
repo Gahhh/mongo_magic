@@ -76,13 +76,15 @@ const EmailForm = props => {
                         style={styles.emailInput}
                     />
                     <Input.TextArea 
-                        rows={4}
-                        placeholder='Description'
+                        rows={3}
+                        placeholder='Your Message'
                         onChange={e => setContent(e.target.value)}
                         style={{...styles.emailInput, marginTop:'30px', height:'100px'}}
                     />
                     <br/>
-                    <Button onClick={() => {sendMail(email, content).then(res => {
+                    <Button onClick={() => {
+                        props.setVisible(false);
+                        sendMail(email, content).then(res => {
                         console.log(res);
                     })}} style={{ marginTop:'15px', borderColor:'#4D7393', borderRadius:'12px'}}>
                         Send

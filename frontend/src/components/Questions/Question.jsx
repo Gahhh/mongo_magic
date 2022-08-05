@@ -61,8 +61,8 @@ const Question = (props) => {
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             {qContent}
                             <Radio.Group style={{ marginTop: '10px' }} onChange={(e) => ans.setAnswer({ ...ans.answer, [props.question._id]: e.target.value })} value={ans.answer[props.question._id]}>
-                                <Radio value={'true'} style={{ marginRight: '10px' }}>Yes</Radio>
-                                <Radio value={'false'} style={{ marginRight: '10px' }}>No</Radio>
+                                <Radio value={'T'} style={{ marginRight: '10px' }}>Yes</Radio>
+                                <Radio value={'F'} style={{ marginRight: '10px' }}>No</Radio>
                             </Radio.Group>
                         </div>
                     </div>

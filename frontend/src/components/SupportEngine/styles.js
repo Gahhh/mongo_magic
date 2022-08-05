@@ -5,13 +5,14 @@ export const styles = {
         // Border
         borderRadius: '50%',
         // Background 
-        backgroundImage: `url(../LogoBlue.png)`, 
+        background: '#ffffff',
+        backgroundImage: `url(/publicAssets/support.png)`, 
         backgroundRepeat: 'repeat',
         backgroundPosition: 'center',
         backgroundSize: '84px',
         // Size
-        width: '80px',
-        height: '80px',
+        width: '90px',
+        height: '90px',
     },
     avatarHello: { 
         // Position
