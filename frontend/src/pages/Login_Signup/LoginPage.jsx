@@ -51,6 +51,10 @@ export default function LoginPage() {
     navigate(`/help`);
   }
 
+  const turnToRanking = () => {
+    navigate('/publicranking')
+  }
+
   const recaptchaRef = React.useRef();
 
 
@@ -92,7 +96,7 @@ export default function LoginPage() {
     <ThemeProvider theme={theme}>
       <Navbar><Logoimg src={logo} alt="logo" />G'Tracker <Span>
         <Atag onClick={transHome}>Home</Atag>
-        <Atag>Rankings</Atag>
+        <Atag onClick={turnToRanking}>Rankings</Atag>
         <Atag onClick={transHelp}>Help</Atag>
         <Atag onClick={transAbout}>About</Atag>
       </Span>
