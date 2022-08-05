@@ -92,4 +92,8 @@ export const regisRequest = (body) => {
 export const getSupportQuestions = () => {
     const res = apiRequest({ method: 'GET', url: '/support/list'});
     return res;
+}    
+export const rankingRequest = () => {
+  const res = apiRequest({ method: 'GET', url: '/ranking/list', });
+  return res;
 }

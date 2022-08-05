@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import logo from '../../assets/LogoBlue.png';
 import Button from '@mui/material/Button';
@@ -24,6 +24,14 @@ export default function AdminLogin() {
   const navigate = useNavigate();
   let useremail = useRef('');
   let userpwd = useRef('');
+
+  React.useEffect(() => {
+    if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "1") {
+      navigate('/users/dashboard');
+    } else if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "0") {
+      navigate('/admin/dashboard');
+    }
+  }, [])
 
   const transRegis = (event) => {
     navigate(`/signup`);
@@ -70,7 +78,13 @@ export default function AdminLogin() {
         } else {
           res.json().then(body => {
             asyncLocalStorage.setItem('userToken', body.token).then(() =>
+<<<<<<< Updated upstream
               navigate(`/admin/dashboard`)
+=======
+              asyncLocalStorage.setItem('userType', "0").then(() =>
+              navigate(`/admin/dashboard`)
+            )
+>>>>>>> Stashed changes
             )
           })
         }
@@ -106,7 +120,7 @@ export default function AdminLogin() {
             />
           </Labelbox>
           <Labelbox className="form-group">
-            <Label htmlFor="password">Name</Label>
+            <Label htmlFor="password">Password</Label>
             <Newinput
               type="password"
               className="form-control"

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import logo from '../../assets/LogoBlue.png';
 import Button from '@mui/material/Button';
@@ -20,10 +20,20 @@ const theme = createTheme({
   },
 });
 
-export default function Newquiz() {
+
+
+export default function LoginPage() {
   const navigate = useNavigate();
   let useremail = useRef('');
   let userpwd = useRef('');
+
+  React.useEffect(() => {
+    if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "1") {
+      navigate('/users/dashboard');
+    } else if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "0") {
+      navigate('/admin/dashboard');
+    }
+  }, [])
 
   const transRegis = (event) => {
     navigate(`/signup`);
@@ -57,24 +67,26 @@ export default function Newquiz() {
     };
     console.log(msg);
     await loginRequest(msg).then(res => {
-        if (!res.ok) {
-          res.json().then(body => {
-            message.error({
-              content: body.message,
-              duration: 1.2,
-              style: {
-                marginTop: '20vh',
-              }
-            });
-          })
-        } else {
-          res.json().then(body => {
-            asyncLocalStorage.setItem('userToken', body.token).then(() =>
+      if (!res.ok) {
+        res.json().then(body => {
+          message.error({
+            content: body.message,
+            duration: 1.2,
+            style: {
+              marginTop: '20vh',
+            }
+          });
+        })
+      } else {
+        res.json().then(body => {
+          asyncLocalStorage.setItem('userToken', body.token).then(() =>
+            asyncLocalStorage.setItem('userType', "1").then(() =>
               navigate(`/users/dashboard`)
             )
-          })
-        }
-      })
+          )
+        })
+      }
+    })
   };
   return (
     <ThemeProvider theme={theme}>
@@ -106,7 +118,7 @@ export default function Newquiz() {
             />
           </Labelbox>
           <Labelbox className="form-group">
-            <Label htmlFor="password">Name</Label>
+            <Label htmlFor="password">Password</Label>
             <Newinput
               type="password"
               className="form-control"

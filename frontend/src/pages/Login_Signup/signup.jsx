@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import logo from '../../assets/LogoBlue.png';
 import Button from '@mui/material/Button';
@@ -28,6 +28,14 @@ export default function AdminLogin() {
   let userPwd = useRef('');
   let userCheck = useRef('');
 
+  React.useEffect(() => {
+    if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "1") {
+      navigate('/users/dashboard');
+    } else if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "0") {
+      navigate('/admin/dashboard');
+    }
+  }, [])
+
   const transRegis = (event) => {
     navigate(`/adminsignup`);
   }
@@ -46,24 +54,23 @@ export default function AdminLogin() {
 
   const recaptchaRef = React.useRef();
 
-
   const handleSubmit = async (e) => {
     console.log("clicked");
     e.preventDefault();
     const token = await recaptchaRef.current.executeAsync();
     console.log(token);
+    const check = userCheck.current.value;
     recaptchaRef.current.reset();
     const msg = {
       email: userEmail.current.value,
       password: userPwd.current.value,
       fullname: userName.current.value,
       org: userOrg.current.value,
-      user_type: "0",
+      user_type: "1",
       reCaptcha_Token: token,
-      userCheck: userCheck.current.value,
     };
     console.log(msg);
-    if (msg.password === msg.userCheck && msg.code === 'wdfvz') {
+    if (msg.password === check && msg.code === 'wdfvz') {
     await regisRequest(msg).then(res => {
         if (!res.ok) {
           res.json().then(body => {
@@ -78,7 +85,9 @@ export default function AdminLogin() {
         } else {
           res.json().then(body => {
             asyncLocalStorage.setItem('userToken', body.token).then(() =>
+              asyncLocalStorage.setItem('userType', "1").then(() =>
               navigate(`/users/dashboard`)
+            )
             )
           })
         }

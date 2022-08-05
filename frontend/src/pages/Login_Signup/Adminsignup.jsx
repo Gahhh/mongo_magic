@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import logo from '../../assets/LogoBlue.png';
 import Button from '@mui/material/Button';
@@ -28,6 +28,14 @@ export default function AdminLogin() {
   let userPwd = useRef('');
   let userCheck = useRef('');
   let userCode = useRef('');
+  
+  React.useEffect(() => {
+    if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "1") {
+      navigate('/users/dashboard');
+    } else if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "0") {
+      navigate('/admin/dashboard');
+    }
+  }, [])
 
   const transRegis = (event) => {
     navigate(`/signup`);
@@ -53,6 +61,7 @@ export default function AdminLogin() {
     const token = await recaptchaRef.current.executeAsync();
     console.log(token);
     recaptchaRef.current.reset();
+    const check = userCheck.current.value;
     const msg = {
       email: userEmail.current.value,
       password: userPwd.current.value,
@@ -61,10 +70,10 @@ export default function AdminLogin() {
       user_type: "0",
       reCaptcha_Token: token,
       code: userCode.current.value,
-      userCheck: userCheck.current.value,
+      
     };
     console.log(msg);
-    if (msg.password === msg.userCheck && msg.code === 'wdfvz') {
+    if (msg.password === check && msg.code === 'wdfvz') {
     await regisRequest(msg).then(res => {
         if (!res.ok) {
           res.json().then(body => {
@@ -79,7 +88,13 @@ export default function AdminLogin() {
         } else {
           res.json().then(body => {
             asyncLocalStorage.setItem('userToken', body.token).then(() =>
+<<<<<<< Updated upstream
               navigate(`/admin/dashboard`)
+=======
+              asyncLocalStorage.setItem('userType', "0").then(() =>
+              navigate(`/admin/dashboard`)
+            )
+>>>>>>> Stashed changes
             )
           })
         }

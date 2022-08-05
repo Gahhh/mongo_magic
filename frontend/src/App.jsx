@@ -24,10 +24,14 @@ import TestPage from './pages/TestPage';
 import AboutPage from './pages/AboutPage';
 import HelpPage from './pages/HelpPage';
 import SupportEngine from  './components/SupportEngine';
+<<<<<<< Updated upstream
 import AdminSupport from './pages/AdminSupport';
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminNavbar from "./components/AdminNavbar";
 import AdminHeaderBar from "./components/AdminHeaderBar";
+=======
+import PublicRanking from './pages/PublicRanking';
+>>>>>>> Stashed changes
 
 export const ProfileContext = React.createContext();
 
@@ -72,6 +76,7 @@ function App() {
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/adminsignup" element={<AdminSignupPage />} />
               <Route path="/assessment" element={<AssessmentPage/>}/>
+              <Route path="/publicranking" element={<PublicRanking/>}/>
               <Route path="/assessment/result/:id" element={<AssessmentResultPage/>}/>
               <Route path="/test" element={<TestPage />} />
               <Route path="/about" element={<AboutPage />} />
