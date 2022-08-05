@@ -96,35 +96,43 @@ def question_answer(req):
       office_list.append(ans_pack[ans])
     if re.search(r'^data', ans):
       data_list.append(ans_pack[ans])
-      
   office_data = data_process(office_list, question_set)
   data_centre_data = data_process(data_list, question_set)
   result = engine(office_data, data_centre_data)
-  demo_pack = {
-    "score": "99",
-    "co2":"1500",
-    "natural_habitat": "500",
-    "roughly_size": "20",
-    "suggestion": {
-      "Location Location Location":[
-        "One or more of your offices only have limited access to the public transport system", 
-        "One or more of your offices are located in a state which has a high percentage of electircity generation from fossil fuels"],
-      "Reduce, reuse, recycle":[
-        "You may need to consider go forward with LED lighting in your offices",
-        "Your data centre may need a passive cooling system in order to reduce the energy consumption"
-      ],
-      "Go cloud, go greens":[
-        "A physical data centre is not the best place to store your data and servers, considering a cloud solution",
-        "You may consider to increase the percentage of renewable sources in your electricity bill"
-      ],
-      "Get certified, get ahead":[
-        "You may consider to get certified for your offices with Green Star Rating",
-        "You may consider to get certified for your data centre with NABERS"
-      ]
-    }
-  }
-  id = "62ebb64ebc16ea3c26d10239"
-  return make_response(json.dumps({'result_id': str(id)}), 200)
+  time_now = str(datetime.now())
+  score_detail = result['score_detail']
+  score_detail['test_time'] = time_now
+  result.pop('score_detail')
+  result["test_time"] = time_now
+  for key in result['suggestion'].keys():
+    temp_set = result['suggestion'][key]
+    result['suggestion'][key] = list(temp_set)
+  data_id = db_col.insert_one(result).inserted_id
+  
+  # demo_pack = {
+  #   "score": "99",
+  #   "co2":"1500",
+  #   "natural_habitat": "500",
+  #   "roughly_size": "20",
+  #   "suggestion": {
+  #     "Location Location Location":[
+  #       "One or more of your offices only have limited access to the public transport system", 
+  #       "One or more of your offices are located in a state which has a high percentage of electircity generation from fossil fuels"],
+  #     "Reduce, reuse, recycle":[
+  #       "You may need to consider go forward with LED lighting in your offices",
+  #       "Your data centre may need a passive cooling system in order to reduce the energy consumption"
+  #     ],
+  #     "Go cloud, go greens":[
+  #       "A physical data centre is not the best place to store your data and servers, considering a cloud solution",
+  #       "You may consider to increase the percentage of renewable sources in your electricity bill"
+  #     ],
+  #     "Get certified, get ahead":[
+  #       "You may consider to get certified for your offices with Green Star Rating",
+  #       "You may consider to get certified for your data centre with NABERS"
+  #     ]
+  #   }
+  # }
+  return make_response(json.dumps({'result_id': str(data_id)}), 200)
 
 def question_get_result(result_id):
   try:
