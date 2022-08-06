@@ -186,15 +186,18 @@ export default function AdminLogin() {
               name="check"
             />
           </Labelbox>
-          <Labelbox>
-            <FormControlLabel
+          <Labelbox style={{display: 'flex', flexDirection:'row'}}>
+            <FormControlLabel style={{width: '20px', marginBottom: '10px'}}
               control={<Checkbox value="remember" color="primary" required/>}
-              label={
-                <Typography sx={{ fontSize: 16, fontWeight: 'bold' }}>
+              // label={
+              //   <Typography sx={{ fontSize: 16, fontWeight: 'bold' }}>
+              //     I agree to the Terms & Conditions
+              //   </Typography>
+              // } sx={{ marginBottom: '10px' } }
+            />
+            <Typography sx={{ fontSize: 16, fontWeight: 'bold', marginTop:'10px'}}>
                   I agree to the Terms & Conditions
                 </Typography>
-              } sx={{ marginBottom: '10px' } }
-            />
           </Labelbox>
           <Button color='primary' variant="contained" type="submit" sx={{ width: '408px', height: '62px', borderRadius: '12px', fontSize: '15px', fontWeight: 'bold', textTransform: 'none', }}>Register</Button>
         </Newform>
