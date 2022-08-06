@@ -428,6 +428,8 @@ const AssessmentPage = () => {
     const clearCurrentPage = () => {
         setAssessmentAnswer({});
         setPageStep(0);
+        setOfficeList(['1']);
+        setdatacentreList(['1']);
     }
 
     return (
