@@ -504,11 +504,11 @@ const AssessmentPage = () => {
                         <div style={{ display:'flex', color: themeColor, textAlign: 'center', width:'50%', justifyContent:'space-evenly' }}>
                             <div>
                                     <SaveFilled style={{ fontSize: '35px' }} onClick={saveAssessment}></SaveFilled>
-                                    <div>Save</div>
+                                    <div>Save for later</div>
                             </div>
                             <div>
                                     <ClearOutlined style={{ fontSize: '35px' }} onClick={clearCurrentPage}/>
-                                    <div>Clear</div>
+                                    <div>Clear all answers</div>
                             </div>
                         </div>
                         <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop:'20px' }}>
@@ -525,7 +525,6 @@ const AssessmentPage = () => {
                             }}>
                                 Next<CaretRightOutlined></CaretRightOutlined>
                             </div>
-                            {/* <Button onClick={() => savePage()}>save</Button> */}
                         </div>
                         {
                             pageStep === 0 ? (

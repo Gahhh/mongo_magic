@@ -15,21 +15,27 @@ const Question = (props) => {
     const ans = React.useContext(QuestionContext);
     const [questionIsShown, setQuestionIsShown] = React.useState(false);
 
-
+    console.log(props.type);
     React.useEffect(() => {
         // if question is dependent, and prerequisite question is not answered, hide question
-        if (JSON.stringify(qDepend) !== '{}' && (ans.answer[qDepend.q_id] !== qDepend.q_option)) {
+        if (ans.answer['62ecdea5ad4a6abefd4f5b69'] === '100' && props.type === 'datacentre' && props.index > 2) {
+            setQuestionIsShown(false);
             delete ans.answer[props.question._id];
             ans.setQuestionUnfinished(prev => prev.filter(item => item !== props.question._id));
-            setQuestionIsShown(false);
-        } else {
-            setQuestionIsShown(true);
-            if (ans.answer[props.question._id] === undefined || ans.answer[props.question._id]?.length === 0) {
-                if (ans.questionUnfinished.indexOf(props.question._id) === -1 || ans.answer[props.question._id]?.length === 0) {
-                    ans.setQuestionUnfinished(prev => [...prev, props.question._id]);
-                }
-            } else {
+        }   else {
+            if (JSON.stringify(qDepend) !== '{}' && (ans.answer[qDepend.q_id] !== qDepend.q_option)) {
+                delete ans.answer[props.question._id];
                 ans.setQuestionUnfinished(prev => prev.filter(item => item !== props.question._id));
+                setQuestionIsShown(false);
+            } else {
+                setQuestionIsShown(true);
+                if (ans.answer[props.question._id] === undefined || ans.answer[props.question._id]?.length === 0) {
+                    if (ans.questionUnfinished.indexOf(props.question._id) === -1 || ans.answer[props.question._id]?.length === 0) {
+                        ans.setQuestionUnfinished(prev => [...prev, props.question._id]);
+                    }
+                } else {
+                    ans.setQuestionUnfinished(prev => prev.filter(item => item !== props.question._id));
+                }
             }
         }
     }, [ans]);
@@ -129,7 +135,7 @@ const Question = (props) => {
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     {qContent}
                                     <div style={{ width: '100% ', order: '1', flexDirection: 'row', marginTop: '10px' }}>
-                                        <Slider style={{ marginLeft: '8px' }} value={ans.answer[props.question._id]} marks={percentSliderMarks} onChange={onSliderAfterChange}></Slider>
+                                        <Slider style={{ marginLeft: '8px' }} defaultValue={ans.answer[props.question._id]} marks={percentSliderMarks} onAfterChange={onSliderAfterChange}></Slider>
                                         <div style={{ textAlign: 'center', height: '20px' }}>
                                             {(ans.answer[props.question._id]) ? (<>{ans.answer[props.question._id]}%</>) : (<>0%</>)}
                                         </div>
@@ -241,7 +247,7 @@ const Question = (props) => {
         <>
             {
                     (
-                        (JSON.stringify(qDepend) === '{}' || ans.answer[qDepend?.q_id] === qDepend?.q_option) && [renderSwitch()]
+                        questionIsShown && (JSON.stringify(qDepend) === '{}' || ans.answer[qDepend?.q_id] === qDepend?.q_option) && [renderSwitch()]
                     )
             }
         </>

@@ -51,7 +51,6 @@ const QuestionForm = (props) => {
             }
         } else {
             if (questionUnfinished.length === 0 && questionRender.length > 0) {
-                console.log('setanswer');
                 props.assessmentSetter(prev => ({ ...prev, [`data`]: answer }));
             }
             if (questionUnfinished.length > 0 && questionRender.length > 0) {
@@ -113,8 +112,8 @@ const QuestionForm = (props) => {
     }
 
     const QuestionListRender = (data) => {
-        setQuestionRender(data.map((question) =>
-            <Question number={props.number} key={question._id} question={question} setAnswer={setAnswer} answer={answer}></Question>
+        setQuestionRender(data.map((question, index) =>
+            <Question type={props.type} number={props.number} index={index} key={question._id} question={question} setAnswer={setAnswer} answer={answer}></Question>
         ))
     }
 
