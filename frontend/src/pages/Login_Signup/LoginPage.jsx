@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import logo from '../../assets/LogoBlue.png';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -55,19 +54,12 @@ export default function LoginPage() {
     navigate('/publicranking')
   }
 
-  const recaptchaRef = React.useRef();
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await recaptchaRef.current.executeAsync();
-    console.log(token);
-    recaptchaRef.current.reset();
     const msg = {
       email: useremail.current.value,
       password: userpwd.current.value,
       user_type: "1",
-      reCaptcha_Token: token,
     };
     console.log(msg);
     await loginRequest(msg).then(res => {
@@ -147,13 +139,6 @@ export default function LoginPage() {
                   Remember me
                 </Typography>
               } sx={{ marginBottom: '10px' }}
-            />
-          </Labelbox>
-          <Labelbox>
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              size="invisible"
-              sitekey="6LebkCshAAAAAHk4a207_vIbTrP2xEPrAeINxV6z"
             />
           </Labelbox>
           <Button color='primary' variant="contained" type="submit" sx={{ width: '408px', height: '62px', borderRadius: '12px', fontSize: '15px', fontWeight: 'bold', textTransform: 'none', }}>Login</Button>
