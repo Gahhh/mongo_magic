@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { regisRequest } from "../../utils/requests";
 import { asyncLocalStorage } from '../../utils/functions';
 import { message } from 'antd';
-import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span } from "./Quizcss";
+import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span } from "./Logincss";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
@@ -115,13 +115,19 @@ export default function AdminLogin() {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Navbar><Logoimg src={logo} alt="logo" />G'Tracker <Span>
+      <div style={{display:"block"}}>
+      <Navbar>
+      <div className='logo-title'>
+        <Logoimg src={logo} alt="logo" />
+        <div className='title'>G'Tracker </div>
+      </div>
+      <Span>
         <Atag onClick={transHome}>Home</Atag>
-        <Atag onClick={turnToRanking}>Rankings</Atag>
+        <Atag onClick={turnToRanking}>Ranking</Atag>
         <Atag onClick={transHelp}>Help</Atag>
         <Atag onClick={transAbout}>About</Atag>
-      </Span>
-      </Navbar>
+      </Span> 
+    </Navbar>
       <Flexbox>
         <Head>
          User Register
@@ -215,6 +221,7 @@ export default function AdminLogin() {
           <Button color='primary' variant="contained" type="submit" sx={{ width: '408px', height: '62px', borderRadius: '12px', fontSize: '15px', fontWeight: 'bold', textTransform: 'none', }}>Register</Button>
         </Newform>
       </Flexbox>
+      </div>
     </ThemeProvider>
   );
 }

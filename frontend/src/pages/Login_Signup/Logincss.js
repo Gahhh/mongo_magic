@@ -66,16 +66,20 @@ const Head2 = styled.h2`
 const Logoimg = styled.img`
   width: 56px;
   height:56px;
-  margin: 10px;
-  margin-left: 5rem;
 `
 const Navbar = styled.div`
   font-weight: 600;
   font-size: 30px;
   line-height: 40px;
   letter-spacing: 0.02em;
+  // color: #ffffff;
   color: #4D7393;
-
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
+  margin: auto;
+  justify-content: space-between;
+  padding-top: 1.2rem;
 `
 
 const Atag = styled.a`
@@ -84,8 +88,9 @@ const Atag = styled.a`
   line-height: 22px;
   /* identical to box height */
   text-align: center;
+  // color: #ffffff;
   color: #183B56;
-  margin: 0 2rem 0;
+  margin: 1rem;
 `
 const Bluetag = styled.a`
   font-weight: 600;
@@ -96,10 +101,11 @@ const Bluetag = styled.a`
 `
 
 const Span = styled.span`
-  float: right;
   right: 10%;
   top: 1rem;
-  position:relative;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
 `
 
 

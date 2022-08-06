@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Layout } from 'antd'
 import styled from 'styled-components';
 import { Button, message, Space, Tag, Progress } from 'antd';
 import { Parallax } from 'react-parallax';
-import { getResult } from '../utils/requests';
-import { CircularProgressbar } from 'react-circular-progressbar';
 import { ProList } from '@ant-design/pro-components';
 import { rankingRequest } from "../utils/requests";
 import LoadingIcon from "../components/LoadingIcon";
-import 'react-circular-progressbar/dist/styles.css';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import logo from '../assets/LogoBlue.png';
 
 
@@ -160,7 +155,6 @@ const PublicRanking = () => {
   }
 
     return (
-        <>
             <Parallax className='image' blur={0} bgImage={require('../assets/banner1.jpg')} strength={800} bgImageStyle={{ minHeight: "100vh" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Navbar>
                     <div className='logo-title'>
@@ -279,7 +273,6 @@ const PublicRanking = () => {
                               margin: '10% 0% 0%', borderRadius: 20, width: '1200px', height:"200px", display: 'flex', justifyContent: 'center',
                               overflow: "hidden"}}><LoadingIcon></LoadingIcon></Layout>)}
             </Parallax>
-        </>
     )
 }
 
