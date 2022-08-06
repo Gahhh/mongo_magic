@@ -14,7 +14,6 @@ import Ranking from './pages/Ranking';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
-import Newquiz from './pages/Login_Signup/Newquiz';
 import AssessmentResultPage from './pages/AssessmentResultPage/AssessmentResultPage';
 import { Layout } from 'antd';
 import NavBar from './components/Navbar';
@@ -28,6 +27,7 @@ import AdminSupport from './pages/AdminSupport';
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminNavbar from "./components/AdminNavbar";
 import AdminHeaderBar from "./components/AdminHeaderBar";
+import PublicRanking from './pages/PublicRanking';
 
 export const ProfileContext = React.createContext();
 
@@ -72,6 +72,7 @@ function App() {
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/adminsignup" element={<AdminSignupPage />} />
               <Route path="/assessment" element={<AssessmentPage/>}/>
+              <Route path="/publicranking" element={<PublicRanking/>}/>
               <Route path="/assessment/result/:id" element={<AssessmentResultPage/>}/>
               <Route path="/test" element={<TestPage />} />
               <Route path="/about" element={<AboutPage />} />
@@ -93,7 +94,6 @@ function App() {
                 <Route path="settings" element={<><Layout><AdminHeaderBar page='Settings'></AdminHeaderBar><Settings /></Layout></>} />
               </Route>
               <Route path="*" element={<NotFound />} />
-              <Route path="/newquiz" element={<Newquiz />} />
             </Routes>
           </ProfileContext.Provider>
         </Router>

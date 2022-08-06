@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import logo from '../../assets/LogoBlue.png';
 import Button from '@mui/material/Button';
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { regisRequest } from "../../utils/requests";
 import { asyncLocalStorage } from '../../utils/functions';
 import { message } from 'antd';
-import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span } from "./Quizcss";
+import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span } from "./Logincss";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
@@ -28,6 +28,14 @@ export default function AdminLogin() {
   let userPwd = useRef('');
   let userCheck = useRef('');
   let userCode = useRef('');
+  
+  React.useEffect(() => {
+    if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "1") {
+      navigate('/users/dashboard');
+    } else if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "0") {
+      navigate('/admin/dashboard');
+    }
+  }, [])
 
   const transRegis = (event) => {
     navigate(`/signup`);
@@ -45,6 +53,9 @@ export default function AdminLogin() {
     navigate(`/help`);
   }
 
+  const turnToRanking = () => {
+    navigate('/publicranking')
+  }
   const recaptchaRef = React.useRef();
 
 
@@ -53,6 +64,7 @@ export default function AdminLogin() {
     const token = await recaptchaRef.current.executeAsync();
     console.log(token);
     recaptchaRef.current.reset();
+    const check = userCheck.current.value;
     const msg = {
       email: userEmail.current.value,
       password: userPwd.current.value,
@@ -61,10 +73,10 @@ export default function AdminLogin() {
       user_type: "0",
       reCaptcha_Token: token,
       code: userCode.current.value,
-      userCheck: userCheck.current.value,
+      
     };
     console.log(msg);
-    if (msg.password === msg.userCheck && msg.code === 'wdfvz') {
+    if (msg.password === check && msg.code === 'wdfvz') {
     await regisRequest(msg).then(res => {
         if (!res.ok) {
           res.json().then(body => {
@@ -79,7 +91,9 @@ export default function AdminLogin() {
         } else {
           res.json().then(body => {
             asyncLocalStorage.setItem('userToken', body.token).then(() =>
+              asyncLocalStorage.setItem('userType', "0").then(() =>
               navigate(`/admin/dashboard`)
+            )
             )
           })
         }
@@ -105,13 +119,19 @@ export default function AdminLogin() {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Navbar><Logoimg src={logo} alt="logo" />G'Tracker <Span>
+      <div style={{display:"block"}}>
+      <Navbar>
+      <div className='logo-title'>
+        <Logoimg src={logo} alt="logo" />
+        <div className='title'>G'Tracker </div>
+      </div>
+      <Span>
         <Atag onClick={transHome}>Home</Atag>
-        <Atag>Rankings</Atag>
+        <Atag onClick={turnToRanking}>Ranking</Atag>
         <Atag onClick={transHelp}>Help</Atag>
         <Atag onClick={transAbout}>About</Atag>
-      </Span>
-      </Navbar>
+      </Span> 
+    </Navbar>
       <Flexbox>
         <Head>
         Admin Register
@@ -219,6 +239,7 @@ export default function AdminLogin() {
           <Button color='primary' variant="contained" type="submit" sx={{ width: '408px', height: '62px', borderRadius: '12px', fontSize: '15px', fontWeight: 'bold', textTransform: 'none', }}>Register</Button>
         </Newform>
       </Flexbox>
+      </div>
     </ThemeProvider>
   );
 }

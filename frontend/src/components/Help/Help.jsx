@@ -31,6 +31,9 @@ const Help = () => {
   const turnToHome = () => {
     navigate('/')
   }
+  const turnToRanking = () => {
+    navigate('/publicranking')
+  }
 
   return(
     <div className='HelpContainer'>
@@ -41,7 +44,7 @@ const Help = () => {
         </div>
         <Span>
           <Atag onClick={turnToHome}>Home</Atag>
-          <Atag>Ranking</Atag>
+          <Atag onClick={turnToRanking}>Ranking</Atag>
           <Atag>Help</Atag>
           <Atag onClick={turnToAbout}>About</Atag>
           {
