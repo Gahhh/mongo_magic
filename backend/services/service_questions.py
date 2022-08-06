@@ -1,4 +1,6 @@
+from audioop import reverse
 import email
+from gettext import find
 import json
 from datetime import datetime
 from bson import ObjectId
@@ -80,61 +82,64 @@ def question_temp_load(req):
     return make_response(json.dumps({'message': 'Server Error'}), 500)
 
 def question_answer(req):
-  ans_pack = req
-  db_col = db['results']
-  
-  office_list = []
-  data_list = []
-  question_list = db['questions'].find()
-  question_set = {}
-  
-  for question in question_list:
-    question_set[str(question['_id'])] = question
-    
-  for ans in ans_pack.keys():
-    if re.search(r'^office', ans):
-      office_list.append(ans_pack[ans])
-    if re.search(r'^data', ans):
-      data_list.append(ans_pack[ans])
-  office_data = data_process(office_list, question_set)
-  data_centre_data = data_process(data_list, question_set)[0]
+  try:
+    ans_pack = req
+    db_col = db['results']
+    db_score = db['score_history']
+    db_user = db['users']
+    db_score_rank = db['scores_rank']
 
-  if data_centre_data["is_data_centre"] == "F":
-    data_centre_data = {}
-  result = engine(office_data, data_centre_data)
-  time_now = str(datetime.now())
-  score_detail = result['score_detail']
-  score_detail['test_time'] = time_now
-  result.pop('score_detail')
-  result["test_time"] = time_now
-  for key in result['suggestion'].keys():
-    temp_set = result['suggestion'][key]
-    result['suggestion'][key] = list(temp_set)
-  data_id = db_col.insert_one(result).inserted_id
-  # demo_pack = {
-  #   "score": "99",
-  #   "co2":"1500",
-  #   "natural_habitat": "500",
-  #   "roughly_size": "20",
-  #   "suggestion": {
-  #     "Location Location Location":[
-  #       "One or more of your offices only have limited access to the public transport system", 
-  #       "One or more of your offices are located in a state which has a high percentage of electircity generation from fossil fuels"],
-  #     "Reduce, reuse, recycle":[
-  #       "You may need to consider go forward with LED lighting in your offices",
-  #       "Your data centre may need a passive cooling system in order to reduce the energy consumption"
-  #     ],
-  #     "Go cloud, go greens":[
-  #       "A physical data centre is not the best place to store your data and servers, considering a cloud solution",
-  #       "You may consider to increase the percentage of renewable sources in your electricity bill"
-  #     ],
-  #     "Get certified, get ahead":[
-  #       "You may consider to get certified for your offices with Green Star Rating",
-  #       "You may consider to get certified for your data centre with NABERS"
-  #     ]
-  #   }
-  # }
-  return make_response(json.dumps({'result_id': str(data_id)}), 200)
+
+    office_list = []
+    data_list = []
+    question_list = db['questions'].find()
+    question_set = {}
+
+    for question in question_list:
+      question_set[str(question['_id'])] = question
+      
+    for ans in ans_pack.keys():
+      if re.search(r'^office', ans):
+        office_list.append(ans_pack[ans])
+      if re.search(r'^data', ans):
+        data_list.append(ans_pack[ans])
+    office_data = data_process(office_list, question_set)
+    data_centre_data = data_process(data_list, question_set)[0]
+
+    if data_centre_data["is_data_centre"] == "F":
+      data_centre_data = {}
+    result = engine(office_data, data_centre_data)
+    time_now = str(datetime.now())
+    score_detail = result['score_detail']
+    score_detail['test_time'] = time_now
+    result.pop('score_detail')
+    result["test_time"] = time_now
+
+    for key in result['suggestion'].keys():
+      temp_set = result['suggestion'][key]
+      result['suggestion'][key] = list(temp_set)
+
+    email = get_jwt_identity()
+    score_detail['email'] = email
+    score_detail['raw_score'] = result['score']
+
+    score_list = list(db_score_rank.find_one({'_id': 'rank'})['list'])
+    score_list.append(result['score'])
+    score_list = sorted(score_list,reverse=True)
+    position = score_list.index(result['score']) / len(score_list) * 100
+    result['position'] = position
+    db_score_rank.update_one({'_id': "rank"}, {'$set': {'list': score_list}})
+
+    org = db_user.find_one({'email': email})['org']
+    score_detail['org'] = org
+    result['org'] = org
+    data_id = db_col.insert_one(result).inserted_id
+    score_detail['test_id'] = str(data_id)
+    db_score.insert_one(score_detail)
+    
+    return make_response(json.dumps({'result_id': str(data_id)}), 200)
+  except:
+    return make_response(json.dumps({'message': 'Server Error'}), 500)
 
 def question_get_result(result_id):
   try:

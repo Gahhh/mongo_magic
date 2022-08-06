@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from struct import pack
 from db.database import db_connect
 import hashlib
 from flask import make_response
@@ -96,3 +97,15 @@ def user_update_profile(req):
   except:
     return make_response(json.dumps({'message': 'Internal Error'}), 500)
 
+def user_get_result(req):
+  try:
+    email = get_jwt_identity()
+    db_result = db['score_history']
+    result = db_result.find({'email': email}, {'_id': False})
+    result = list(result)
+    if not result:
+      return make_response(json.dumps({'message': 'User has no results'}), 404)
+    
+    return make_response(json.dumps(result), 200)
+  except:
+    return make_response(json.dumps({'message': 'Server Error'}), 500)
