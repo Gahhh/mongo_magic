@@ -337,18 +337,6 @@ const AssessmentResultPage = () => {
                                         Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext> Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
                                         To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
                                     </TextContext>
-                                    <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
-                                        Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext> Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
-                                        To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
-                                    </TextContext>
-                                    <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
-                                        Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext> Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
-                                        To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
-                                    </TextContext>
-                                    <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
-                                        Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext> Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
-                                        To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
-                                    </TextContext>
                                 </ContentContainerLeft>
                                 <ContentContainerRight>
                                     <div style={{ height: '100px', width: '100%', display: 'flex', justifyContent: 'end' }}>
@@ -356,7 +344,6 @@ const AssessmentResultPage = () => {
                                     </div>
                                     <h3 style={{ display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '32px' }} >Result</h3>
                                     <h1 style={{ marginLeft: '20px', color: '#4D7393' }}>Your Organisation's Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h1>
-                                    <div style={{ marginBottom:'40px' }}>{bulletPoints()}</div>
                                     <div style={{ marginBottom:'40px' }}>{bulletPoints()}</div>
                                     <div style={{ display: 'flex', height: '100%', width: 'auto', position:'absolute', bottom:'0', right:'0' }}>
                                         <div style={{ alignSelf: 'flex-end', whiteSpace: 'nowrap', color: '#4D7393', fontWeight: '600' }}>By G'Tracker</div>
