@@ -216,3 +216,15 @@ def energy_score_calculate(avg_energy):
   
 def calculate_tennis_area(habitat):
   return habitat/223
+
+def score_percent_process(score_pack):
+  for key in score_pack.keys():
+    if key == "location":
+      score_pack[key] = score_pack[key]/10
+    elif key == 'public_transport':
+      score_pack[key] = score_pack[key]/20
+    elif key == 'energy':
+      score_pack[key] = score_pack[key]/40
+    elif key == 'certification/measures':
+      score_pack[key] = score_pack[key]/30
+  return score_pack

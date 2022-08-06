@@ -132,6 +132,7 @@ def engine(office, data):
       total_score *= scaled_data_score
   score_detail['energy'] = energy_score
   tennis_area = calculate_tennis_area(habitat)
+  score_detail = score_percent_process(score_detail)
   pack = {
     "score": int(total_score),
      "co2": int(co2e),
