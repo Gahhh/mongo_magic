@@ -120,6 +120,12 @@ function Profile() {
             });
     };
 
+    const setNoimg = () => {
+        setImgUrl(null);
+        setUser({ ...user, photo: null });
+        setChange({ ...change, photo: null });
+    }
+
 
     return (
         <>
@@ -149,6 +155,7 @@ function Profile() {
                             <Input size="large" maxLength='50' style={{ width: '100%' }} defaultValue={prof.providerProfile.profile.org} onChange={(e) => setChange({ org: e.target.value })} />
                         </div>
                         <Button disabled={!!!hasDiff} style={uploadStyle} onClick={() => (update(change))}>Update My Profile</Button>
+                        <Button onClick={setNoimg} style={uploadStyle}>Remove Image</Button>
                         <div style={{ height: '40px', width: '40px' }}><br></br></div>
                     </Content>
                 ) : (<Layout style={{ display: 'flex', justifyContent: 'center' }}><LoadingIcon></LoadingIcon></Layout>)}

@@ -6,7 +6,7 @@ export const styles = {
         borderRadius: '50%',
         // Background 
         background: '#ffffff',
-        backgroundImage: `url(./LogoBlue.png)`, 
+        backgroundImage: `url(/publicAssets/LogoBlue.png)`, 
         backgroundRepeat: 'repeat',
         backgroundPosition: 'center',
         backgroundSize: '84px',
