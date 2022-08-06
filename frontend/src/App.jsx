@@ -14,7 +14,6 @@ import Ranking from './pages/Ranking';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
-import Newquiz from './pages/Login_Signup/Newquiz';
 import AssessmentResultPage from './pages/AssessmentResultPage/AssessmentResultPage';
 import { Layout } from 'antd';
 import NavBar from './components/Navbar';
@@ -95,7 +94,6 @@ function App() {
                 <Route path="settings" element={<><Layout><AdminHeaderBar page='Settings'></AdminHeaderBar><Settings /></Layout></>} />
               </Route>
               <Route path="*" element={<NotFound />} />
-              <Route path="/newquiz" element={<Newquiz />} />
             </Routes>
           </ProfileContext.Provider>
         </Router>
