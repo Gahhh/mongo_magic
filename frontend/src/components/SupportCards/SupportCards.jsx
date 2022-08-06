@@ -3,12 +3,14 @@ import {Layout, message} from 'antd';
 import { Avatar, Card } from 'antd';
 import { getSupportQuestions } from '../../utils/requests';
 import { CardsContainer, CardContainer } from './SupportCardsCSS';
+import { Input } from 'antd';
 
-
+const { TextArea } = Input;
 const { Meta } = Card;
 
 const SupportCards = () => {
-  const [questions, setQuestions] = useState([])
+  const [questions, setQuestions] = useState([]);
+  const [answer, setAnswer] = useState('');
 
   const get_support = async () => {
     await getSupportQuestions().then(
@@ -34,11 +36,14 @@ const SupportCards = () => {
       {
         questions?.map((question) => {
           // console.log(question)
+          const email = question.email.email;
+          console.log(answer)
           return(
             <CardContainer>
               <Card
                 style={{
-                  width: 300,
+                  width: '100%',
+                  height: '100%'
                 }}
                 actions={[
                   <div>Solve</div>,
@@ -47,8 +52,8 @@ const SupportCards = () => {
               >
                 <Meta
                   avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                  title='{}'
-                  description="This is the description"
+                  title={question.question.content}
+                  description={ <TextArea style={{width: 400, height: 300}} placeholder="Answer the question"  onChange={e => {setAnswer(e.target.value)}}/>}
                 />
               </Card>
             </CardContainer>
