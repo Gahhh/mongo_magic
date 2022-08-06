@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import logo from '../../assets/LogoBlue.png';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -54,25 +53,20 @@ export default function AdminLogin() {
   const turnToRanking = () => {
     navigate('/publicranking')
   }
-  const recaptchaRef = React.useRef();
 
   const handleSubmit = async (e) => {
     console.log("clicked");
     e.preventDefault();
-    const token = await recaptchaRef.current.executeAsync();
-    console.log(token);
     const check = userCheck.current.value;
-    recaptchaRef.current.reset();
     const msg = {
       email: userEmail.current.value,
       password: userPwd.current.value,
       fullname: userName.current.value,
       org: userOrg.current.value,
       user_type: "1",
-      reCaptcha_Token: token,
     };
     console.log(msg);
-    if (msg.password === check && msg.code === 'wdfvz') {
+    if (msg.password === check) {
     await regisRequest(msg).then(res => {
         if (!res.ok) {
           res.json().then(body => {
@@ -94,18 +88,9 @@ export default function AdminLogin() {
           })
         }
       })}
-    else if (msg.password !== msg.userCheck) {
+    else if (msg.password !== check) {
       message.error({
         content: 'Please check your password',
-        duration: 1.2,
-        style: {
-          marginTop: '20vh',
-        }
-      });
-    }
-    else if (msg.code !== 'wdfvz') {
-      message.error({
-        content: 'Wrong invitation code. Please check your code',
         duration: 1.2,
         style: {
           marginTop: '20vh',
@@ -209,13 +194,6 @@ export default function AdminLogin() {
                   I agree to the Terms & Conditions
                 </Typography>
               } sx={{ marginBottom: '10px' } }
-            />
-          </Labelbox>
-          <Labelbox>
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              size="invisible"
-              sitekey="6LebkCshAAAAAHk4a207_vIbTrP2xEPrAeINxV6z"
             />
           </Labelbox>
           <Button color='primary' variant="contained" type="submit" sx={{ width: '408px', height: '62px', borderRadius: '12px', fontSize: '15px', fontWeight: 'bold', textTransform: 'none', }}>Register</Button>
