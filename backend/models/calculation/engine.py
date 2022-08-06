@@ -133,10 +133,10 @@ def engine(office, data):
   score_detail['energy'] = energy_score
   tennis_area = calculate_tennis_area(habitat)
   pack = {
-    "score": total_score,
-     "co2": co2e,
-     "natural_habitat": habitat,
-     "roughly_size": tennis_area,
+    "score": int(total_score),
+     "co2": int(co2e),
+     "natural_habitat": int(habitat),
+     "roughly_size": int(tennis_area),
      "suggestion": office_suggestion,
      "score_detail": score_detail
   }

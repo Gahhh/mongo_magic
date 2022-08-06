@@ -175,11 +175,11 @@ def calculate_habitat(co2e):
 def cloud_percent(ans):
   suggest = "Your organisation has a low percentage of servers on the cloud, \
     think about moving more services to the cloud to reduce your carbon footprint. "
-  # result = int(ans)/100
-  # if result < 0.5:
-  #   return [("Go cloud, go greens",suggest), result]
-  # return [(" ",""), result]
-  return [("Go cloud, go greens",suggest), 0]
+  result = int(ans)/100
+  if result < 0.5:
+    return [("Go cloud, go greens",suggest), result]
+  return [(" ",""), result]
+
 
 
 def calculate_avg_energy(total_electricity, total_floor, employee):
