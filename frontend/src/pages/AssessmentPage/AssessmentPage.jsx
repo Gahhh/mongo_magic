@@ -6,12 +6,11 @@ import { getQuestionList, saveQuestion, getSavedQuestion, postAnswers } from '..
 import AssessmentStepBar from '../../components/AssessmentStepBar/AssessmentStepBar';
 import QuestionForm from '../../components/QuestionForm/QuestionForm';
 import AssessmentModal from '../../components/AssessmentModal/AssessmentModal';
-import { CaretRightOutlined, CaretLeftFilled } from '@ant-design/icons';
+import { CaretRightOutlined, CaretLeftFilled, SaveFilled } from '@ant-design/icons';
 import LoadingIcon from '../../components/LoadingIcon';
 import './AssessmentPage.css';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/LogoBlue.png';
-
 export const SaveButton = createContext();
 
 const PageContainer = styled.div`
@@ -392,7 +391,7 @@ const AssessmentPage = () => {
 
     const answerAllShits = () => {
         setPageStep(2);
-        setOfficeList(['1','2']);
+        setOfficeList(['1']);
         setdatacentreList(['1']);
         setAssessmentAnswer({
             
@@ -429,10 +428,13 @@ const AssessmentPage = () => {
     return (
         <PageContainer>
             {(!loading) && ((pageStep === 0 && questionListOffice?.length > 0) || (pageStep === 1 && questionListDataCenter?.length > 0) || (pageStep === 2) || (pageStep === 3)) ? (
-                <><NavContainer>
+                <>
+                <div style={{position:'fixed', inset:'50% auto auto 10px', color:themeColor, textAlign:'center'}}>
+                    <SaveFilled style={{ fontSize:'35px' }} onClick={saveAssessment}></SaveFilled>
+                    <div>Save</div>
+                </div>
+                <NavContainer>
                     <Navbar>
-                    {/* <Button onClick={saveAssessment}>Save Questions</Button>
-                    <Button onClick={answerAllShits}>一键答题</Button> */}
                     <div className='logo-title'>
                         <Logoimg src={logo} alt="logo" />
                         <div className='title'>G'Tracker </div>
@@ -441,6 +443,7 @@ const AssessmentPage = () => {
                         <Atag onClick={() => (navigate('/users/dashboard'))}>Dashboard</Atag>
                         <Atag onClick={() => (navigate('/help'))}>Help</Atag>
                         <Atag onClick={() => (navigate('/about'))}>About</Atag>
+                        <Button onClick={answerAllShits}>一键答题</Button>
                     </Navbar>
                 </NavContainer>
                     <HeaderContainer>
