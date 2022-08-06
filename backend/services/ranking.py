@@ -1,11 +1,8 @@
-import email
+
 import json
 from datetime import datetime
-from bson import ObjectId
-import re
-import jwt
+
 from db.database import db_connect
-import hashlib
 from flask import make_response
 from flask_jwt_extended import create_access_token, get_jwt_identity
 from services.utils import data_process
