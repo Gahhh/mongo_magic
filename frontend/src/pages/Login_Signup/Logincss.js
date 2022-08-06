@@ -108,6 +108,19 @@ const Span = styled.span`
   flex-direction: row;
 `
 
+const TermTitle = styled.b`
+  text-decoration-line: underline;
+`
+
+const UnderLine = styled.text`
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+`
+
+const UL = styled.ul`
+  list-style-position: outside;
+`
 
 
-export {Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span};
+
+export {Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span, TermTitle, UnderLine, UL};

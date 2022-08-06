@@ -10,6 +10,9 @@ import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navb
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
+import { Modal } from 'antd';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Terms from "../../components/TermsAndConditions/Terms";
 
 const theme = createTheme({
   palette: {
@@ -27,6 +30,19 @@ export default function AdminLogin() {
   let userPwd = useRef('');
   let userCheck = useRef('');
   let userCode = useRef('');
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   
   React.useEffect(() => {
     if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "1") {
@@ -222,8 +238,11 @@ export default function AdminLogin() {
               // } sx={{ marginBottom: '10px' } }
             />
             <Typography sx={{ fontSize: 16, fontWeight: 'bold', marginTop:'10px'}}>
-                  I agree to the Terms & Conditions
+              I agree to the&nbsp;<a onClick={showModal}>Terms & Conditions</a>
                 </Typography>
+            <Modal title="Terms & Conditions" style={{width: '60%', height: '80%'}} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+              <Terms></Terms>
+            </Modal>
           </Labelbox>
           <Button color='primary' variant="contained" type="submit" sx={{ width: '408px', height: '62px', borderRadius: '12px', fontSize: '15px', fontWeight: 'bold', textTransform: 'none', }}>Register</Button>
         </Newform>
