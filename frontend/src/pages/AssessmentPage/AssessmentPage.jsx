@@ -238,6 +238,7 @@ const AssessmentPage = () => {
             default:
                 setOfficeList(prev => ([...prev, `${officeNumber + 1}`]));
                 setOfficeNumber(officeNumber + 1);
+                setCollapseNumber(collapseNumber + 1);
                 break;
         }
     }

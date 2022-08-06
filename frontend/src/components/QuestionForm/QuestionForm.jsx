@@ -118,7 +118,6 @@ const QuestionForm = (props) => {
         ))
     }
 
-    console.log(props.number);
 
     return (
         <>

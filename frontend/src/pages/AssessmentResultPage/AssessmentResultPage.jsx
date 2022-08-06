@@ -125,7 +125,7 @@ const AssessmentResultPage = () => {
                 })
             }
         })
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         if (value < 100) {
@@ -208,13 +208,12 @@ const AssessmentResultPage = () => {
         return (
             Object.keys(data['suggestion']).map((key, index) => {
                 return (
-                    <div>
-                        <ul style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
-                            {
+                    <div key={`container${index}`}>
+                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{suggestion[key].length > 0 ? key : ''}</ul>
+                            {   
                                 suggestion[key].map((item, index) => {
-                                    console.log(item);
                                     return (
-                                        <li style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
+                                        <li key={index} style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
                                     )
                                 })
                             }
@@ -281,8 +280,7 @@ const AssessmentResultPage = () => {
         "roughly_size": "20",
         "suggestion": {
             "Location Location Location": [
-                "One or more of your offices only have limited access to the public transport system",
-                "One or more of your offices are located in a state which has a high percentage of electircity generation from fossil fuels"],
+],
             "Reduce, reuse, recycle": [
                 "You may need to consider go forward with LED lighting in your offices",
                 "Your data centre may need a passive cooling system in order to reduce the energy consumption"
@@ -331,10 +329,10 @@ const AssessmentResultPage = () => {
                             (<ContentContainer>
                                 <ContentContainerLeft>
                                     <div style={{ marginLeft: '25px', height: '400px', width: '100%', backgroundColor: `${themeColor_light}` }}>
-                                        <Image style={{ height: '400px', width:'100%'}} src={require('../../assets/resultBack_2.jpeg')}></Image>
+                                        <Image style={{ height: '400px', width:'100%'}} src={'/publicAssets/resultBack.jpg'}></Image>
                                     </div>
                                     <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
-                                        Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext> Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
+                                        Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext>Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
                                         To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
                                     </TextContext>
                                 </ContentContainerLeft>
