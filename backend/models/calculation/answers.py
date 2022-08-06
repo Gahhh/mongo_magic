@@ -89,7 +89,7 @@ def is_ac_smart(ans):
   return [(" ",""), 0]
 
 def office_elec_amount(ans):
-  return int(ans)*1000
+  return int(ans)
 
 def office_elec_percent(ans):
   suggest = "One or more of your offices have a lower renewable electricity percentage than the average.\
@@ -134,7 +134,7 @@ def nabers_mk(ans):
   return [(" ",""), result]
 
 def data_elec_amount(ans):
-  return int(ans)*1000
+  return int(ans)
 
 def data_elec_percent(ans):
   suggest = "Your data centre have a lower renewable electricity percentage than the average.\
@@ -170,7 +170,7 @@ def calculate_co2(electricity, green_energy_percent, postcode):
   return elec_eff * state_co2_covert[ans[0]]
 
 def calculate_habitat(co2e):
-  return co2e * co2e_to_habitat
+  return co2e / co2e_to_habitat
 
 def cloud_percent(ans):
   suggest = "Your organisation has a low percentage of servers on the cloud, \
@@ -215,4 +215,4 @@ def energy_score_calculate(avg_energy):
   return 0
   
 def calculate_tennis_area(habitat):
-  return habitat/260
+  return habitat/223
