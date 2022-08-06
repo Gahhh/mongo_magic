@@ -44,6 +44,9 @@ const PostCodeInput = (props) => {
             });
         } else {
             setLocation(null);
+            const deleteAnswer = { ...ans.answer };
+            delete deleteAnswer[props.qId];
+            ans.setAnswer(deleteAnswer);
         }
     }
 
