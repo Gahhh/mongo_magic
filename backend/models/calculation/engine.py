@@ -83,7 +83,7 @@ def engine(office, data):
       scaled = i[0]*(i[1]/total_employee)
       total_score += scaled
   if data:
-    data_set = data[0]
+    data_set = data
     cloud_percentage = 0
     data_score = 0
     for key in data_set.keys():
