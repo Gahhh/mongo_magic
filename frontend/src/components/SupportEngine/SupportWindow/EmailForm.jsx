@@ -116,7 +116,6 @@ const EmailForm = props => {
                         Send
                     </Button>
                     <br></br>
-                    <small> Check your Spam and Trash Container</small>
                 </form>
                 
                 

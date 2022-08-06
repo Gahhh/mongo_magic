@@ -26,7 +26,7 @@ display: flex;
 const ResultCardContainer = styled.div`
     display: flex;
     /* flex-direction: column; */
-    height: 800px;
+    min-height: 800px;
     width: 1000px;
     background: hsla(0,0%,100%,.95);
     margin-top: 30px;
@@ -41,12 +41,14 @@ const ContentContainerRight = styled.div`
     margin: auto;
     height: 100%;
     margin-right: 10px;
+    position: relative;
 `
 
 const ContentContainerLeft = styled.div`
     /* background-color: white; */
-    height: 600px;
-    width: 400px;
+    min-height: 600px;
+    max-width: 400px;
+    min-width: 400px;
     display: flex;
     flex-direction: column;
     margin-top: 100px;
@@ -207,18 +209,15 @@ const AssessmentResultPage = () => {
             Object.keys(data['suggestion']).map((key, index) => {
                 return (
                     <div>
-                        <div style={{ marginLeft: '20px', marginRight: '20px', color: '#4D7393', fontWeight: '700' }}>{key}</div>
-                        <div>
+                        <ul style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
                             {
                                 suggestion[key].map((item, index) => {
                                     console.log(item);
-                                    return (<div style={{ marginLeft: '20px', marginRight: '20px', color: '#89c5d1' }}>
-                                        {item}
-                                    </div>
+                                    return (
+                                        <li style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
                                     )
                                 })
                             }
-                        </div>
                     </div>
                 )
             })
@@ -335,7 +334,7 @@ const AssessmentResultPage = () => {
                                         <Image style={{ height: '400px', width:'100%'}} src={require('../../assets/resultBack_2.jpeg')}></Image>
                                     </div>
                                     <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
-                                        Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext> Kg of Carbon Dioxide equivalent (tCO<sub>2</sub>e).
+                                        Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext> Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
                                         To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
                                     </TextContext>
                                 </ContentContainerLeft>
@@ -345,9 +344,9 @@ const AssessmentResultPage = () => {
                                     </div>
                                     <h3 style={{ display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '32px' }} >Result</h3>
                                     <h1 style={{ marginLeft: '20px', color: '#4D7393' }}>Your Organisation's Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h1>
-                                    <div>{bulletPoints()}</div>
-                                    <div style={{ display: 'flex', height: '100%', width: 'auto', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-                                        <div style={{ position: 'relative', left: '-80px', alignSelf: 'flex-end', whiteSpace: 'nowrap', color: '#4D7393', fontWeight: '600', marginRight: '5px' }}>By G'Tracker</div>
+                                    <div style={{ marginBottom:'40px' }}>{bulletPoints()}</div>
+                                    <div style={{ display: 'flex', height: '100%', width: 'auto', position:'absolute', bottom:'0', right:'0' }}>
+                                        <div style={{ alignSelf: 'flex-end', whiteSpace: 'nowrap', color: '#4D7393', fontWeight: '600' }}>By G'Tracker</div>
                                     </div>
                                 </ContentContainerRight>
                             </ContentContainer>)}
