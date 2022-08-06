@@ -10,6 +10,7 @@ import { CaretRightOutlined, CaretLeftFilled } from '@ant-design/icons';
 import LoadingIcon from '../../components/LoadingIcon';
 import './AssessmentPage.css';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/LogoBlue.png';
 
 export const SaveButton = createContext();
 
@@ -45,6 +46,19 @@ const HeaderContainer = styled.div`
     align-items: center;
 `
 
+const Logoimg = styled.img`
+    width: 56px;
+    height:56px;
+    `
+
+const Span = styled.span`
+right: 10%;
+top: 1rem;
+margin-left: 1rem;
+display: flex;
+flex-direction: row;
+`
+
 const QuestionContainer = styled.div`
     width: 50%;
     min-height: 60vh;
@@ -57,6 +71,30 @@ const QuestionContainer = styled.div`
 const StepContainer = styled.div`
     display: flex;
     width: 100%;
+`
+
+const Navbar = styled.div`
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 40px;
+    letter-spacing: 0.02em;
+    color: #4D7393;
+    display: flex;
+    flex-direction: row;
+    width:60%;
+    margin: auto;
+    padding-top: 1.2rem;
+    justify-content: space-between;
+`
+
+const Atag = styled.a`
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+    text-align: center;
+    color: #4D7393;
+    margin: 1rem;
 `
 
 const AssessmentPage = () => {
@@ -108,8 +146,6 @@ const AssessmentPage = () => {
             }
             setOfficeNumber(officeTotal);
             setdatacentreNumber(datacentreTotal);
-            // setCollapseNumber(Object.keys(savedAssessmentContent).filter(item => item.substring(0, 6) === 'office').length);
-            // setdatacentreCollapseNumber(Object.keys(savedAssessmentContent).filter(item => item.substring(0, 4) === 'data').length);
             setLoading(false);
         } else {
             setHasSavedAssessment(false);
@@ -127,10 +163,6 @@ const AssessmentPage = () => {
             if (res.ok) {
                 res.json().then(data => {
                     handleQuestionList(data.question_list);
-                    // setHasSavedAssessment(false);
-                    // setOfficeList(['1']);
-                    // setdatacentreList(['1']);
-                    // setLoading(false);
                 }
                 )
             }
@@ -363,38 +395,32 @@ const AssessmentPage = () => {
         setOfficeList(['1','2']);
         setdatacentreList(['1']);
         setAssessmentAnswer({
-            "office1": {
-                "62d7eb8720b23a61a4656ec2": "3211",
-                "62d7ecc120b23a61a4656ec3": "T",
-                "62dbbf7fe82cdd10987ecd1e": [
-                    "Lightrail"
-                ],
-                "62dbbba0e82cdd10987ecd15": "123",
-                "62dbbb56e82cdd10987ecd14": "123",
-                "62dbbc12e82cdd10987ecd16": "F",
-                "62dbbd34e82cdd10987ecd19": "T",
-                "62dbbd0ae82cdd10987ecd18": "T",
-                "62dbbd6ee82cdd10987ecd1a": "123",
-                "62dbbe4ee82cdd10987ecd1b": "14",
-                "62dbbe8be82cdd10987ecd1c": "F",
-                "62dbbe9ae82cdd10987ecd1d": "F"
-            },
-            "office2": {
-                "62d7eb8720b23a61a4656ec2": "3111",
-                "62d7ecc120b23a61a4656ec3": "F",
-                "62dbbb56e82cdd10987ecd14": "123",
-                "62dbbba0e82cdd10987ecd15": "123",
-                "62dbbc12e82cdd10987ecd16": "T",
-                "62dbbc98e82cdd10987ecd17": "4 Stars",
-                "62dbbd6ee82cdd10987ecd1a": "321",
-                "62dbbe4ee82cdd10987ecd1b": "18",
-                "62dbbe8be82cdd10987ecd1c": "F",
-                "62dbbe9ae82cdd10987ecd1d": "F"
-            },
-            "data": {
-                "62dff0a2dd0aaca7f9e83a86": "F",
-                "62e8f46032a02279ec5058d6": "F"
-            }
+            
+                "office1": {
+                    "62d7ecc120b23a61a4656ec3": "F",
+                    "62dbbb56e82cdd10987ecd14": "123",
+                    "62dbbba0e82cdd10987ecd15": "123",
+                    "62d7eb8720b23a61a4656ec2": "1112",
+                    "62dbbc12e82cdd10987ecd16": "F",
+                    "62dbbd0ae82cdd10987ecd18": "F",
+                    "62dbbd34e82cdd10987ecd19": "F",
+                    "62dbbd6ee82cdd10987ecd1a": "5",
+                    "62dbbe4ee82cdd10987ecd1b": "21",
+                    "62dbbe8be82cdd10987ecd1c": "F",
+                    "62dbbe9ae82cdd10987ecd1d": "F"
+                },
+                "data": {
+                    "62dff0a2dd0aaca7f9e83a86": "T",
+                    "62dff13edd0aaca7f9e83a87": "T",
+                    "62ecdea5ad4a6abefd4f5b69": "21",
+                    "62dff202dd0aaca7f9e83a88": "12",
+                    "62dff22add0aaca7f9e83a89": "T",
+                    "62dff2a7dd0aaca7f9e83a8a": "1 Star",
+                    "62dff2ecdd0aaca7f9e83a8b": "33",
+                    "62e269bfe93d521d7ac25a12": "16",
+                    "62e26a1ee93d521d7ac25a13": "T"
+                }
+            
         })
     }
 
@@ -404,9 +430,18 @@ const AssessmentPage = () => {
         <PageContainer>
             {(!loading) && ((pageStep === 0 && questionListOffice?.length > 0) || (pageStep === 1 && questionListDataCenter?.length > 0) || (pageStep === 2) || (pageStep === 3)) ? (
                 <><NavContainer>
-                    <Button onClick={saveAssessment}>Save Questions</Button>
-                    <Button onClick={answerAllShits}>一键答题</Button>
-                    <h1>Navbar</h1>
+                    <Navbar>
+                    {/* <Button onClick={saveAssessment}>Save Questions</Button>
+                    <Button onClick={answerAllShits}>一键答题</Button> */}
+                    <div className='logo-title'>
+                        <Logoimg src={logo} alt="logo" />
+                        <div className='title'>G'Tracker </div>
+                    </div>
+                        <Atag onClick={() => (navigate('/'))}>Home</Atag>
+                        <Atag onClick={() => (navigate('/users/dashboard'))}>Dashboard</Atag>
+                        <Atag onClick={() => (navigate('/help'))}>Help</Atag>
+                        <Atag onClick={() => (navigate('/about'))}>About</Atag>
+                    </Navbar>
                 </NavContainer>
                     <HeaderContainer>
                         <h3 className='headerContent'>The Assessment of the sustainability score will be done based on the data provided.</h3>
@@ -480,7 +515,7 @@ const AssessmentPage = () => {
                                 <Divider plain>{officeFinished ? `All Answered, Add More or Go Ahead` : `Please Finish All Questions`}</Divider>
                             ) : (
                                 pageStep === 1 ? (
-                                    <Divider plain>{datacentreFinished ? `All Answered, Add More or Go Ahead` : `Please Finish All Questions`}</Divider>
+                                    <Divider plain>{datacentreFinished ? `All Answered, Go Ahead` : `Please Finish All Questions`}</Divider>
                                 ) : (
                                     <></>
                                 )
