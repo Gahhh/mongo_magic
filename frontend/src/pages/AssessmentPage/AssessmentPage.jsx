@@ -6,7 +6,7 @@ import { getQuestionList, saveQuestion, getSavedQuestion, postAnswers } from '..
 import AssessmentStepBar from '../../components/AssessmentStepBar/AssessmentStepBar';
 import QuestionForm from '../../components/QuestionForm/QuestionForm';
 import AssessmentModal from '../../components/AssessmentModal/AssessmentModal';
-import { CaretRightOutlined, CaretLeftFilled, SaveFilled } from '@ant-design/icons';
+import { CaretRightOutlined, CaretLeftFilled, SaveFilled, ClearOutlined } from '@ant-design/icons';
 import LoadingIcon from '../../components/LoadingIcon';
 import './AssessmentPage.css';
 import { useNavigate } from 'react-router-dom';
@@ -375,18 +375,18 @@ const AssessmentPage = () => {
 
     const onSubmit = () => {
         postAnswers(assessmentAnswer)
-        .then(res => {
-            if(res.status === 200){
-                message.success('Assessment submitted successfully');
-                res.json().then(data => {
-                    console.log(data);
-                    const id = data.result_id;
-                    navigate(`/assessment/result/${id}`);
-                })
-            } else {
-                message.error('Error: Server error');
-            }
-        })
+            .then(res => {
+                if (res.status === 200) {
+                    message.success('Assessment submitted successfully');
+                    res.json().then(data => {
+                        console.log(data);
+                        const id = data.result_id;
+                        navigate(`/assessment/result/${id}`);
+                    })
+                } else {
+                    message.error('Error: Server error');
+                }
+            })
     }
 
     const answerAllShits = () => {
@@ -394,58 +394,59 @@ const AssessmentPage = () => {
         setOfficeList(['1']);
         setdatacentreList(['1']);
         setAssessmentAnswer({
-            
-                "office1": {
-                    "62d7ecc120b23a61a4656ec3": "F",
-                    "62dbbb56e82cdd10987ecd14": "123",
-                    "62dbbba0e82cdd10987ecd15": "123",
-                    "62d7eb8720b23a61a4656ec2": "1112",
-                    "62dbbc12e82cdd10987ecd16": "F",
-                    "62dbbd0ae82cdd10987ecd18": "F",
-                    "62dbbd34e82cdd10987ecd19": "F",
-                    "62dbbd6ee82cdd10987ecd1a": "5",
-                    "62dbbe4ee82cdd10987ecd1b": "21",
-                    "62dbbe8be82cdd10987ecd1c": "F",
-                    "62dbbe9ae82cdd10987ecd1d": "F"
-                },
-                "data": {
-                    "62dff0a2dd0aaca7f9e83a86": "T",
-                    "62dff13edd0aaca7f9e83a87": "T",
-                    "62ecdea5ad4a6abefd4f5b69": "21",
-                    "62dff202dd0aaca7f9e83a88": "12",
-                    "62dff22add0aaca7f9e83a89": "T",
-                    "62dff2a7dd0aaca7f9e83a8a": "1 Star",
-                    "62dff2ecdd0aaca7f9e83a8b": "33",
-                    "62e269bfe93d521d7ac25a12": "16",
-                    "62e26a1ee93d521d7ac25a13": "T"
-                }
-            
+
+            "office1": {
+                "62d7ecc120b23a61a4656ec3": "F",
+                "62dbbb56e82cdd10987ecd14": "123",
+                "62dbbba0e82cdd10987ecd15": "123",
+                "62d7eb8720b23a61a4656ec2": "1112",
+                "62dbbc12e82cdd10987ecd16": "F",
+                "62dbbd0ae82cdd10987ecd18": "F",
+                "62dbbd34e82cdd10987ecd19": "F",
+                "62dbbd6ee82cdd10987ecd1a": "5",
+                "62dbbe4ee82cdd10987ecd1b": "21",
+                "62dbbe8be82cdd10987ecd1c": "F",
+                "62dbbe9ae82cdd10987ecd1d": "F"
+            },
+            "data": {
+                "62dff0a2dd0aaca7f9e83a86": "T",
+                "62dff13edd0aaca7f9e83a87": "T",
+                "62ecdea5ad4a6abefd4f5b69": "21",
+                "62dff202dd0aaca7f9e83a88": "12",
+                "62dff22add0aaca7f9e83a89": "T",
+                "62dff2a7dd0aaca7f9e83a8a": "1 Star",
+                "62dff2ecdd0aaca7f9e83a8b": "33",
+                "62e269bfe93d521d7ac25a12": "16",
+                "62e26a1ee93d521d7ac25a13": "T"
+            }
+
         })
     }
 
     console.log(assessmentAnswer);
 
+    const clearCurrentPage = () => {
+        setAssessmentAnswer({});
+        setPageStep(0);
+    }
+
     return (
         <PageContainer>
             {(!loading) && ((pageStep === 0 && questionListOffice?.length > 0) || (pageStep === 1 && questionListDataCenter?.length > 0) || (pageStep === 2) || (pageStep === 3)) ? (
                 <>
-                <div style={{position:'fixed', inset:'50% auto auto 10px', color:themeColor, textAlign:'center'}}>
-                    <SaveFilled style={{ fontSize:'35px' }} onClick={saveAssessment}></SaveFilled>
-                    <div>Save</div>
-                </div>
-                <NavContainer>
-                    <Navbar>
-                    <div className='logo-title'>
-                        <Logoimg src={logo} alt="logo" />
-                        <div className='title'>G'Tracker </div>
-                    </div>
-                        <Atag onClick={() => (navigate('/'))}>Home</Atag>
-                        <Atag onClick={() => (navigate('/users/dashboard'))}>Dashboard</Atag>
-                        <Atag onClick={() => (navigate('/help'))}>Help</Atag>
-                        <Atag onClick={() => (navigate('/about'))}>About</Atag>
-                        <Button onClick={answerAllShits}>一键答题</Button>
-                    </Navbar>
-                </NavContainer>
+                    <NavContainer>
+                        <Navbar>
+                            <div className='logo-title'>
+                                <Logoimg src={logo} alt="logo" />
+                                <div className='title'>G'Tracker </div>
+                            </div>
+                            <Atag onClick={() => (navigate('/'))}>Home</Atag>
+                            <Atag onClick={() => (navigate('/users/dashboard'))}>Dashboard</Atag>
+                            <Atag onClick={() => (navigate('/help'))}>Help</Atag>
+                            <Atag onClick={() => (navigate('/about'))}>About</Atag>
+                            <Button onClick={answerAllShits}>一键答题</Button>
+                        </Navbar>
+                    </NavContainer>
                     <HeaderContainer>
                         <h3 className='headerContent'>The Assessment of the sustainability score will be done based on the data provided.</h3>
                         <h3 className='headerContent'>G'Tracker will not store or share your data with anyone without your permission.</h3>
@@ -497,7 +498,17 @@ const AssessmentPage = () => {
                         }
                     </SaveButton.Provider>
                     <div style={{ marginBottom: '50px', display: 'flex', flexDirection: 'column', width: '50%', alignItems: 'center' }}>
-                        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <div style={{ display:'flex', color: themeColor, textAlign: 'center', width:'50%', justifyContent:'space-evenly' }}>
+                            <div>
+                                    <SaveFilled style={{ fontSize: '35px' }} onClick={saveAssessment}></SaveFilled>
+                                    <div>Save</div>
+                            </div>
+                            <div>
+                                    <ClearOutlined style={{ fontSize: '35px' }} onClick={clearCurrentPage}/>
+                                    <div>Clear</div>
+                            </div>
+                        </div>
+                        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop:'20px' }}>
                             {<div onClick={goPrevPage} style={{ visibility: `${pageStep > 0 ? '' : 'hidden'}`, cursor: 'pointer', display: 'flex', textAlign: 'center', alignItems: 'center', order: '0', fontSize: '16px' }}>
                                 <CaretLeftFilled style={{ fontSize: '20px' }}></CaretLeftFilled> Prev
                             </div>}
