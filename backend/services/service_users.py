@@ -1,11 +1,9 @@
 import json
 from datetime import datetime
-from struct import pack
 from db.database import db_connect
 import hashlib
 from flask import make_response
 from flask_jwt_extended import create_access_token, get_jwt_identity
-from services.utils import get_approval
 
 
 db = db_connect()
