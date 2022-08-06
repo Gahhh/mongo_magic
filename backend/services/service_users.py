@@ -18,9 +18,7 @@ def user_register(req):
   create_time = datetime.now()
   user_type = req['user_type']
   db_col = db['users']
-  recaptcha = req['reCaptcha_Token']
-  if not get_approval(recaptcha):
-    return make_response(json.dumps({'message': 'Invalid reCaptcha'}), 400)
+  
   if db_col.find_one({'email': email}):
     return make_response(json.dumps({'message': 'Email already exists'}), 400)
   
@@ -54,9 +52,7 @@ def user_login(req):
     password = req['password']
     type_in = req['user_type']
     db_col = db['users']
-    recaptcha = req['reCaptcha_Token']
-    if not get_approval(recaptcha):
-      return make_response(json.dumps({'message': 'Invalid reCaptcha'}), 400)
+
     if not email or not password:
       return make_response(json.dumps({'message': 'Missing required fields'}), 400)
     password_md5 = hashlib.md5(password.encode('utf-8')).hexdigest()
