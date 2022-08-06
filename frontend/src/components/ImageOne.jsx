@@ -85,6 +85,9 @@ const ImageOne = () => {
   const turnToHelp = () => {
     navigate('/help')
   }
+  const turnToRanking = () => {
+    navigate('/publicranking')
+  }
 
 
   return <Parallax className='image' blur={0} bgImage={require('../assets/banner1.jpg')} strength={800} bgImageStyle={{minHeight:"100vh"}}>
@@ -95,7 +98,7 @@ const ImageOne = () => {
       </div>
       <Span>
         <Atag>Home</Atag>
-        <Atag>Ranking</Atag>
+        <Atag onClick={turnToRanking}>Ranking</Atag>
         <Atag onClick={turnToHelp}>Help</Atag>
         <Atag onClick={turnToAbout}>About</Atag>
         {

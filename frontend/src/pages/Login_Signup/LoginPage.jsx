@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import logo from '../../assets/LogoBlue.png';
 import Button from '@mui/material/Button';
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../../utils/requests";
 import { asyncLocalStorage } from '../../utils/functions';
 import { message } from 'antd';
-import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span } from "./Quizcss";
+import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span } from "./Logincss.js";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
@@ -20,10 +20,20 @@ const theme = createTheme({
   },
 });
 
-export default function Newquiz() {
+
+
+export default function LoginPage() {
   const navigate = useNavigate();
   let useremail = useRef('');
   let userpwd = useRef('');
+
+  React.useEffect(() => {
+    if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "1") {
+      navigate('/users/dashboard');
+    } else if (localStorage.getItem('userToken') && localStorage.getItem('userType') === "0") {
+      navigate('/admin/dashboard');
+    }
+  }, [])
 
   const transRegis = (event) => {
     navigate(`/signup`);
@@ -39,6 +49,10 @@ export default function Newquiz() {
   }
   const transHelp = (event) => {
     navigate(`/help`);
+  }
+
+  const turnToRanking = () => {
+    navigate('/publicranking')
   }
 
   const recaptchaRef = React.useRef();
@@ -57,34 +71,42 @@ export default function Newquiz() {
     };
     console.log(msg);
     await loginRequest(msg).then(res => {
-        if (!res.ok) {
-          res.json().then(body => {
-            message.error({
-              content: body.message,
-              duration: 1.2,
-              style: {
-                marginTop: '20vh',
-              }
-            });
-          })
-        } else {
-          res.json().then(body => {
-            asyncLocalStorage.setItem('userToken', body.token).then(() =>
+      if (!res.ok) {
+        res.json().then(body => {
+          message.error({
+            content: body.message,
+            duration: 1.2,
+            style: {
+              marginTop: '20vh',
+            }
+          });
+        })
+      } else {
+        res.json().then(body => {
+          asyncLocalStorage.setItem('userToken', body.token).then(() =>
+            asyncLocalStorage.setItem('userType', "1").then(() =>
               navigate(`/users/dashboard`)
             )
-          })
-        }
-      })
+          )
+        })
+      }
+    })
   };
   return (
     <ThemeProvider theme={theme}>
-      <Navbar><Logoimg src={logo} alt="logo" />G'Tracker <Span>
+      <div style={{display:"block"}}>
+      <Navbar>
+      <div className='logo-title'>
+        <Logoimg src={logo} alt="logo" />
+        <div className='title'>G'Tracker </div>
+      </div>
+      <Span>
         <Atag onClick={transHome}>Home</Atag>
-        <Atag>Rankings</Atag>
+        <Atag onClick={turnToRanking}>Ranking</Atag>
         <Atag onClick={transHelp}>Help</Atag>
         <Atag onClick={transAbout}>About</Atag>
-      </Span>
-      </Navbar>
+      </Span> 
+    </Navbar>
       <Flexbox>
         <Head>
           Login
@@ -106,7 +128,7 @@ export default function Newquiz() {
             />
           </Labelbox>
           <Labelbox className="form-group">
-            <Label htmlFor="password">Name</Label>
+            <Label htmlFor="password">Password</Label>
             <Newinput
               type="password"
               className="form-control"
@@ -137,6 +159,8 @@ export default function Newquiz() {
           <Button color='primary' variant="contained" type="submit" sx={{ width: '408px', height: '62px', borderRadius: '12px', fontSize: '15px', fontWeight: 'bold', textTransform: 'none', }}>Login</Button>
         </Newform>
       </Flexbox>
+      </div>
+      
     </ThemeProvider>
   );
 }
