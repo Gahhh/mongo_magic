@@ -12,12 +12,12 @@ def add():
     return support_question_add(request.json)
 
 @user_support_blueprint.route('/support/list', methods=['GET'])
-@jwt_required()
+@swag_from('../docs/support/list_question.yml', methods=['GET'])
 def get_question_list():
     return support_question_list(request)
 
 @user_support_blueprint.route('/support/solve', methods=['POST'])
-@jwt_required()
+@swag_from('../docs/support/solve_question.yml', methods=['POST'])
 def solve_question_():
     return support_question_solve(request.json)
   
