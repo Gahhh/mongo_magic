@@ -1,9 +1,9 @@
 tags:
   - Analysis
 summary: Get test data from database
-# security:
-#   - Bearer: [Bearer] 
-#   - APIKeyHeader: ['authorization']
+security:
+  - Bearer: [Bearer] 
+  - APIKeyHeader: ['authorization']
 parameters:
   - in: body
     name: body
