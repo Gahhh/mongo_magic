@@ -11,6 +11,9 @@ import LoadingIcon from '../../components/LoadingIcon';
 import './AssessmentPage.css';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/LogoBlue.png';
+import { Modal } from 'antd';
+import Terms from '../../components/TermsAndConditions/Terms';
+import Privacy from '../../components/Privacy/Privacy';
 export const SaveButton = createContext();
 
 const PageContainer = styled.div`
@@ -127,6 +130,32 @@ const AssessmentPage = () => {
     const saveButton = useMemo(() => ({ saving }), [saving]);
 
     const shouldAskForSavedUnswer = useRef(true);
+    const [isModalVisible, setIsModalVisible] = React.useState(false);
+    const [isModalVisible2, setIsModalVisible2] = React.useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    const show = () => {
+        setIsModalVisible2(true);
+    };
+
+    const Ok = () => {
+        setIsModalVisible2(false);
+    };
+
+    const Cancel = () => {
+        setIsModalVisible2(false);
+    };
 
     useEffect(() => {
         if (usingSavedAssessment) {
@@ -433,14 +462,6 @@ const AssessmentPage = () => {
         setdatacentreList(['1']);
     }
 
-    const turnToDashboard = () => {
-      if (localStorage.getItem('userType') === "1") {
-        navigate('/users/dashboard');
-      } else if (localStorage.getItem('userType') === "0") {
-        navigate('/admin/dashboard');
-      }
-    }
-
     return (
         <PageContainer>
             {(!loading) && ((pageStep === 0 && questionListOffice?.length > 0) || (pageStep === 1 && questionListDataCenter?.length > 0) || (pageStep === 2) || (pageStep === 3)) ? (
@@ -452,7 +473,7 @@ const AssessmentPage = () => {
                                 <div className='title'>G'Tracker </div>
                             </div>
                             <Atag onClick={() => (navigate('/'))}>Home</Atag>
-                            <Atag onClick={() => turnToDashboard()}>Dashboard</Atag>
+                            <Atag onClick={() => (navigate('/users/dashboard'))}>Dashboard</Atag>
                             <Atag onClick={() => (navigate('/help'))}>Help</Atag>
                             <Atag onClick={() => (navigate('/about'))}>About</Atag>
                             <Button onClick={answerAllShits}>一键答题</Button>
@@ -494,7 +515,14 @@ const AssessmentPage = () => {
                                                         </Row>
                                                         <Row style={{ marginTop: '30px' }}>
                                                             <Col span={32}>
-                                                                <Checkbox defaultChecked={termsAgreed} onChange={(e) => onTermsChange(e)}>I agree to the <a>Terms & Conditions</a> and the <a>Privacy Policy</a>.</Checkbox>
+                                                                <Checkbox defaultChecked={termsAgreed} onChange={(e) => onTermsChange(e)}></Checkbox>
+                                                                I agree to the <a onClick={showModal}>Terms & Conditions</a> and the <a onClick={show}>Privacy Policy</a>.
+                                                                <Modal title="Terms & Conditions" style={{width: '60%', height: '80%'}} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                                                                    <Terms></Terms>
+                                                                </Modal>
+                                                                <Modal title="Privacy at G’TRACKER" style={{width: '60%', height: '80%'}} visible={isModalVisible2} onOk={Ok} onCancel={Cancel}>
+                                                                    <Privacy></Privacy>
+                                                                </Modal>
                                                             </Col>
                                                         </Row>
                                                         <Row style={{ marginTop: '30px', alignSelf: 'center' }}>
