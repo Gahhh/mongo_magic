@@ -21,6 +21,15 @@ def engine(office, data):
   total_electricity = 0
   score_list = []
   total_score = 0
+  analysis_data = {
+    'electricity': 0,
+    'floor_area': 0,
+    'employee': 0,
+    'is_cloud': 0,
+    'cloud_percentage': 0,
+    'is_green_star': 0,
+    'co2e': 0,
+  }
   if office:
     for item in office:
       electricity = 0
@@ -30,14 +39,17 @@ def engine(office, data):
       for key in item.keys():
         if key == "office_floor_space":
           floor = eval(f"{key}({item[key]})")
+          analysis_data['floor_area'] += floor
         elif key == "office_employee_num":
           employee = eval(f"{key}({item[key]})")
+          analysis_data['employee'] += employee
         elif key == "office_elec_percent":
           elec_per = eval(f"{key}({item[key]})")
           green_energy_percent = elec_per[1]
           office_suggestion = get_suggest(elec_per, office_suggestion)
         elif key == "office_elec_amount":
           electricity = eval(f"{key}({item[key]})")
+          
         elif key=="office_postcode":
           general = eval(f"{key}({item[key]})")
           office_suggestion = get_suggest(general, office_suggestion)
@@ -49,6 +61,7 @@ def engine(office, data):
           score_detail['public_transport'] = general[1]+4
           score+=general[1]+4
         elif key == "green_star_ans":
+          analysis_data['is_green_start'] = True
           general = eval(f'{key}("{item[key]}")')
           office_suggestion = get_suggest(general, office_suggestion)
           score_detail["certification/measures"] = general[1]+15
@@ -78,6 +91,7 @@ def engine(office, data):
     office_suggestion = get_suggest(energy_result, office_suggestion)
     avg_energy = energy_result[1]
     energy_score = energy_score_calculate(avg_energy)
+    analysis_data['electricity'] += total_electricity
     for i in score_list:
       scaled = i[0]*(i[1]/total_employee)
       total_score += scaled
@@ -91,6 +105,7 @@ def engine(office, data):
         if data_set[key] == "F":
           break
       elif key == "is_cloud":
+        analysis_data['is_cloud'] = True
         temp_result = eval(f'{key}("{data_set[key]}")')
         office_suggestion = get_suggest(temp_result, office_suggestion)
         data_score += temp_result[1]
@@ -98,6 +113,7 @@ def engine(office, data):
         temp_result = eval(f'{key}("{data_set[key]}")')
         office_suggestion = get_suggest(temp_result, office_suggestion)
         cloud_percentage = temp_result[1]
+        analysis_data['cloud_percentage'] = cloud_percentage
       elif key == "data_capacity":
         data_capacity = eval(f"{key}({data_set[key]})")
       elif key == "data_elec_percent":
@@ -133,12 +149,15 @@ def engine(office, data):
   score_detail['energy'] = energy_score
   tennis_area = calculate_tennis_area(habitat)
   score_detail = score_percent_process(score_detail)
+  analysis_data['co2e'] = int(co2e)
+  
   pack = {
     "score": int(total_score),
      "co2": int(co2e),
      "natural_habitat": int(habitat),
      "roughly_size": int(tennis_area),
      "suggestion": office_suggestion,
-     "score_detail": score_detail
+     "score_detail": score_detail,
+     "analysis_data": analysis_data
   }
   return pack

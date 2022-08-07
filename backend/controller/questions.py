@@ -41,4 +41,4 @@ def temp_get():
 @swag_from('../docs/question/get_result.yml', methods=['GET'])
 def get_result():
     id = request.args.get('id')
-    return question_get_result(id)
+    return question_get_result(id) 
