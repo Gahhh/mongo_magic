@@ -31,7 +31,7 @@ def analysis_data(req):
   except:
     return make_response(json.dumps({'message': 'Input Error'}), 400)
   
-def digram_data(req):
+def diagram_data(req):
   try:
     db_result = db['score_history']
     email = get_jwt_identity()
