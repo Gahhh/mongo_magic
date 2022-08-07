@@ -100,6 +100,11 @@ export const rankingRequest = () => {
     return res;
 }
 
+export const solveSupportQuestion = (body) => {
+    const res = apiRequest({method: 'POST', url: '/support/solve', body: body});
+    return res;
+}
+
 export const getAnalysis = (body) => {
     return apiRequest({ url: '/analysis/data', body:body });
 }
