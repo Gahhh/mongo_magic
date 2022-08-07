@@ -1,7 +1,6 @@
 import { DatePicker, Space, Checkbox, Row, Col, Button } from 'antd';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import getAnalysis
 
 const { RangePicker } = DatePicker;
 
