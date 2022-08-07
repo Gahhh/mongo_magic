@@ -17,7 +17,9 @@ const Analytics = () => {
         <>
             {prof.providerProfile.profile ? (
             <Content style={{ display: 'flex',  justifyContent: 'center'}}>
-                
+                <div style={{ position:'relative', top:'50px' }}>
+                    <DataSelector setData={setData}></DataSelector>
+                </div>
             </Content>
             ) : (<Layout style={{ display: 'flex', justifyContent: 'center' }}><LoadingIcon></LoadingIcon></Layout>)}
         </>

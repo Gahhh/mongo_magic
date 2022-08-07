@@ -2,7 +2,6 @@ import { DatePicker, Space, Checkbox, Row, Col, Button } from 'antd';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { getAnalysis } from '../../utils/requests';
-import fileDownload from 'js-file-download'
 
 const { RangePicker } = DatePicker;
 
