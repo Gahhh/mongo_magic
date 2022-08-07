@@ -57,8 +57,7 @@ def question_temp_save(req):
     email = get_jwt_identity()
     pack = {
       "email": email,
-      "metadata": req,
-      "count": 0
+      "metadata": req
     }
     db_col.insert_one(pack)
     return make_response(json.dumps({'message': 'success saved'}), 200)
@@ -70,10 +69,6 @@ def question_temp_load(req):
     email = get_jwt_identity()
     pack = db['questions_cache'].find_one({'email': email})
     if pack:
-      if pack['count'] < 1:
-        pack['count'] += 1
-        db['questions_cache'].update_one({'email': email}, {'$set': pack})
-        return make_response(json.dumps({'metadata': pack['metadata']}), 200)
       db['questions_cache'].delete_one({'email': email})
       return make_response(json.dumps({ email: pack['metadata']}), 200)
     else:
@@ -82,13 +77,12 @@ def question_temp_load(req):
     return make_response(json.dumps({'message': 'Server Error'}), 500)
 
 def question_answer(req):
-  try:
     ans_pack = req
     db_col = db['results']
     db_score = db['score_history']
     db_user = db['users']
     db_score_rank = db['scores_rank']
-
+    db_rank_list = db['rank_list']
 
     office_list = []
     data_list = []
@@ -122,7 +116,8 @@ def question_answer(req):
     email = get_jwt_identity()
     score_detail['email'] = email
     score_detail['raw_score'] = result['score']
-
+    if not db_score_rank.find_one({'_id': 'rank'}):
+      db_score_rank.insert_one({'_id': 'rank', 'list': []})
     score_list = list(db_score_rank.find_one({'_id': 'rank'})['list'])
     score_list.append(result['score'])
     score_list = sorted(score_list,reverse=True)
@@ -135,11 +130,12 @@ def question_answer(req):
     result['org'] = org
     data_id = db_col.insert_one(result).inserted_id
     score_detail['test_id'] = str(data_id)
-    db_score.insert_one(score_detail)
-    
+    score_detail_id = db_score.insert_one(score_detail).inserted_id
+    if db_rank_list.find_one({'org': org}):
+      db_rank_list.update_one({'org': org}, {'$set': {'score_history': score_detail_id, 'email': email}})
+    else:
+      db_rank_list.insert_one({'email': email,'org': org, 'score_history': score_detail_id})
     return make_response(json.dumps({'result_id': str(data_id)}), 200)
-  except:
-    return make_response(json.dumps({'message': 'Server Error'}), 500)
 
 def question_get_result(result_id):
   try:
