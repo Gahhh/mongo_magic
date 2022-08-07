@@ -6,7 +6,7 @@ from flask import make_response
 db = db_connect()
 
 def ranking_get_list(req):
-  try:
+  # try:
     db_rank_list = db['rank_list']
     db_score_history = db['score_history']
     db_user = db['users']
@@ -14,7 +14,8 @@ def ranking_get_list(req):
     result_list = list(db_rank_list.find())
     return_list = []
     for result in result_list:
-      return_list.append(db_score_history.find_one({'_id': result['score_history']}))
+      if db_score_history.find_one({'_id': result['score_history']}):
+        return_list.append(db_score_history.find_one({'_id': result['score_history']}))
     return_list = sorted(return_list, key=lambda x: x['raw_score'], reverse=True)
     pack = {}
     count = 1
@@ -37,5 +38,5 @@ def ranking_get_list(req):
       count += 1
   
     return make_response(json.dumps(pack), 200)
-  except:
-    return make_response(json.dumps({'message': 'No test results yet'}), 404)
+  # except:
+  #   return make_response(json.dumps({'message': 'No test results yet'}), 404)

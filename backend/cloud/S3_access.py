@@ -1,5 +1,5 @@
 import csv
-import boto3, botocore 
+import boto3
 from cloud.config import AWS_S3_ACCESS
 from io import StringIO
 import pandas as pd
