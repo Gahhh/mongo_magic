@@ -101,5 +101,5 @@ export const rankingRequest = () => {
 }
 
 export const getAnalysis = (body) => {
-    return apiRequest({ url: '/analysis/data', body:body });
+    return apiRequest({ method:'POST' ,url: '/analysis/data', body:body });
 }
