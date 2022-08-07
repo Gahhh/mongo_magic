@@ -121,6 +121,22 @@ const UL = styled.ul`
   list-style-position: outside;
 `
 
+const PrivacyTittle = styled.b`
+  font-size: 20px;
+`
+
+const PrivacyTime = styled.b`
+  font-size: 15px;
+`
+
+const UnderlineLi = styled.li`
+  text-decoration-line: underline;
+`
+
+const WhiteUL = styled.ul`
+  list-style-type: circle;
+`
 
 
-export {Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span, TermTitle, UnderLine, UL};
+
+export {Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span, TermTitle, UnderLine, UL, WhiteUL, PrivacyTittle, UnderlineLi, PrivacyTime};
