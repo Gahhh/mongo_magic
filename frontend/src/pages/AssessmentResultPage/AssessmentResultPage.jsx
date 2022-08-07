@@ -345,7 +345,7 @@ const AssessmentResultPage = () => {
                                     <p style={{ lineHeight:'1', whiteSpace: 'noWrap', overflowX:'hidden', overflowY:'hidden', textOverflow:'ellipsis', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '28px' }}><span style={{color: '#89c5d1'}}>for </span>{data.org}</p>
                                     </div>
                                     <h5 style={{ lineHeight:'1', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px'}}>Tested on {time}</h5>
-                                    <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Your Organisation's Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h2>
+                                    <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Your Organisation Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h2>
                                     <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Top <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{parseInt(data.position)}%</ParamContext> in the G'Tracker database</h2>
                                     <div style={{ marginBottom:'40px' }}>{bulletPoints()}</div>
                                     <div style={{ display: 'flex', height: '100%', width: 'auto', position:'absolute', bottom:'0', right:'0' }}>
