@@ -1,0 +1,37 @@
+tags:
+  - Support
+summary: send question solution to the database
+security:
+  - Bearer: [Bearer] 
+  - APIKeyHeader: ['authorization']
+parameters:
+  - in: body
+    name: body
+    description: question to be sent to the database
+    required: true
+    schema:
+      required:
+        - question_id
+      properties:
+        question_id:
+          type: integer
+
+responses:
+  200:
+    description: Solution sent successfully
+    schema:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "Solution sent successfully"
+  404:
+    description: Server error
+    schema:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "server error"
