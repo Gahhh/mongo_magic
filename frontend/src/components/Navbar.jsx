@@ -20,6 +20,8 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { checkToken } from '../utils/functions';
 import { userLogout } from '../utils/requests';
 import themeColor from "../config/theme";
+import rankingimg from '../assets/rankingimg.jpg'
+import rankingSelected from '../assets/rankingSelected.png'
 
 const { Sider }  = Layout;
 
@@ -183,7 +185,7 @@ const NavBar = (props) =>{
                         <Menu.Item icon={<DashboardLogo id='3' src={(itemSelected === '3') ? (analyticsLogoSelected): (analyticsLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="3">
                             Analytics
                         </Menu.Item>
-                        <Menu.Item icon={<DashboardLogo id='4' src={(itemSelected === '4') ? (rankingLogoSelected): (rankingLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemLast} key="4">
+                        <Menu.Item icon={<DashboardLogo id='4' src={(itemSelected === '4') ? (rankingSelected): (rankingimg) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemLast} key="4">
                             Ranking
                         </Menu.Item>
                         <Menu.Item style={{ marginLeft:`${logoOffsetLeft}px`, fontWeight: 'bolder', pointerEvents: 'none'}} key="100">

@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import BarChart from '../components/BarChart/BarChart';
 import { ProfileContext } from '../App';
 import LoadingIcon from "../components/LoadingIcon";
+import DataSelector from "../components/DataSelector/DataSelector";
 
 const { Content }  = Layout;
 
@@ -11,9 +12,10 @@ const Ranking = () => {
     return (
         <>
             {prof.providerProfile.profile ? (
-            <Content style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <BarChart></BarChart>
-            </Content>) : (<Layout style={{ display: 'flex', justifyContent: 'center' }}><LoadingIcon></LoadingIcon></Layout>)}
+            <Content style={{ display: 'flex',  justifyContent: 'center' }}>
+                <DataSelector></DataSelector>
+            </Content>
+            ) : (<Layout style={{ display: 'flex', justifyContent: 'center' }}><LoadingIcon></LoadingIcon></Layout>)}
         </>
     )
 }

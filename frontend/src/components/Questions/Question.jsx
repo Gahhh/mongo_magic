@@ -15,7 +15,6 @@ const Question = (props) => {
     const ans = React.useContext(QuestionContext);
     const [questionIsShown, setQuestionIsShown] = React.useState(false);
 
-    console.log(props.type);
     React.useEffect(() => {
         // if question is dependent, and prerequisite question is not answered, hide question
         if (ans.answer['62ecdea5ad4a6abefd4f5b69'] === '100' && props.type === 'datacentre' && props.index > 2) {

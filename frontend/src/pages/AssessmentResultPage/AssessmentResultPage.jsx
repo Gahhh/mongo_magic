@@ -26,7 +26,7 @@ display: flex;
 const ResultCardContainer = styled.div`
     display: flex;
     /* flex-direction: column; */
-    min-height: 800px;
+    min-height: 700px;
     width: 1000px;
     background: hsla(0,0%,100%,.95);
     margin-top: 30px;
@@ -42,6 +42,7 @@ const ContentContainerRight = styled.div`
     height: 100%;
     margin-right: 10px;
     position: relative;
+    
 `
 
 const ContentContainerLeft = styled.div`
@@ -51,7 +52,6 @@ const ContentContainerLeft = styled.div`
     min-width: 400px;
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
     margin-right: 50px;
     text-align: center;
 `
@@ -84,6 +84,10 @@ const Logoimg = styled.img`
     height:56px;
     `
 
+const OrgName = styled.p`
+    overflow: hidden !important;
+`
+
 
 const Atag = styled.a`
     font-weight: 600;
@@ -113,6 +117,7 @@ const AssessmentResultPage = () => {
     const [preparing, setPreparing] = useState(true);
     const [data, setData] = useState({});
     const navigate = useNavigate();
+    const [time, setTime] = useState('');
 
     const themeColor_light = '#89c5d1';
 
@@ -122,6 +127,7 @@ const AssessmentResultPage = () => {
             if (res.status === 200) {
                 res.json().then(data => {
                     setData(data);
+                    setTime(data['test_time'].substring(0, data['test_time'].indexOf(' ')));
                 })
             }
         })
@@ -198,18 +204,11 @@ const AssessmentResultPage = () => {
 
     const bulletPoints = () => {
         const suggestion = data['suggestion'];
-        // return(
-        //     Object.keys(data['suggestion']).map((key, index) =>
-        //     {   
-        //         <div key={index}>dafadsfdk</div>
-        //     }
-        //     )
-        // )
         return (
             Object.keys(data['suggestion']).map((key, index) => {
                 return (
-                    <div key={`container${index}`}>
-                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{suggestion[key].length > 0 ? key : ''}</ul>
+                    suggestion[key].length > 0 && <div key={`container${index}`}>
+                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
                             {   
                                 suggestion[key].map((item, index) => {
                                     return (
@@ -326,8 +325,12 @@ const AssessmentResultPage = () => {
                 <ResultCardContainer style={{ justifyContent: loading ? 'center' : '' }}>
                     <div id="contentCard" style={{ justifyContent: 'center', display: 'flex' }}>
                         {(loading) ? (<div style={{ width: '150px', height: '150px', alignSelf: 'center' }}><CircularProgressbar text={value < 100 ? `${value}%` : preparing ? `100%` : `Ready`} value={value} /></div>) :
+                            Object.keys(data).length > 0 ? 
                             (<ContentContainer>
                                 <ContentContainerLeft>
+                                    <div style={{ height: '40px', width: '100%', display: 'flex', justifyContent: 'start', alignSelf:'flexStart', margin:'15px 0 30px 40px' }}>
+                                        <Button style={{ borderRadius: '5px', width: '150px', alignSelf: 'end', marginRight: '10px', color: '#4D7393', borderColor: '#89c5d1' }} onClick={downloadPdf} data-html2canvas-ignore="true">Save as PDF</Button>
+                                    </div>
                                     <div style={{ marginLeft: '25px', height: '400px', width: '100%', backgroundColor: `${themeColor_light}` }}>
                                         <Image style={{ height: '400px', width:'100%'}} src={'/publicAssets/resultBack.jpg'}></Image>
                                     </div>
@@ -337,17 +340,20 @@ const AssessmentResultPage = () => {
                                     </TextContext>
                                 </ContentContainerLeft>
                                 <ContentContainerRight>
-                                    <div style={{ height: '100px', width: '100%', display: 'flex', justifyContent: 'end' }}>
-                                        <Button style={{ borderRadius: '5px', width: '150px', alignSelf: 'end', marginRight: '10px', marginBottom: '50px', color: '#4D7393', borderColor: '#89c5d1' }} onClick={downloadPdf} data-html2canvas-ignore="true">Save as PDF</Button>
+                                    <h3 style={{lineHeight:'1' , paddingTop:'20px',display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '36px' }} >Sustainability Report</h3>
+                                    <div style={{maxWidth:'500px', display:'flex'}}>
+                                    <p style={{ lineHeight:'1', whiteSpace: 'noWrap', overflowX:'hidden', overflowY:'hidden', textOverflow:'ellipsis', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '28px' }}><span style={{color: '#89c5d1'}}>for </span>{data.org}</p>
                                     </div>
-                                    <h3 style={{ display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '32px' }} >Result</h3>
-                                    <h1 style={{ marginLeft: '20px', color: '#4D7393' }}>Your Organisation's Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h1>
+                                    <h5 style={{ lineHeight:'1', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px'}}>Tested on {time}</h5>
+                                    <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Your Organisation's Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h2>
+                                    <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Top <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{parseInt(data.position)}%</ParamContext> in the G'Tracker database</h2>
                                     <div style={{ marginBottom:'40px' }}>{bulletPoints()}</div>
                                     <div style={{ display: 'flex', height: '100%', width: 'auto', position:'absolute', bottom:'0', right:'0' }}>
                                         <div style={{ alignSelf: 'flex-end', whiteSpace: 'nowrap', color: '#4D7393', fontWeight: '600' }}>By G'Tracker</div>
                                     </div>
                                 </ContentContainerRight>
-                            </ContentContainer>)}
+                            </ContentContainer>) : 
+                            <ContentContainer style={{minWidth:'1000px',height:'100%', justifyContent:'center', alignItems:'center'}}><ParamContext style={{fontSize:'40px'}}>Result Not Found, Check your URL</ParamContext></ContentContainer>}
                     </div>
                     {/* { !!!loading && <div style={{ alignSelf:'flex-end', whiteSpace:'nowrap', color:'#4D7393',fontWeight:'600', marginRight:'5px' }}>By G'Tracker</div>} */}
                 </ResultCardContainer>
