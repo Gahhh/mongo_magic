@@ -462,6 +462,14 @@ const AssessmentPage = () => {
         setdatacentreList(['1']);
     }
 
+    const turnToDashboard = () => {
+        if (localStorage.getItem('userType') === "1") {
+            navigate('/users/dashboard');
+        } else if (localStorage.getItem('userType') === "0") {
+            navigate('/admin/dashboard');
+        }
+    }
+
     return (
         <PageContainer>
             {(!loading) && ((pageStep === 0 && questionListOffice?.length > 0) || (pageStep === 1 && questionListDataCenter?.length > 0) || (pageStep === 2) || (pageStep === 3)) ? (
@@ -473,7 +481,7 @@ const AssessmentPage = () => {
                                 <div className='title'>G'Tracker </div>
                             </div>
                             <Atag onClick={() => (navigate('/'))}>Home</Atag>
-                            <Atag onClick={() => (navigate('/users/dashboard'))}>Dashboard</Atag>
+                            <Atag onClick={() => turnToDashboard()}>Dashboard</Atag>
                             <Atag onClick={() => (navigate('/help'))}>Help</Atag>
                             <Atag onClick={() => (navigate('/about'))}>About</Atag>
                             <Button onClick={answerAllShits}>一键答题</Button>
