@@ -31,7 +31,7 @@ responses:
         message:
           type: string
           example: "Question sent successfully"
-  500:
+  400:
     description: Server error
     schema:
       required:
@@ -39,4 +39,4 @@ responses:
       properties:
         message:
           type: string
-          example: "server error"
+          example: "Input error"

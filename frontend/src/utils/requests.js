@@ -1,4 +1,5 @@
 import backend_url from "../config/api";
+import { message } from "antd";
 
 const apiRequest = async ({ method = undefined, url, body = undefined }) => {
     const requestOptions = {
@@ -90,16 +91,20 @@ export const regisRequest = (body) => {
 }
 
 export const getSupportQuestions = () => {
-    const res = apiRequest({ method: 'GET', url: '/support/list'});
+    const res = apiRequest({ method: 'GET', url: '/support/list' });
     return res;
 }
 
 export const rankingRequest = () => {
-  const res = apiRequest({ method: 'GET', url: '/ranking/list', });
-  return res;
+    const res = apiRequest({ method: 'GET', url: '/ranking/list', });
+    return res;
 }
 
 export const solveSupportQuestion = (body) => {
     const res = apiRequest({method: 'POST', url: '/support/solve', body: body});
     return res;
+}
+
+export const getAnalysis = (body) => {
+    return apiRequest({ url: '/analysis/data', body:body });
 }

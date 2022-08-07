@@ -1,80 +1,42 @@
-import email
+
 import json
-from datetime import datetime
-from bson import ObjectId
-import re
-import jwt
 from db.database import db_connect
-import hashlib
 from flask import make_response
-from flask_jwt_extended import create_access_token, get_jwt_identity
-from services.utils import data_process
-from models.calculation.engine import engine
 
 db = db_connect()
 
 def ranking_get_list(req):
-  time = str(datetime.now())
-  pack={
-    "1": {
-      "org":"UNSW0",
-      "photo":"https://www.unsw.edu.au/content/dam/images/graphics/logos/unsw/unsw_0.png",
-      "time": time,
-      "score": "99",
-      "detail": {
-        "location": "40",
-        "transport": "50",
-        "energy": "60",
-        "Certification": "70"
+  # try:
+    db_rank_list = db['rank_list']
+    db_score_history = db['score_history']
+    db_user = db['users']
+    
+    result_list = list(db_rank_list.find())
+    return_list = []
+    for result in result_list:
+      if db_score_history.find_one({'_id': result['score_history']}):
+        return_list.append(db_score_history.find_one({'_id': result['score_history']}))
+    return_list = sorted(return_list, key=lambda x: x['raw_score'], reverse=True)
+    pack = {}
+    count = 1
+    for item in return_list:
+      photo = db_user.find_one({'email': item['email']})['photo']
+      detail = {
+        "location": str(int(item['location']*100)),
+        "transport": str(int(item['public_transport']*100)),
+        "energy": str(int(item['energy']*100)),
+        "Certification": str(int(item['certification/measures']*100)),
       }
-    },
-    "2": {
-      "org":"UNSW1",
-      "photo":"https://www.unsw.edu.au/content/dam/images/graphics/logos/unsw/unsw_0.png",
-      "time": time,
-      "score": "98",
-      "detail": {
-        "location": "40",
-        "transport": "50",
-        "energy": "60",
-        "Certification": "70"
+      
+      pack[str(count)] = {
+        "org": item['org'],
+        "photo": photo,
+        "time": item['test_time'],
+        "score": item['raw_score'],
+        "detail": detail
       }
-    },
-    "3": {
-      "org":"UNSW2",
-      "photo":"https://www.unsw.edu.au/content/dam/images/graphics/logos/unsw/unsw_0.png",
-      "time": time,
-      "score": "93",
-      "detail": {
-        "location": "40",
-        "transport": "50",
-        "energy": "60",
-        "Certification": "70"
-      }
-    },
-    "4": {
-      "org":"UNSW3",
-      "photo":"https://www.unsw.edu.au/content/dam/images/graphics/logos/unsw/unsw_0.png",
-      "time": time,
-      "score": "93",
-      "detail": {
-        "location": "40",
-        "transport": "50",
-        "energy": "60",
-        "Certification": "70"
-      }
-    },
-    "5": {
-      "org":"UNSW5",
-      "photo":"https://www.unsw.edu.au/content/dam/images/graphics/logos/unsw/unsw_0.png",
-      "time": time,
-      "score": "90",
-      "detail": {
-        "location": "40",
-        "transport": "50",
-        "energy": "60",
-        "Certification": "70"
-      }
-    }
-  }
-  return make_response(json.dumps(pack), 200)
+      count += 1
+  
+    return make_response(json.dumps(pack), 200)
+  # except:
+  #   return make_response(json.dumps({'message': 'No test results yet'}), 404)
