@@ -328,7 +328,7 @@ const AssessmentResultPage = () => {
                             Object.keys(data).length > 0 ? 
                             (<ContentContainer>
                                 <ContentContainerLeft>
-                                    <div style={{ height: '40px', width: '100%', display: 'flex', justifyContent: 'start', alignSelf:'flexStart', margin:'15px 0 30px 40px' }}>
+                                    <div style={{ height: '40px', width: '100%', display: 'flex', justifyContent: 'start', alignSelf:'flexStart', margin:'15px 0 30px 25px' }}>
                                         <Button style={{ borderRadius: '5px', width: '150px', alignSelf: 'end', marginRight: '10px', color: '#4D7393', borderColor: '#89c5d1' }} onClick={downloadPdf} data-html2canvas-ignore="true">Save as PDF</Button>
                                     </div>
                                     <div style={{ marginLeft: '25px', height: '400px', width: '100%', backgroundColor: `${themeColor_light}` }}>
@@ -340,7 +340,7 @@ const AssessmentResultPage = () => {
                                     </TextContext>
                                 </ContentContainerLeft>
                                 <ContentContainerRight>
-                                    <h3 style={{lineHeight:'1' , paddingTop:'20px',display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '36px' }} >Sustainability Report</h3>
+                                    <h3 style={{lineHeight:'1' , paddingTop:'60px',display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '36px' }} >Sustainability Report</h3>
                                     <div style={{maxWidth:'500px', display:'flex'}}>
                                     <p style={{ lineHeight:'1', whiteSpace: 'noWrap', overflowX:'hidden', overflowY:'hidden', textOverflow:'ellipsis', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '28px' }}><span style={{color: '#89c5d1'}}>for </span>{data.org}</p>
                                     </div>
