@@ -159,7 +159,7 @@
     unstated-next "^1.1.0"
     use-media-antd-query "^1.1.0"
 
-"@ant-design/pro-provider@1.9.3":
+"@ant-design/pro-provider@1.9.3", "@ant-design/pro-provider@^1.9.3":
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/@ant-design/pro-provider/-/pro-provider-1.9.3.tgz#4df9a1fd581025c760487202957f8b5e84c4a683"
   integrity sha512-wV7DIJDlm9DPeB8Q8BNRLd6YMgdPK1jtEPOmjpmEE+3XfmGFKKHlU30tIQBImMiJAHr2coTGqV+/iMfJ4E4AXQ==
