@@ -4,7 +4,6 @@ from db.database import db_connect
 import hashlib
 from flask import make_response
 from flask_jwt_extended import create_access_token, get_jwt_identity
-from services.utils import get_approval
 
 
 db = db_connect()
@@ -17,9 +16,7 @@ def user_register(req):
   create_time = datetime.now()
   user_type = req['user_type']
   db_col = db['users']
-  recaptcha = req['reCaptcha_Token']
-  if not get_approval(recaptcha):
-    return make_response(json.dumps({'message': 'Invalid reCaptcha'}), 400)
+  
   if db_col.find_one({'email': email}):
     return make_response(json.dumps({'message': 'Email already exists'}), 400)
   
@@ -53,9 +50,7 @@ def user_login(req):
     password = req['password']
     type_in = req['user_type']
     db_col = db['users']
-    recaptcha = req['reCaptcha_Token']
-    if not get_approval(recaptcha):
-      return make_response(json.dumps({'message': 'Invalid reCaptcha'}), 400)
+
     if not email or not password:
       return make_response(json.dumps({'message': 'Missing required fields'}), 400)
     password_md5 = hashlib.md5(password.encode('utf-8')).hexdigest()
@@ -96,3 +91,15 @@ def user_update_profile(req):
   except:
     return make_response(json.dumps({'message': 'Internal Error'}), 500)
 
+def user_get_result(req):
+  try:
+    email = get_jwt_identity()
+    db_result = db['score_history']
+    result = db_result.find({'email': email}, {'_id': False})
+    result = list(result)
+    if not result:
+      return make_response(json.dumps({'message': 'User has no results'}), 404)
+    
+    return make_response(json.dumps(result), 200)
+  except:
+    return make_response(json.dumps({'message': 'Server Error'}), 500)

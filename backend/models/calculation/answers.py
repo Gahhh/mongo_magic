@@ -89,7 +89,7 @@ def is_ac_smart(ans):
   return [(" ",""), 0]
 
 def office_elec_amount(ans):
-  return int(ans)*1000
+  return int(ans)
 
 def office_elec_percent(ans):
   suggest = "One or more of your offices have a lower renewable electricity percentage than the average.\
@@ -134,7 +134,7 @@ def nabers_mk(ans):
   return [(" ",""), result]
 
 def data_elec_amount(ans):
-  return int(ans)*1000
+  return int(ans)
 
 def data_elec_percent(ans):
   suggest = "Your data centre have a lower renewable electricity percentage than the average.\
@@ -170,16 +170,16 @@ def calculate_co2(electricity, green_energy_percent, postcode):
   return elec_eff * state_co2_covert[ans[0]]
 
 def calculate_habitat(co2e):
-  return co2e * co2e_to_habitat
+  return co2e / co2e_to_habitat
 
 def cloud_percent(ans):
   suggest = "Your organisation has a low percentage of servers on the cloud, \
     think about moving more services to the cloud to reduce your carbon footprint. "
-  # result = int(ans)/100
-  # if result < 0.5:
-  #   return [("Go cloud, go greens",suggest), result]
-  # return [(" ",""), result]
-  return [("Go cloud, go greens",suggest), 0]
+  result = int(ans)/100
+  if result < 0.5:
+    return [("Go cloud, go greens",suggest), result]
+  return [(" ",""), result]
+
 
 
 def calculate_avg_energy(total_electricity, total_floor, employee):
@@ -215,4 +215,16 @@ def energy_score_calculate(avg_energy):
   return 0
   
 def calculate_tennis_area(habitat):
-  return habitat/260
+  return habitat/223
+
+def score_percent_process(score_pack):
+  for key in score_pack.keys():
+    if key == "location":
+      score_pack[key] = score_pack[key]/10
+    elif key == 'public_transport':
+      score_pack[key] = score_pack[key]/20
+    elif key == 'energy':
+      score_pack[key] = score_pack[key]/40
+    elif key == 'certification/measures':
+      score_pack[key] = score_pack[key]/30
+  return score_pack

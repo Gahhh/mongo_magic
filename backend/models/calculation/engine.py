@@ -1,5 +1,4 @@
-from re import I
-from db.database import db_connect
+
 from models.calculation.answers import *
 
 def engine(office, data):
@@ -21,6 +20,7 @@ def engine(office, data):
   total_floor = 0
   total_electricity = 0
   score_list = []
+  total_score = 0
   if office:
     for item in office:
       electricity = 0
@@ -78,10 +78,10 @@ def engine(office, data):
     office_suggestion = get_suggest(energy_result, office_suggestion)
     avg_energy = energy_result[1]
     energy_score = energy_score_calculate(avg_energy)
-    total_score = 0
     for i in score_list:
       scaled = i[0]*(i[1]/total_employee)
       total_score += scaled
+    total_score += energy_score
   if data:
     data_set = data
     cloud_percentage = 0
@@ -132,11 +132,12 @@ def engine(office, data):
       total_score *= scaled_data_score
   score_detail['energy'] = energy_score
   tennis_area = calculate_tennis_area(habitat)
+  score_detail = score_percent_process(score_detail)
   pack = {
-    "score": total_score,
-     "co2": co2e,
-     "natural_habitat": habitat,
-     "roughly_size": tennis_area,
+    "score": int(total_score),
+     "co2": int(co2e),
+     "natural_habitat": int(habitat),
+     "roughly_size": int(tennis_area),
      "suggestion": office_suggestion,
      "score_detail": score_detail
   }
