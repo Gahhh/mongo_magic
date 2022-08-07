@@ -1,13 +1,13 @@
 import React from "react";
 import { Layout } from 'antd';
-import { Avatar, List, Space, message, Button, Progress, Tag, Row, Col } from 'antd';
+import { Avatar, message, Button, Progress, Table } from 'antd';
 import LoadingIcon from "../components/LoadingIcon";
-import { ProList } from '@ant-design/pro-components';
 import { rankingRequest } from "../utils/requests";
 import '@ant-design/pro-components/dist/components.css';
 import { useNavigate } from 'react-router-dom'
-import { flexbox } from "@mui/system";
-
+import { ConfigProvider } from 'antd';
+import noAvatar from '../assets/noAvatar.png'
+import es_ES from 'antd/es/locale/es_ES';
 const { Content } = Layout;
 
 
@@ -15,8 +15,21 @@ const Ranking = () => {
 
   const navigate = useNavigate();
   const [ranking, setRanking] = React.useState(null);
-  const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
   const [listData, setData] = React.useState(null);
+  const getWindowSize = () => ({
+    innerWidth: (window.innerWidth <= 1920) ? window.innerWidth : 1920,
+  });
+
+  const [windowSize, setWindowSize] = React.useState(getWindowSize());
+  const handleResize = () => {
+    setWindowSize(getWindowSize());
+  };
+  console.log(window.innerWidth);
+  React.useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    console.log(windowSize.innerWidth)
+    return () => window.removeEventListener('resize', handleResize)
+  }, []);
   React.useEffect(() => {
     rankingRequest().then(res => {
       if (res.ok) {
@@ -53,13 +66,19 @@ const Ranking = () => {
       console.log(newData)
       console.log(rankIndex)
       for (let i = 0; i < rankIndex.length; i++) {
-        let tags = {
-          score: newData[i].score,
-          rankNo: rankIndex[i],
-          times: newData[i].time.split(' ')[0]
+        newData[i].date = newData[i].time.split(' ')[0];
+        newData[i].rankIndex = rankIndex[i];
+        newData[i].energy = newData[i].detail['energy'];
+        newData[i].location = newData[i].detail['location'];
+        newData[i].transport = newData[i].detail['transport'];
+        newData[i].Certification = newData[i].detail['Certification'];
+        let company = {
+          org: newData[i].org,
+          photo: newData[i].photo,
         }
-        newData[i].tags = tags;
+        newData[i].company = company;
       }
+      console.log(newData)
       setData(newData);
 
     }
@@ -71,172 +90,121 @@ const Ranking = () => {
       navigate('/assessment');
     }
   }
+  const columns = [
+    {
+      title: 'Company',
+      dataIndex: 'company',
+      key: 'Company',
+      width: 400,
+      render: (data) => {
+        return(
+          <div style={{display: 'flex',alignItems:'center'}}><Avatar src={data.photo?data.photo:noAvatar} /><div style={{marginLeft:'5px'}}>{data.org}</div></div>
+        )
+      },
+    },
+    {
+      title: 'Rank',
+      dataIndex: 'rankIndex',
+      key: 'rankIndex',
+      width: 400,
+    },
+    {
+      title: 'Score',
+      dataIndex: 'score',
+      key: 'Score',
+      width: 300,
+    },
+    {
+      title: 'Test time',
+      dataIndex: 'date',
+      key: 'date',
+      width: 400,
+    },
+  ];
+
 
 
   return (
     <>
-      {/* <Navbar page='Ranking'></Navbar> */}
 
       {(listData) ? (<Content className="hi" style={{
-        margin: '10% 10% 0%', borderRadius: 20, width: '80%',
-        overflow: "hidden"
+        margin: '5% 10% 0%', borderRadius: 20, width: '80%',
+        overflow: "hidden", 
       }}>
-        <ProList
-          rowKey="title"
-          headerTitle="Ranking List"
-          toolBarRender={() => {
-            return [
-              <Button key="3" type="primary" onClick={() => handleClick()}>
-                New test
-              </Button>,
-            ];
-          }}
-          expandable={{ expandedRowKeys, onExpandedRowsChange: setExpandedRowKeys }}
-          dataSource={listData}
-          split='true'
-          pagination={{
-            pageSize: 8,
-          }}
-          metas={{
-            title: {
-              dataIndex: 'org',
-            },
-            subTitle: {
-              dataIndex: 'tags',
-              render: (tags) => {
-                return (
-                  // <Content style={{ display: 'flex', }}>
-                  <Space size={20}>
-                    <Tag style={{marginLeft:'10rem', marginRight:'7rem'}} color="blue">No. {tags.rankNo}</Tag>
-                    <Tag style={{marginLeft:'5rem', marginRight:'8rem'}}color="#5BD8A6">Score: {tags.score}</Tag>
-                    <Tag style={{marginLeft:'5rem'}}color="#5BD8A6">{tags.times}</Tag>
-                  </Space>
-                  // <Row style={{width:"800px", marginLeft:'5rem'}}justify="space-around">
-                  //   <Col xs={4} sm={4} md={4} lg={8} xl={8}>
-                  //     <Tag  color="blue">No. {tags.rankNo}</Tag>
-                  //   </Col>
-                  //   <Col xs={4} sm={4} md={4} lg={8} xl={8} style={{display:flexbox, justifyContent:"center", alignContent:"center"}}>
-                  //   <Tag  color="blue">No. {tags.rankNo}</Tag>
-                  //   </Col>
-                  //   <Col xs={4} sm={4} md={4} lg={8} xl={8}>
-                  //   <Tag  color="blue">No. {tags.rankNo}</Tag>
-                  //   </Col>
-                  // </Row>
-                  // {/* </Content> */}
-                );
-              },
-            },
-            description: {
-              dataIndex: 'detail',
-              render: (details) => {
-                return (
-                  <div style={{ display: 'flex' }}>
+        <ConfigProvider locale={es_ES}
+        >
+
+          <div style={{backgroundColor: 'white', padding:'20px', borderRadius:'10px'}}>
+              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px'}}>
+                <h3 style={{float: 'left', marginBottom: '0'}}>Ranking List</h3>
+                <Button type="primary" style={{float: 'right'}} onClick={() => handleClick()}>New test</Button>
+              </div>
+          <Table
+                columns={columns}
+                pagination={{
+                  pageSize: 7,
+                }}
+                size='large'
+                rowKey={'org'}
+                style = {{
+                  border:'1px',
+                  borderStyle:'solid',
+                  borderRadius:'10px',
+                  borderColor:'rgb(240,242,245)',
+                  padding:'30px',
+                  backgroundColor:'white'
+                }}
+                expandable={{
+                  expandedRowRender: (record) => (
+                    <div style={{ display: 'flex' }}>
                     <div style={{
-                      width: '200px',
-                      marginRight: '1rem',
+                      display: "flex",
+                      flexDirection: 'column',
+                      margin: 'auto'
                     }}>Energy Score:
-                      <Progress type="circle" strokeColor={{
+                      <Progress type="circle"  strokeColor={{
                         '0%': '#108ee9',
                         '100%': '#87d068',
-                      }} percent={details.energy} />
+                      }} percent={record.energy} />
                     </div>
                     <div style={{
-                      width: '200px',
-                      // marginLeft: '1rem',
-                      marginRight: '3rem',
+                      display: "flex",
+                      flexDirection: 'column',
+                      margin: 'auto'
                     }}>Location Score:
                       <Progress type="circle" strokeColor={{
                         '0%': '#108ee9',
                         '100%': '#87d068',
-                      }} percent={details.location} />
+                      }} percent={record.location} />
                     </div>
                     <div style={{
-                      width: '200px',
-                      marginRight: '6rem',
+                      display: "flex",
+                      flexDirection: 'column',
+                      margin: 'auto'
                     }}>Transport Score:
                       <Progress type="circle" strokeColor={{
                         '0%': '#108ee9',
                         '100%': '#87d068',
-                      }} percent={details.transport} />
+                      }} percent={record.transport} />
                     </div>
                     <div style={{
-                      width: '200px',
+                      display: "flex",
+                      flexDirection: 'column',
+                      margin: 'auto'
                     }}>Certification Score:
                       <Progress type="circle" strokeColor={{
                         '0%': '#108ee9',
                         '100%': '#87d068',
-                      }} percent={details.Certification} />
+                      }} percent={record.Certification} />
                     </div>
                   </div>
-                );
-              },
-            },
-            avatar: {
-              dataIndex: 'photo',
-            },
-            content: {
-              // render: () => (
-              //   <div
-              //     style={{
-              //       minWidth: 200,
-              //       flex: 1,
-              //       display: 'flex',
-              //       justifyContent: 'flex-end',
-              //     }}
-              //   >
-              //     <div
-              //       style={{
-              //         width: '200px',
-              //       }}
-              //     >
-              //       <div>发布中</div>
-              //       <Progress percent={80} />
-              //     </div>
-              //   </div>
-              // ),
-            },
-          }}
-        />
-        {/* <List
-          itemLayout="vertical"
-          size="large"
-          pagination={{
-            onChange: (page) => {
-              console.log(page);
-            },
-            pageSize: 3,
-          }}
-          dataSource={data}
-          footer={
-            <div>
-              <b>ant design</b> footer part
-            </div>
-          }
-          renderItem={(item) => (
-            <List.Item
-              key={item.title}
-              actions={[
-                <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-                <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-              ]}
-              extra={
-                <img
-                  width={272}
-                  alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                />
-              }
-            >
-              <List.Item.Meta
-                avatar={<Avatar src={item.avatar} />}
-                title={<a href={item.href}>{item.title}</a>}
-                description={item.description}
+                  ),
+                  rowExpandable: (record) => record.name !== 'Not Expandable',
+                }}
+                dataSource={listData}
               />
-              {item.content}
-            </List.Item>
-          )}
-        /> */}
+              </div>
+        </ConfigProvider>
       </Content>) : (<Layout style={{ display: 'flex', justifyContent: 'center' }}><LoadingIcon></LoadingIcon></Layout>)}
 
     </>

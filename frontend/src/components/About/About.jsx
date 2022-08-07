@@ -22,7 +22,11 @@ const About = () => {
   }
 
   const turnToDashboard = () => {
-    navigate('/users/dashboard');
+    if (localStorage.getItem('userType') === "1") {
+      navigate('/users/dashboard');
+    } else if (localStorage.getItem('userType') === "0") {
+      navigate('/admin/dashboard');
+    }
   }
 
   const logout = () => {
