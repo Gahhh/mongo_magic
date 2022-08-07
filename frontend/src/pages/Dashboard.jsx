@@ -1,5 +1,5 @@
 import { React } from "react";
-import { Layout } from 'antd';
+import { Layout, Button } from 'antd';
 import '../App.css';
 import { checkToken } from '../utils/functions';
 import TextEffect from '../components/TextEffect';
@@ -17,10 +17,14 @@ const Dashboard = (props) => {
 
     return (
         <>  
-                <Content style={{ minWidth:'500px',display:'flex', alignItems:'center', justifyContent:'center' }}>
+                <Content style={{ minWidth:'500px',display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column' }}>
                     {(profile?.providerProfile?.profile?.email == undefined) ? (<LoadingIcon></LoadingIcon>) :
                     (<>
-                    <TextEffect textColor={themeColor} /></>
+                    <TextEffect textColor={themeColor} />
+                    <span style={{ fontSize:'20px' }}>
+                                    <a href='/assessment' style= {{ color:`${themeColor}` }}> Get Tested Now >></a>
+                                </span>
+                    </>
                     )}
                 </Content>
         </>

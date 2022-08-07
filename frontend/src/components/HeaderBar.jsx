@@ -56,7 +56,6 @@ const HeaderBar = (props) => {
     const [profile, setProfile] = useState(undefined);
     const prof = useContext(ProfileContext);
     const navigate = useNavigate();
-    console.log(profile)
     useEffect(() => {
         if (prof.providerProfile.profile && (!objectEqual(prof.providerProfile.profile, profile))) {
             setProfile(prof.providerProfile.profile);
@@ -100,7 +99,7 @@ const HeaderBar = (props) => {
                 });
         }
         // checkToken();
-    }, [prof.providerProfile.profile, prof.providerProfile.setProfile]);
+    }, [prof.providerProfile.profile]);
 
     const objectEqual = (obj1, obj2) => {
         if (typeof obj1 !== 'object' || typeof obj2 !== 'object') {
