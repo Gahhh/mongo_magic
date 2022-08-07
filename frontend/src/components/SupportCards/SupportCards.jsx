@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {Layout, message} from 'antd';
 import { Avatar, Card } from 'antd';
-import { getSupportQuestions } from '../../utils/requests';
+import { getSupportQuestions, solveSupportQuestion } from '../../utils/requests';
 import { CardsContainer, CardContainer } from './SupportCardsCSS';
 import { Input } from 'antd';
+import sendSolveEMail from '../../utils/sendSolveEmail';
 
 const { TextArea } = Input;
 const { Meta } = Card;
@@ -28,8 +29,37 @@ const SupportCards = () => {
   }
   useEffect(() => {
     get_support();
-  },[questions.length])
+  },[questions])
   // console.log(typeof questions)
+  const solveQuestion = async (body, email) => {
+    await solveSupportQuestion(body).then(
+      res => {
+        if (res.ok) {
+          // message.success('Success!')
+          sendSolveEMail(email, answer).then(
+            res => {
+              message.success('Success!')
+              console.log(res)
+            }
+          )
+        } else {
+          message.error('Oops! Something went wrong')
+        }
+      }
+    )
+  }
+
+  const cancelQuestion = async (body) => {
+    await solveSupportQuestion(body).then(
+      res => {
+        if (res.ok) {
+          message.success('Success!')
+        } else {
+          message.error('Oops! Something went wrong')
+        }
+      }
+    )
+  }
 
   return(
     <CardsContainer>
@@ -37,7 +67,10 @@ const SupportCards = () => {
         questions?.map((question) => {
           // console.log(question)
           const email = question.email.email;
-          console.log(answer)
+          const body = {
+            question_id: question._id
+          }
+          // console.log(answer)
           return(
             <CardContainer>
               <Card
@@ -46,12 +79,13 @@ const SupportCards = () => {
                   height: '100%'
                 }}
                 actions={[
-                  <div>Solve</div>,
-                  <div>Cancel</div>
+                  <div onClick={() => solveQuestion(body, email)}>Solve</div>,
+                  <div onClick={() => cancelQuestion(body)}>Cancel</div>
                 ]}
               >
                 <Meta
-                  avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                  style={{display: "flex", justifyContent: 'space-around'}}
+                  // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
                   title={question.question.content}
                   description={ <TextArea style={{width: 400, height: 300}} placeholder="Answer the question"  onChange={e => {setAnswer(e.target.value)}}/>}
                 />

@@ -1,0 +1,54 @@
+tags:
+  - Analysis
+summary: Get test data from database
+security:
+  - Bearer: [Bearer] 
+  - APIKeyHeader: ['authorization']
+parameters:
+  - in: body
+    name: body
+    schema:
+      id: analysis_data_model
+      required:
+        - dateEnd
+        - dateStart
+        - types
+      properties:
+        dateEnd:
+          type: string
+          example: "08/08/2022"
+        dateStart:
+          type: string
+          example: "09/08/2022"
+        types:
+          type: list
+          example: ['electricity', 'floor_area', 'co2e']
+responses:
+  200:
+    description: The download URL successfully create
+    schema:
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          example: "1afe3wf4werbwg42g543vwerdgv34"
+  400:
+    description: Input error
+    schema:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "Input error"
+  500:
+    description: AWS S3 bucket error
+    schema:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "AWS S3 bucket error"
+      
