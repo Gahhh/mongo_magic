@@ -1,6 +1,7 @@
 import { DatePicker, Space, Checkbox, Row, Col, Button } from 'antd';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import { getAnalysis } from '../../utils/requests';
 
 const { RangePicker } = DatePicker;
 
@@ -45,8 +46,15 @@ const DataSelector = (props) => {
         }
     }
 
-    const getData = () => {
-
+    const getData = () => { 
+        getAnalysis(request).then(res=>{
+            if (res.status === 200) {
+                setGettingData(false);
+                res.json().then(data=>{
+                    window.open(data.url, '_blank', 'toolbar=0,location=0,menubar=0');
+                })
+            }
+        })
     }
 
 

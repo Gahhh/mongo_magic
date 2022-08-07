@@ -106,10 +106,10 @@ export const solveSupportQuestion = (body) => {
 }
 
 export const getAnalysis = (body) => {
-    return apiRequest({ url: '/analysis/data', body:body });
+    return apiRequest({ method:'POST', url: '/analysis/data', body:body });
 }
 
 export const resultListRequest = () => {
-  const res = apiRequest({ method: 'GET', url: '/users/result', });
-  return res;
-}
+    const res = apiRequest({ method: 'GET', url: '/users/result'});
+    return res;
+  }
