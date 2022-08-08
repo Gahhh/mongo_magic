@@ -12,7 +12,7 @@ import analyticsLogoSelected from '../assets/analyticsLogoSelected.png';
 import profileLogo from '../assets/profileLogo.png';
 import profileLogoSelected from '../assets/profileLogoSelected.png';
 import '../App.css';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { userLogout } from '../utils/requests';
 import themeColor from "../config/theme";
 import rankingimg from '../assets/rankingimg.jpg'
@@ -40,7 +40,6 @@ const TopLogo = styled.img`
 const LogoText = styled.a`
     position:relative;
     left: 5%;
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -128,13 +127,6 @@ const NavBar = (props) =>{
         padding: '0 15px',
     };
 
-    let menuItemLast = {
-        marginTop: '20px',
-        marginLeft: logoOffsetLeft + 14,
-        padding: '0 15px',
-        marginBottom: '40px',
-    }
-
     /**
      * navigation and set item selected
      * @param {*} e 
@@ -174,10 +166,10 @@ const NavBar = (props) =>{
                     <Menu.Item style={{ marginLeft:`${logoOffsetLeft}px`, fontWeight: 'bolder', pointerEvents: 'none'}} key="200"  >
                             <b style={{ fontWeight: '700', fontSize:'16px'}}>Main Menu</b>
                     </Menu.Item>
-                        <Menu.Item icon={<DashboardLogo id='1' src={(itemSelected === '1') ? (dashboardLogoSelected): (dashboardLogo) } size={textOffsetLeft - logoOffsetLeft - 42} />} style={menuItemStyle} key="1">
-                            Dashboard
+                        <Menu.Item icon={<DashboardLogo id='1' src={(itemSelected === '1') ? (resultsLogoSelected): (resultsLogo) } size={textOffsetLeft - logoOffsetLeft - 42} />} style={menuItemStyle} key="1">
+                            Home
                         </Menu.Item>
-                        <Menu.Item icon={<DashboardLogo id='2' src={(itemSelected === '2') ? (resultsLogoSelected): (resultsLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="2">
+                        <Menu.Item icon={<DashboardLogo id='2' src={(itemSelected === '2') ? (dashboardLogoSelected): (dashboardLogo)  } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="2">
                             Results
                         </Menu.Item>
                         <Menu.Item icon={<DashboardLogo id='3' src={(itemSelected === '3') ? (analyticsLogoSelected): (analyticsLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="3">

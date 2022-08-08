@@ -1,30 +1,6 @@
 import React from "react";
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
-import styled from 'styled-components';
-
-
-const Newform = styled.div`
-  // width: 504px;
-  // min-height: 50vh;
-  background: #FFFFFF;
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items:center;
-  padding:30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-`
-const Flexbox = styled.div`
-  display: flex;
-  flex-direction: column;
-  // height:100vh;
-
-  justify-content: center;
-  align-items:center;
-`
 
 const formItemLayout = {
   labelCol: {
@@ -62,8 +38,6 @@ const Newquiz = () => {
   };
 
   return (
-    // <Flexbox>
-    // <Newform>
     <Form name="dynamic_form_item" {...formItemLayoutWithOutLabel} onFinish={onFinish}>
       <Form.List
         name="names"
@@ -148,8 +122,6 @@ const Newquiz = () => {
         </Button>
       </Form.Item>
     </Form>
-    // {/* </Newform>
-    // </Flexbox> */}
   );
 };
 

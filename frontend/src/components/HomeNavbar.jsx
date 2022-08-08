@@ -46,7 +46,6 @@ const Name = styled.div`
   height: 40px;
   left: 144px;
   top: 57.5px;
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 30px;
@@ -70,7 +69,6 @@ const LinkBox = styled.div`
   gap: 8px;
   width: 56px;
   height: 24px;
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -99,7 +97,6 @@ const LoginBtn = styled.button`
 
   background: #4D7393;
   border-radius: 12px;
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -121,7 +118,6 @@ const RegisterBtn = styled.button`
   width: 126px;
   height: 59px;
   border: 2px solid #4D7393;
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
