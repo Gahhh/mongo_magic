@@ -90,6 +90,9 @@ const EmailForm = props => {
                         style={{...styles.emailInput, marginTop:'30px', height:'100px'}}
                     />
                     <br/>
+                    <div style={{ display:'flex', flexDirection:'column', paddingTop:'5px' }}>
+                    <small>If you didn't receive our response, check your spam & trash folder</small>
+                    </div>
                     <Button onClick={() => {
                         props.setVisible(false);
                         if (content.length < 0){
@@ -109,7 +112,7 @@ const EmailForm = props => {
                             }
                         )
                         sendMail(email, content).then(res => {
-                    })}} style={{ marginTop:'15px', borderColor:'#4D7393', borderRadius:'12px'}}>
+                    })}} style={{ marginTop:'5px', borderColor:'#4D7393', borderRadius:'12px'}}>
                         Send
                     </Button>
                     <br></br>
