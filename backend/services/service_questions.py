@@ -102,9 +102,10 @@ def question_answer(req):
 
     if data_centre_data["is_data_centre"] == "F":
       data_centre_data = {}
-    if data_centre_data['is_cloud'] == "T":
-      if data_centre_data["cloud_percent"] == "100":
-        data_centre_data = {}
+    else:
+      if data_centre_data['is_cloud'] == "T":
+        if data_centre_data["cloud_percent"] == "100":
+          data_centre_data = {}
     result = engine(office_data, data_centre_data)
     time_now = str(datetime.datetime.now())
     
