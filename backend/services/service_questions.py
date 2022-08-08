@@ -100,8 +100,11 @@ def question_answer(req):
     office_data = data_process(office_list, question_set)
     data_centre_data = data_process(data_list, question_set)[0]
 
-    if data_centre_data["is_data_centre"] == "F" or data_centre_data["cloud_percent"] == "100":
+    if data_centre_data["is_data_centre"] == "F":
       data_centre_data = {}
+    if data_centre_data['is_cloud'] == "T":
+      if data_centre_data["cloud_percent"] == "100":
+        data_centre_data = {}
     result = engine(office_data, data_centre_data)
     time_now = str(datetime.datetime.now())
     
