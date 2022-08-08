@@ -26,7 +26,7 @@ display: flex;
 const ResultCardContainer = styled.div`
     display: flex;
     /* flex-direction: column; */
-    min-height: 700px;
+    min-height: 800px;
     width: 1000px;
     background: hsla(0,0%,100%,.95);
     margin-top: 30px;
@@ -126,6 +126,7 @@ const AssessmentResultPage = () => {
         getResult(id).then(res => {
             if (res.status === 200) {
                 res.json().then(data => {
+                    console.log(data);
                     setData(data);
                     setTime(data['test_time'].substring(0, data['test_time'].indexOf(' ')));
                 })
@@ -216,11 +217,11 @@ const AssessmentResultPage = () => {
             Object.keys(data['suggestion']).map((key, index) => {
                 return (
                     suggestion[key].length > 0 && <div key={`container${index}`}>
-                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
+                        <ul key={`list${index}`} style={{ color: '#4D7393', fontSize:'16px',fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
                             {   
                                 suggestion[key].map((item, index) => {
                                     return (
-                                        <li key={index} style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
+                                        <li key={index} style={{  marginRight: '20px', fontSize:'16px',color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
                                     )
                                 })
                             }
@@ -327,7 +328,7 @@ const AssessmentResultPage = () => {
                                     <div style={{maxWidth:'500px', display:'flex'}}>
                                     <p style={{ lineHeight:'1', whiteSpace: 'noWrap', overflowX:'hidden', overflowY:'hidden', textOverflow:'ellipsis', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '28px' }}><span style={{color: '#89c5d1'}}>for </span>{data.org}</p>
                                     </div>
-                                    <h5 style={{ lineHeight:'1', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px'}}>Tested on {time}</h5>
+                                    <h5 style={{ lineHeight:'1', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px'}}>Assessed on {time}</h5>
                                     <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Your Organisation Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h2>
                                     <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Top <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{parseInt(data.position)}%</ParamContext> in the G'Tracker database</h2>
                                     <div style={{ marginBottom:'40px' }}>{bulletPoints()}</div>

@@ -5,12 +5,13 @@ import { getSupportQuestions, solveSupportQuestion } from '../../utils/requests'
 import { CardsContainer, CardContainer } from './SupportCardsCSS';
 import { Input } from 'antd';
 import sendSolveEMail from '../../utils/sendSolveEmail';
+import LoaidngIcon from '../LoadingIcon'
 
 const { TextArea } = Input;
 const { Meta } = Card;
 
-const SupportCards = () => {
-  const [questions, setQuestions] = useState([]);
+const SupportCards = (props) => {
+  const [questions, setQuestions] = useState(null);
   const [answer, setAnswer] = useState('');
 
   const get_support = async () => {
@@ -26,9 +27,11 @@ const SupportCards = () => {
       }
     )
   }
+
   useEffect(() => {
     get_support();
-  },[questions])
+  },[])
+
   const solveQuestion = async (body, email) => {
     await solveSupportQuestion(body).then(
       res => {
@@ -37,6 +40,7 @@ const SupportCards = () => {
           sendSolveEMail(email, answer).then(
             res => {
               message.success('Success!')
+              get_support();
             }
           )
         } else {
@@ -51,14 +55,16 @@ const SupportCards = () => {
       res => {
         if (res.ok) {
           message.success('Success!')
+          get_support();
         } else {
           message.error('Oops! Something went wrong')
         }
       }
     )
   }
-
+  
   return(
+    questions === null ? <LoaidngIcon/> :
     <CardsContainer>
       {
         questions?.map((question) => {
@@ -66,9 +72,11 @@ const SupportCards = () => {
           const body = {
             question_id: question._id
           }
+          console.log(question._id)
           return(
-            <CardContainer>
+            <CardContainer key={`container${question._id}}`}>
               <Card
+                key={`card${question._id}`}
                 style={{
                   width: '100%',
                   height: '100%'
@@ -79,6 +87,7 @@ const SupportCards = () => {
                 ]}
               >
                 <Meta
+                  key={`meta${question._id}`}
                   style={{display: "flex", justifyContent: 'space-around'}}
                   // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
                   title={question.question.content}

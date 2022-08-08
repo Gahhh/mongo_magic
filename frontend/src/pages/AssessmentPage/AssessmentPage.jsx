@@ -128,10 +128,12 @@ const AssessmentPage = () => {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const saveButton = useMemo(() => ({ saving }), [saving]);
+    const [removeAnsweredQuestions, setRemoveAnsweredQuestions] = useState(false);
 
     const shouldAskForSavedUnswer = useRef(true);
     const [isModalVisible, setIsModalVisible] = React.useState(false);
     const [isModalVisible2, setIsModalVisible2] = React.useState(false);
+
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -459,6 +461,10 @@ const AssessmentPage = () => {
         setPageStep(0);
         setOfficeList(['1']);
         setdatacentreList(['1']);
+        setRemoveAnsweredQuestions(true);
+        setTimeout(() => {
+            setRemoveAnsweredQuestions(false);
+        }, 200);
     }
 
     const turnToDashboard = () => {
@@ -500,12 +506,12 @@ const AssessmentPage = () => {
                                     {
                                         (pageStep === 0) ?
                                             <>{officeList.map((office) =>
-                                                <QuestionForm type={'office'} setRemover={setRemover} key={`office${office}`} collapseNumber={collapseNumber} officeList={officeList} number={parseInt(office)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListOffice}></QuestionForm>
+                                                <QuestionForm type={'office'} setRemoveAnsweredQuestions={setRemoveAnsweredQuestions} setRemover={setRemover} key={`office${office}`} collapseNumber={collapseNumber} officeList={officeList} number={parseInt(office)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListOffice}></QuestionForm>
                                             )}</> :
                                             (pageStep === 1) ?
                                                 <>
                                                     {datacentreList.map((datacentre) =>
-                                                        <QuestionForm type={'datacentre'} key={`Data Centre`} collapseNumber={1} datacentreList={datacentreList} number={parseInt(datacentre)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListDataCenter}></QuestionForm>
+                                                        <QuestionForm type={'datacentre'} key={`Data Centre`} setRemoveAnsweredQuestions={setRemoveAnsweredQuestions} collapseNumber={1} datacentreList={datacentreList} number={parseInt(datacentre)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListDataCenter}></QuestionForm>
                                                     )}
                                                 </> :
                                                 (pageStep === 2) ?
