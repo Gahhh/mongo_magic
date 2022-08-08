@@ -41,7 +41,6 @@ const Analytics = () => {
         })
         }, []);
 
-        console.log(valueList, dateList);
         const getOption = () => {
             return {
                 maintainAspectRatio:false,

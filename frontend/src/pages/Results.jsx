@@ -27,11 +27,7 @@ const Results = () => {
       if (res.ok) {
         res.json().then(
           data => {
-            // setRanking(data);
-            console.log(data);
             const avar = data[0]["certification/measures"];
-            console.log((avar * 100 <= 100) ? avar * 100 : 100);
-            // console.log(Array.from(data))
             setResults(data);
           }
         )

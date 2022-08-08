@@ -1,5 +1,4 @@
 import React from "react";
-import backend_url from "../config/api";
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import styled from 'styled-components';
@@ -60,7 +59,6 @@ const formItemLayoutWithOutLabel = {
 
 const Newquiz = () => {
   const onFinish = (values) => {
-    console.log('Received values of form:', values);
   };
 
   return (

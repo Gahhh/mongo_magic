@@ -162,7 +162,7 @@ const AdminSignupPage = () => {
       confirm: data.get('confirm'),
       user_type: "0",
     }
-    console.log(msg);
+    
     if (data.get('password') === data.get('check') && data.get('code') === 'wdfvz') {
       switch (data.get('confirm')) {
         case null:

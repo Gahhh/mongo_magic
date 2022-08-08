@@ -28,7 +28,6 @@ const sendMail = async(toEmail, Body) => {
     })
     return email;
 } catch (error) {
-    console.log(error);
 }
 }
 

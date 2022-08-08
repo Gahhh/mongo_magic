@@ -72,7 +72,6 @@ const SupportCards = (props) => {
           const body = {
             question_id: question._id
           }
-          console.log(question._id)
           return(
             <CardContainer key={`container${question._id}}`}>
               <Card

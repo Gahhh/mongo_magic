@@ -15,7 +15,6 @@ const AdminDashboard = (props) => {
       if (res.ok) {
         res.json().then(
           data => {
-            console.log(data)
             setStats(data);
           }
         )
@@ -26,7 +25,6 @@ const AdminDashboard = (props) => {
     getStats();
   } , []);
 
-  console.log(JSON.stringify(stats))
   return (
     <>
       <Content >

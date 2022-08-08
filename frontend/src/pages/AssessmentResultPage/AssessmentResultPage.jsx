@@ -110,23 +110,22 @@ const Span = styled.span`
 
 
 const AssessmentResultPage = () => {
-  const { id } = useParams();
-  const { Content } = Layout
-  const [value, setValue] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [preparing, setPreparing] = useState(true);
-  const [data, setData] = useState({});
-  const navigate = useNavigate();
-  const [time, setTime] = useState('');
+    const { id } = useParams();
+    const { Content } = Layout
+    const [value, setValue] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [preparing, setPreparing] = useState(true);
+    const [data, setData] = useState({});
+    const navigate = useNavigate();
+    const [time, setTime] = useState('');
 
-  const themeColor_light = '#89c5d1';
+    const themeColor_light = '#89c5d1';
 
 
     useEffect(() => {
         getResult(id).then(res => {
             if (res.status === 200) {
                 res.json().then(data => {
-                    console.log(data);
                     setData(data);
                     setTime(data['test_time'].substring(0, data['test_time'].indexOf(' ')));
                 })
@@ -134,11 +133,11 @@ const AssessmentResultPage = () => {
         })
     }, [id]);
 
-  useEffect(() => {
-    if (value < 100) {
-      addToOneHundred();
-    }
-  }, [value])
+    useEffect(() => {
+        if (value < 100) {
+            addToOneHundred();
+        }
+    }, [value])
 
     useEffect(() => {
         if (value >= 100) {
@@ -150,65 +149,65 @@ const AssessmentResultPage = () => {
             }, 600);
         }
 
-  }, [value])
+    }, [value])
 
-  const addToOneHundred = () => {
-    returnArbitraryTime().then(
-      res => {
-        setValue(prev => prev + res);
-      }
-    )
-  }
-
-
-  const returnArbitraryTime = () => {
-    return new Promise(resolve => setTimeout(() =>
-      resolve(Math.floor(Math.random() * (20 - 1)) + 1)
-      , Math.random() * (600 - 1) + 1));
-  }
-
-
-  const turnToLogin = () => {
-    navigate('/login');
-  }
-
-  const turnToRegister = () => {
-    navigate('/signup');
-  }
-
-  const handleClick = () => {
-    if (localStorage.getItem('userToken')) {
-      navigate('/assessment');
+    const addToOneHundred = () => {
+        returnArbitraryTime().then(
+            res => {
+                setValue(prev => prev + res);
+            }
+        )
     }
-    else {
-      turnToLogin();
+
+
+    const returnArbitraryTime = () => {
+        return new Promise(resolve => setTimeout(() =>
+            resolve(Math.floor(Math.random() * (20 - 1)) + 1)
+            , Math.random() * (600 - 1) + 1));
     }
-  }
 
-  const turnToDashboard = () => {
-    if (localStorage.getItem('userType') === "1") {
-      navigate('/users/dashboard');
-    } else if (localStorage.getItem('userType') === "0") {
-      navigate('/admin/dashboard');
+
+    const turnToLogin = () => {
+        navigate('/login');
     }
-  }
 
-  const logout = () => {
-    localStorage.removeItem('userToken');
-    navigate('/');
-  }
+    const turnToRegister = () => {
+        navigate('/signup');
+    }
 
-  const turnToRanking = () => {
-    navigate('/publicranking')
-  }
+    const handleClick = () => {
+        if (localStorage.getItem('userToken')) {
+            navigate('/assessment');
+        }
+        else {
+            turnToLogin();
+        }
+    }
 
-  const turnToAbout = () => {
-    navigate('/about')
-  }
+    const turnToDashboard = () => {
+        if (localStorage.getItem('userType') === "1") {
+            navigate('/users/dashboard');
+        } else if (localStorage.getItem('userType') === "0") {
+            navigate('/admin/dashboard');
+        }
+    }
 
-  const turnToHelp = () => {
-    navigate('/help')
-  }
+    const logout = () => {
+        localStorage.removeItem('userToken');
+        navigate('/');
+    }
+
+    const turnToRanking = () => {
+        navigate('/publicranking')
+    }
+
+    const turnToAbout = () => {
+        navigate('/about')
+    }
+
+    const turnToHelp = () => {
+        navigate('/help')
+    }
 
 
     const bulletPoints = () => {
@@ -217,14 +216,14 @@ const AssessmentResultPage = () => {
             Object.keys(data['suggestion']).map((key, index) => {
                 return (
                     suggestion[key].length > 0 && <div key={`container${index}`}>
-                        <ul key={`list${index}`} style={{ color: '#4D7393', fontSize:'16px',fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
-                            {   
-                                suggestion[key].map((item, index) => {
-                                    return (
-                                        <li key={index} style={{  marginRight: '20px', fontSize:'16px',color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
-                                    )
-                                })
-                            }
+                        <ul key={`list${index}`} style={{ color: '#4D7393', fontSize: '16px', fontWeight: '700', paddingTop: '10px', lineHeight: '2', paddingInlineStart: '20px', marginBlockEnd: '0' }}>{key}</ul>
+                        {
+                            suggestion[key].map((item, index) => {
+                                return (
+                                    <li key={index} style={{ marginRight: '20px', fontSize: '16px', color: '#89c5d1', paddingInlineStart: '20px' }}>{item}</li>
+                                )
+                            })
+                        }
                     </div>
                 )
             })
@@ -309,35 +308,35 @@ const AssessmentResultPage = () => {
                 <ResultCardContainer style={{ justifyContent: loading ? 'center' : '' }}>
                     <div id="contentCard" style={{ justifyContent: 'center', display: 'flex' }}>
                         {(loading) ? (<div style={{ width: '150px', height: '150px', alignSelf: 'center' }}><CircularProgressbar text={value < 100 ? `${value}%` : preparing ? `100%` : `Ready`} value={value} /></div>) :
-                            Object.keys(data).length > 0 ? 
-                            (<ContentContainer>
-                                <ContentContainerLeft>
-                                    <div style={{ height: '40px', width: '100%', display: 'flex', justifyContent: 'start', alignSelf:'flexStart', margin:'15px 0 30px 25px' }}>
-                                        <Button style={{ borderRadius: '5px', width: '150px', alignSelf: 'end', marginRight: '10px', color: '#4D7393', borderColor: '#89c5d1' }} onClick={downloadPdf} data-html2canvas-ignore="true">Save as PDF</Button>
-                                    </div>
-                                    <div style={{ marginLeft: '25px', height: '400px', width: '100%', backgroundColor: `${themeColor_light}` }}>
-                                        <Image style={{ height: '400px', width:'100%'}} src={'/publicAssets/resultBack.jpg'}></Image>
-                                    </div>
-                                    <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
-                                        Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext>Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
-                                        To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
-                                    </TextContext>
-                                </ContentContainerLeft>
-                                <ContentContainerRight>
-                                    <h3 style={{lineHeight:'1' , paddingTop:'60px',display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '36px' }} >Sustainability Report</h3>
-                                    <div style={{maxWidth:'500px', display:'flex'}}>
-                                    <p style={{ lineHeight:'1', whiteSpace: 'noWrap', overflowX:'hidden', overflowY:'hidden', textOverflow:'ellipsis', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '28px' }}><span style={{color: '#89c5d1'}}>for </span>{data.org}</p>
-                                    </div>
-                                    <h5 style={{ lineHeight:'1', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px'}}>Assessed on {time}</h5>
-                                    <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Your Organisation Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h2>
-                                    <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight:'1' }}>Top <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{parseInt(data.position)}%</ParamContext> in the G'Tracker database</h2>
-                                    <div style={{ marginBottom:'40px' }}>{bulletPoints()}</div>
-                                    <div style={{ display: 'flex', height: '100%', width: 'auto', position:'absolute', bottom:'0', right:'0' }}>
-                                        <div style={{ alignSelf: 'flex-end', whiteSpace: 'nowrap', color: '#4D7393', fontWeight: '600' }}>By G'Tracker</div>
-                                    </div>
-                                </ContentContainerRight>
-                            </ContentContainer>) : 
-                            <ContentContainer style={{minWidth:'1000px',height:'100%', justifyContent:'center', alignItems:'center'}}><ParamContext style={{fontSize:'40px'}}>Result Not Found, Check your URL</ParamContext></ContentContainer>}
+                            Object.keys(data).length > 0 ?
+                                (<ContentContainer>
+                                    <ContentContainerLeft>
+                                        <div style={{ height: '40px', width: '100%', display: 'flex', justifyContent: 'start', alignSelf: 'flexStart', margin: '15px 0 30px 25px' }}>
+                                            <Button style={{ borderRadius: '5px', width: '150px', alignSelf: 'end', marginRight: '10px', color: '#4D7393', borderColor: '#89c5d1' }} onClick={downloadPdf} data-html2canvas-ignore="true">Save as PDF</Button>
+                                        </div>
+                                        <div style={{ marginLeft: '25px', height: '400px', width: '100%', backgroundColor: `${themeColor_light}` }}>
+                                            <Image style={{ height: '400px', width: '100%' }} src={'/publicAssets/resultBack.jpg'}></Image>
+                                        </div>
+                                        <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
+                                            Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext>Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
+                                            To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
+                                        </TextContext>
+                                    </ContentContainerLeft>
+                                    <ContentContainerRight>
+                                        <h3 style={{ lineHeight: '1', paddingTop: '60px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '36px' }} >Sustainability Report</h3>
+                                        <div style={{ maxWidth: '500px', display: 'flex' }}>
+                                            <p style={{ lineHeight: '1', whiteSpace: 'noWrap', overflowX: 'hidden', overflowY: 'hidden', textOverflow: 'ellipsis', color: '#4D7393', fontWeight: '600', marginLeft: '20px', fontSize: '28px' }}><span style={{ color: '#89c5d1' }}>for </span>{data.org}</p>
+                                        </div>
+                                        <h5 style={{ lineHeight: '1', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#4D7393', fontWeight: '600', marginLeft: '20px' }}>Assessed on {time}</h5>
+                                        <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight: '1' }}>Your Organisation Scored <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{data.score}</ParamContext> in our assessment</h2>
+                                        <h2 style={{ marginLeft: '20px', color: '#4D7393', lineHeight: '1' }}>Top <ParamContext style={{ fontSize: '30px', color: '#89c5d1' }}>{parseInt(data.position)}%</ParamContext> in the G'Tracker database</h2>
+                                        <div style={{ marginBottom: '40px' }}>{bulletPoints()}</div>
+                                        <div style={{ display: 'flex', height: '100%', width: 'auto', position: 'absolute', bottom: '0', right: '0' }}>
+                                            <div style={{ alignSelf: 'flex-end', whiteSpace: 'nowrap', color: '#4D7393', fontWeight: '600' }}>By G'Tracker</div>
+                                        </div>
+                                    </ContentContainerRight>
+                                </ContentContainer>) :
+                                <ContentContainer style={{ minWidth: '1000px', height: '100%', justifyContent: 'center', alignItems: 'center' }}><ParamContext style={{ fontSize: '40px' }}>Result Not Found, Check your URL</ParamContext></ContentContainer>}
                     </div>
                     {/* { !!!loading && <div style={{ alignSelf:'flex-end', whiteSpace:'nowrap', color:'#4D7393',fontWeight:'600', marginRight:'5px' }}>By G'Tracker</div>} */}
                 </ResultCardContainer>
