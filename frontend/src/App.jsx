@@ -12,7 +12,6 @@ import Results from './pages/Results';
 import Analytics from './pages/Analytics';
 import Ranking from './pages/Ranking';
 import Profile from './pages/Profile';
-import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import AssessmentResultPage from './pages/AssessmentResultPage/AssessmentResultPage';
 import { Layout } from 'antd';
@@ -84,7 +83,6 @@ function App() {
                 <Route path="analytics" element={<><Layout><HeaderBar page='Analytics'></HeaderBar><Analytics /></Layout></>} />
                 <Route path="ranking" element={<><Layout><HeaderBar page='Ranking'></HeaderBar><Ranking /></Layout></>} />
                 <Route path="profile" element={<><Layout><HeaderBar page='Profile'></HeaderBar><Profile /></Layout></>} />
-                <Route path="settings" element={<><Layout><HeaderBar page='Settings'></HeaderBar><Settings /></Layout></>} />
               </Route>
               <Route path='/admin/' element={<><AdminNavbar page='Dashboard'></AdminNavbar><Outlet/></>}>
                 <Route path="dashboard" element={<Layout><AdminHeaderBar page='Dashboard'></AdminHeaderBar><AdminDashboard /></Layout>} />
@@ -92,7 +90,6 @@ function App() {
                 <Route path="analytics" element={<><Layout><AdminHeaderBar page='Analytics'></AdminHeaderBar><AdminAnalytics /></Layout></>} />
                 <Route path="ranking" element={<><Layout><AdminHeaderBar page='Ranking'></AdminHeaderBar><Ranking /></Layout></>} />
                 <Route path="profile" element={<><Layout><AdminHeaderBar page='Profile'></AdminHeaderBar><Profile /></Layout></>} />
-                <Route path="settings" element={<><Layout><AdminHeaderBar page='Settings'></AdminHeaderBar><Settings /></Layout></>} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>

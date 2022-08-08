@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {Layout, message} from 'antd';
-import { Avatar, Card } from 'antd';
+import { message} from 'antd';
+import { Card } from 'antd';
 import { getSupportQuestions, solveSupportQuestion } from '../../utils/requests';
 import { CardsContainer, CardContainer } from './SupportCardsCSS';
 import { Input } from 'antd';
@@ -72,7 +72,6 @@ const SupportCards = (props) => {
           const body = {
             question_id: question._id
           }
-          console.log(question._id)
           return(
             <CardContainer key={`container${question._id}}`}>
               <Card
@@ -89,7 +88,6 @@ const SupportCards = (props) => {
                 <Meta
                   key={`meta${question._id}`}
                   style={{display: "flex", justifyContent: 'space-around'}}
-                  // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
                   title={question.question.content}
                   description={ <TextArea style={{width: 400, height: 300}} placeholder="Answer the question"  onChange={e => {setAnswer(e.target.value)}}/>}
                 />

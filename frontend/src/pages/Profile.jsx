@@ -83,7 +83,6 @@ function Profile() {
             }
         },
         onRemove(info) {
-            // setImgReady(false);
             setImgUrl({});
         },
         style: avatarStyle,

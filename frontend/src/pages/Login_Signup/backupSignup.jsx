@@ -162,7 +162,7 @@ const AdminSignupPage = () => {
       confirm: data.get('confirm'),
       user_type: "0",
     }
-    console.log(msg);
+
     if (data.get('password') === data.get('check') && data.get('code') === 'wdfvz') {
       switch (data.get('confirm')) {
         case null:
@@ -170,7 +170,6 @@ const AdminSignupPage = () => {
           break;
         default:
           Api('users/register', 'POST', undefined, msg, (body) => {
-            console.log(body);
             if (body.token) {
               // localStorage.setItem('userToken', body.token);
               // navigate(`/users/dashboard`);

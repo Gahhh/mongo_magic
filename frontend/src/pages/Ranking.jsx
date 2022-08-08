@@ -24,12 +24,12 @@ const Ranking = () => {
   const handleResize = () => {
     setWindowSize(getWindowSize());
   };
-  console.log(window.innerWidth);
+
   React.useEffect(() => {
     window.addEventListener('resize', handleResize);
-    console.log(windowSize.innerWidth)
     return () => window.removeEventListener('resize', handleResize)
   }, []);
+
   React.useEffect(() => {
     rankingRequest().then(res => {
       if (res.ok) {
@@ -60,8 +60,6 @@ const Ranking = () => {
 
       const newData = Object.values(ranking);
       const rankIndex = Object.keys(ranking);
-      console.log(newData)
-      console.log(rankIndex)
       for (let i = 0; i < rankIndex.length; i++) {
         newData[i].date = newData[i].time.split(' ')[0];
         newData[i].rankIndex = rankIndex[i];
@@ -93,8 +91,8 @@ const Ranking = () => {
       key: 'Company',
       width: 400,
       render: (data) => {
-        return(
-          <div style={{display: 'flex',alignItems:'center'}}><Avatar src={data.photo?data.photo:noAvatar} /><div style={{marginLeft:'5px'}}>{data.org}</div></div>
+        return (
+          <div style={{ display: 'flex', alignItems: 'center' }}><Avatar src={data.photo ? data.photo : noAvatar} /><div style={{ marginLeft: '5px' }}>{data.org}</div></div>
         )
       },
     },
@@ -125,40 +123,40 @@ const Ranking = () => {
 
       {(listData) ? (<Content className="hi" style={{
         margin: '5% 10% 0%', borderRadius: 20, width: '80%',
-        overflow: "hidden", 
+        overflow: "hidden",
       }}>
         <ConfigProvider locale={es_ES}
         >
 
-          <div style={{backgroundColor: 'white', padding:'20px', borderRadius:'10px'}}>
-              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px'}}>
-                <h3 style={{float: 'left', marginBottom: '0'}}>Ranking List</h3>
-                <Button type="primary" style={{float: 'right'}} onClick={() => handleClick()}>New Assessment</Button>
-              </div>
-          <Table
-                columns={columns}
-                pagination={{
-                  pageSize: 7,
-                }}
-                size='large'
-                rowKey={'org'}
-                style = {{
-                  border:'1px',
-                  borderStyle:'solid',
-                  borderRadius:'10px',
-                  borderColor:'rgb(240,242,245)',
-                  padding:'30px',
-                  backgroundColor:'white'
-                }}
-                expandable={{
-                  expandedRowRender: (record) => (
-                    <div style={{ display: 'flex' }}>
+          <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+              <h3 style={{ float: 'left', marginBottom: '0' }}>Ranking List</h3>
+              <Button type="primary" style={{ float: 'right' }} onClick={() => handleClick()}>New Assessment</Button>
+            </div>
+            <Table
+              columns={columns}
+              pagination={{
+                pageSize: 7,
+              }}
+              size='large'
+              rowKey={'org'}
+              style={{
+                border: '1px',
+                borderStyle: 'solid',
+                borderRadius: '10px',
+                borderColor: 'rgb(240,242,245)',
+                padding: '30px',
+                backgroundColor: 'white'
+              }}
+              expandable={{
+                expandedRowRender: (record) => (
+                  <div style={{ display: 'flex' }}>
                     <div style={{
                       display: "flex",
                       flexDirection: 'column',
                       margin: 'auto'
                     }}>Energy Score:
-                      <Progress type="circle"  strokeColor={{
+                      <Progress type="circle" strokeColor={{
                         '0%': '#108ee9',
                         '100%': '#87d068',
                       }} percent={record.energy} />
@@ -194,12 +192,12 @@ const Ranking = () => {
                       }} percent={record.Certification} />
                     </div>
                   </div>
-                  ),
-                  rowExpandable: (record) => record.name !== 'Not Expandable',
-                }}
-                dataSource={listData}
-              />
-              </div>
+                ),
+                rowExpandable: (record) => record.name !== 'Not Expandable',
+              }}
+              dataSource={listData}
+            />
+          </div>
         </ConfigProvider>
       </Content>) : (<Layout style={{ display: 'flex', justifyContent: 'center' }}><LoadingIcon></LoadingIcon></Layout>)}
 

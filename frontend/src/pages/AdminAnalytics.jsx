@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Layout } from 'antd';
-import BarChart from '../components/BarChart/BarChart';
 import { ProfileContext } from '../App';
 import LoadingIcon from "../components/LoadingIcon";
 import DataSelector from "../components/DataSelector/DataSelector";

@@ -400,7 +400,7 @@ const AssessmentPage = () => {
                 if (res.ok) {
                     message.success('Assessment saved successfully');
                 } else {
-                    console.log(res);
+                    message.error('Error: Server error');
                 }
             })
     }
@@ -420,41 +420,6 @@ const AssessmentPage = () => {
             })
     }
 
-    const answerAllShits = () => {
-        setPageStep(2);
-        setOfficeList(['1']);
-        setdatacentreList(['1']);
-        setAssessmentAnswer({
-
-            "office1": {
-                "62d7ecc120b23a61a4656ec3": "F",
-                "62dbbb56e82cdd10987ecd14": "123",
-                "62dbbba0e82cdd10987ecd15": "123",
-                "62d7eb8720b23a61a4656ec2": "1112",
-                "62dbbc12e82cdd10987ecd16": "F",
-                "62dbbd0ae82cdd10987ecd18": "F",
-                "62dbbd34e82cdd10987ecd19": "F",
-                "62dbbd6ee82cdd10987ecd1a": "5",
-                "62dbbe4ee82cdd10987ecd1b": "21",
-                "62dbbe8be82cdd10987ecd1c": "F",
-                "62dbbe9ae82cdd10987ecd1d": "F"
-            },
-            "data": {
-                "62dff0a2dd0aaca7f9e83a86": "T",
-                "62dff13edd0aaca7f9e83a87": "T",
-                "62ecdea5ad4a6abefd4f5b69": "21",
-                "62dff202dd0aaca7f9e83a88": "12",
-                "62dff22add0aaca7f9e83a89": "T",
-                "62dff2a7dd0aaca7f9e83a8a": "1 Star",
-                "62dff2ecdd0aaca7f9e83a8b": "33",
-                "62e269bfe93d521d7ac25a12": "16",
-                "62e26a1ee93d521d7ac25a13": "T"
-            }
-
-        })
-    }
-
-    console.log(assessmentAnswer);
 
     const clearCurrentPage = () => {
         setAssessmentAnswer({});
@@ -489,7 +454,6 @@ const AssessmentPage = () => {
                             <Atag onClick={() => turnToDashboard()}>Dashboard</Atag>
                             <Atag onClick={() => (navigate('/help'))}>Help</Atag>
                             <Atag onClick={() => (navigate('/about'))}>About</Atag>
-                            <Button onClick={answerAllShits}>一键答题</Button>
                         </Navbar>
                     </NavContainer>
                     <HeaderContainer>
