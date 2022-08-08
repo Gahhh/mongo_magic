@@ -12,7 +12,6 @@ import Results from './pages/Results';
 import Analytics from './pages/Analytics';
 import Ranking from './pages/Ranking';
 import Profile from './pages/Profile';
-import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import AssessmentResultPage from './pages/AssessmentResultPage/AssessmentResultPage';
 import { Layout } from 'antd';

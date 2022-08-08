@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-// import backToHome from "../assets/404BackToHomeBtn.png";
-// import { removeNavbar } from "../utils/functions";
 import { Button } from 'antd';
 import Image404 from "../assets/404Image.png";
+import { useNavigate } from 'react-router-dom';
 
 const ImageContainer = styled.img`
     display: block;
@@ -40,18 +39,6 @@ const TextDescription = styled.p`
     color: #94959B;
 `
 
-// const BackToHomeBtn = styled.img`
-//     &:hover{
-//         cursor: pointer;
-//     }
-//     display: block;
-//     justify-content: center;
-//     align-items: center;
-//     margin: 5vh auto 10vh auto;
-//     min-height: 50px;
-//     min-width: 100px;
-// `
-
 const btnTextStyle = {
     fontStyle: 'normal',
     fontWeight: '600',
@@ -66,13 +53,12 @@ const btnTextStyle = {
     color: '#FFFFFF'
 }
 
-const goHome = (e) => {
-    window.location.href = "/";
-}
 const NotFound = () => {
-    // useEffect(() => {
-    //     removeNavbar();
-    // }, []);
+    const navigate = useNavigate();
+
+    const goHome = () => {
+        navigate('/');
+    }
 
     return (
         <div style={{ background: '#F6F6F6', height: '100vh', width: '100%', textAlign: 'center', justifyContent: 'center', alignContent: '' }}>

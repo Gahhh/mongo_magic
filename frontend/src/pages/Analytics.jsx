@@ -3,7 +3,6 @@ import { Layout, Button } from 'antd';
 import { ProfileContext } from '../App';
 import LoadingIcon from "../components/LoadingIcon";
 import { getUserDiagramData, resultListRequest } from "../utils/requests";
-import * as echarts from 'echarts';
 import ReactECharts from 'echarts-for-react';
 import { useNavigate } from "react-router-dom";
 
