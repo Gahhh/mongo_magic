@@ -2,19 +2,7 @@ from flask import request, Blueprint
 from flask_jwt_extended import jwt_required
 from flasgger import Swagger
 from flasgger.utils import swag_from
-<<<<<<< HEAD
-<<<<<<< HEAD
-from services.analysis import analysis_data, diagram_data, stats_data
-||||||| parent of 01dc8b9 (fix bug)
-from services.analysis import analysis_data, digram_data
-=======
-from services.analysis import analysis_data, diagram_data
->>>>>>> 01dc8b9 (fix bug)
-||||||| parent of 1c384f9 (admin stats data)
-from services.analysis import analysis_data, diagram_data
-=======
-from services.analysis import analysis_data, diagram_data, stats_data
->>>>>>> 1c384f9 (admin stats data)
+from services.analysis import analysis_data, digram_data, stats_data
 
 analysis_blueprint = Blueprint('analysis', __name__)
 
@@ -28,28 +16,10 @@ def get_analysis_data():
 @jwt_required()
 # @swag_from('../docs/analysis/get_analysis_data.yml', methods=['GET'])
 def get_digram_data():
-<<<<<<< HEAD
-<<<<<<< HEAD
-    return diagram_data(request)
-
-@analysis_blueprint.route('/analysis/admin_stats', methods=['GET'])
-# @jwt_required()
-# @swag_from('../docs/analysis/get_stats_data.yml', methods=['GET'])
-def get_stats_data():
-    return stats_data(request)
-||||||| parent of 01dc8b9 (fix bug)
     return digram_data(request)
-=======
-    return diagram_data(request)
->>>>>>> 01dc8b9 (fix bug)
-||||||| parent of 1c384f9 (admin stats data)
-    return diagram_data(request)
-=======
-    return diagram_data(request)
 
 @analysis_blueprint.route('/analysis/admin_stats', methods=['GET'])
 # @jwt_required()
 # @swag_from('../docs/analysis/get_stats_data.yml', methods=['GET'])
 def get_stats_data():
     return stats_data(request)
->>>>>>> 1c384f9 (admin stats data)
