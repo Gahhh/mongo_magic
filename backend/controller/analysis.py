@@ -2,7 +2,7 @@ from flask import request, Blueprint
 from flask_jwt_extended import jwt_required
 from flasgger import Swagger
 from flasgger.utils import swag_from
-from services.analysis import analysis_data, diagram_data
+from services.analysis import analysis_data, diagram_data, stats_data
 
 analysis_blueprint = Blueprint('analysis', __name__)
 
@@ -17,3 +17,9 @@ def get_analysis_data():
 # @swag_from('../docs/analysis/get_analysis_data.yml', methods=['GET'])
 def get_digram_data():
     return diagram_data(request)
+
+@analysis_blueprint.route('/analysis/admin_stats', methods=['GET'])
+# @jwt_required()
+# @swag_from('../docs/analysis/get_stats_data.yml', methods=['GET'])
+def get_stats_data():
+    return stats_data(request)
