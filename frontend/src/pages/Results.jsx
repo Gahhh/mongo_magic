@@ -26,8 +26,11 @@ const Results = () => {
       if (res.ok) {
         res.json().then(
           data => {
-            const avar = data[0]["certification/measures"];
-            setResults(data);
+            if(data.length === 0){
+              setResults("empty");
+            } else {
+              setResults(data);
+            }
           }
         )
       }
