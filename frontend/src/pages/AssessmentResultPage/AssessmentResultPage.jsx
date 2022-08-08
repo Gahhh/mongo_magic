@@ -26,7 +26,7 @@ display: flex;
 const ResultCardContainer = styled.div`
     display: flex;
     /* flex-direction: column; */
-    min-height: 700px;
+    min-height: 800px;
     width: 1000px;
     background: hsla(0,0%,100%,.95);
     margin-top: 30px;
@@ -217,11 +217,11 @@ const AssessmentResultPage = () => {
             Object.keys(data['suggestion']).map((key, index) => {
                 return (
                     suggestion[key].length > 0 && <div key={`container${index}`}>
-                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
+                        <ul key={`list${index}`} style={{ color: '#4D7393', fontSize:'16px',fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
                             {   
                                 suggestion[key].map((item, index) => {
                                     return (
-                                        <li key={index} style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
+                                        <li key={index} style={{  marginRight: '20px', fontSize:'16px',color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
                                     )
                                 })
                             }
