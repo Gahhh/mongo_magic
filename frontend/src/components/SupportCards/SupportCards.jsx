@@ -16,7 +16,6 @@ const SupportCards = () => {
   const get_support = async () => {
     await getSupportQuestions().then(
       res => {
-        // console.log(res);
         if (res.ok) {
           res.json().then(body => {
             setQuestions(body.question_list)
@@ -30,7 +29,6 @@ const SupportCards = () => {
   useEffect(() => {
     get_support();
   },[questions])
-  // console.log(typeof questions)
   const solveQuestion = async (body, email) => {
     await solveSupportQuestion(body).then(
       res => {
@@ -39,7 +37,6 @@ const SupportCards = () => {
           sendSolveEMail(email, answer).then(
             res => {
               message.success('Success!')
-              console.log(res)
             }
           )
         } else {
@@ -65,12 +62,10 @@ const SupportCards = () => {
     <CardsContainer>
       {
         questions?.map((question) => {
-          // console.log(question)
           const email = question.email.email;
           const body = {
             question_id: question._id
           }
-          // console.log(answer)
           return(
             <CardContainer>
               <Card

@@ -11,8 +11,6 @@ import analyticsLogo from '../assets/analyticsLogo.png';
 import analyticsLogoSelected from '../assets/analyticsLogoSelected.png';
 import profileLogo from '../assets/profileLogo.png';
 import profileLogoSelected from '../assets/profileLogoSelected.png';
-import settingsLogo from '../assets/settingsLogo.png';
-import settingsLogoSelected from '../assets/settingsLogoSelected.png';
 import '../App.css';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { userLogout } from '../utils/requests';

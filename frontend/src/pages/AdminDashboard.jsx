@@ -13,7 +13,6 @@ const { Content } = Layout;
 
 const AdminDashboard = (props) => {
   const profile = useContext(ProfileContext);
-  // console.log((profile?.providerProfile?.profile?.email == undefined));
 
   return (
     <>

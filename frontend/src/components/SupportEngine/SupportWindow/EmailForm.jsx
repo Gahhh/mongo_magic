@@ -100,7 +100,6 @@ const EmailForm = props => {
                         }
                         sendSupportQuestion({'email':{email}, 'question':{content}}).then(
                             res => {
-                                console.log(res);
                                 if (res.ok){
                                     message.success('Message sent! Will get back to you soon')
                                     setSent(true)
@@ -110,8 +109,6 @@ const EmailForm = props => {
                             }
                         )
                         sendMail(email, content).then(res => {
-                        console.log(email);
-                        console.log(res);
                     })}} style={{ marginTop:'15px', borderColor:'#4D7393', borderRadius:'12px'}}>
                         Send
                     </Button>
