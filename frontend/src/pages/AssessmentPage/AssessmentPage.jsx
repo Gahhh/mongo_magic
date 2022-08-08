@@ -431,6 +431,7 @@ const AssessmentPage = () => {
         setOfficeList(['1']);
         setdatacentreList(['1']);
         setRemoveAnsweredQuestions(true);
+        setCollapseNumber(1);
         setTimeout(() => {
             setRemoveAnsweredQuestions(false);
         }, 200);
