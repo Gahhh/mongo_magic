@@ -15,7 +15,6 @@ const sendSolveEMail = async(toEmail, Body) => {
     })
     return email;
   } catch (error) {
-    console.log(error);
   }
 }
 
