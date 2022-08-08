@@ -270,9 +270,13 @@ const AssessmentPage = () => {
                 setdatacentreNumber(datacentreNumber + 1);
                 break;
             default:
-                setOfficeList(prev => ([...prev, `${officeNumber + 1}`]));
-                setOfficeNumber(officeNumber + 1);
-                setCollapseNumber(collapseNumber + 1);
+                if (officeList.length < 10) {
+                    setOfficeList(prev => ([...prev, `${officeNumber + 1}`]));
+                    setOfficeNumber(officeNumber + 1);
+                    setCollapseNumber(collapseNumber + 1);
+                } else {
+                    message.error('You can only have 10 offices, contact us if you need more');
+                }
                 break;
         }
     }
