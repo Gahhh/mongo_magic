@@ -34,18 +34,21 @@ const AdminDashboard = (props) => {
             <Card
               title="Total Users Registered"
               bordered={false}
+              style={{ marginBottom: '10px' }}
             >
             <Statistic value={stats.user_total} />
             </Card>
             <Card
               title="Total Assessments Taken"
               bordered={false}
+              style={{ marginBottom: '10px' }}
             >
             <Statistic value={stats.result_total} />
             </Card>
             <Card
               title="Average Score"
               bordered={false}
+              style={{ marginBottom: '10px' }}
             >
             <Statistic value={stats.avg_score} />
             </Card>

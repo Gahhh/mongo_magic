@@ -1,5 +1,5 @@
-import { Popover, Steps } from 'antd';
-import React, {useState} from 'react';
+import {  Steps } from 'antd';
+import React from 'react';
 import './AssessmentStepBar.css';
 import '../../pages/AssessmentPage/AssessmentPage.css';
 

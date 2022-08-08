@@ -67,6 +67,7 @@ const Contents = styled.div`
   min-width: 40px;
   max-width: 800px;
   margin: 50px;
+  text-align: justify;
 `
 
 const SubTitle = styled.h3`

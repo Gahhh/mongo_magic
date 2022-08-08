@@ -11,14 +11,6 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import logo from '../../assets/LogoBlue.png';
 
-const TopNavContainer = styled.div`
-display: flex;
-width: 100%;
-height: 200px;
-align-items: center;
-justify-content: space-around;
-`
-
 const ContentContainer = styled.div`
 display: flex;
 `

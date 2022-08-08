@@ -27,15 +27,8 @@ const LeftContainer = styled.div`
     text-align: center;
 `
 
-const MenuLogo = styled.img`
-    width: 28px;
-    height: 28px;
-    /* position: relative;  */
-`
-
 const DashBoardText = styled.b`
     position:absolute; 
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
