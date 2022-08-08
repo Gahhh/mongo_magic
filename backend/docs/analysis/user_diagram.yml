@@ -1,0 +1,32 @@
+tags:
+  - Analysis
+summary: Get the results history of a user from database
+security:
+  - Bearer: [Bearer] 
+  - APIKeyHeader: ['authorization']
+responses:
+  200:
+    description: Get result
+    schema:
+      required:
+        - result
+      properties:
+        result:
+          type: array
+          example: [
+            {"location": 0.0, "public_transport": 0.0, "energy": 1.0, "certification/measures": 0.0, "test_time":
+                "2022-08-08 03:15:03.666733", "email": "user@user.com", "raw_score": 28, "org": "NCC", "test_id":
+                  "62f07fb7c4f855cc78954e52"}, 
+                  {"location": 0.0, "public_transport": 0.0, "energy": 1.0, "certification/measures": 0.0,
+                    "test_time": "2022-08-07 11:53:03.678583", "email": "user@user.com", "raw_score": 28, "org": "NCC", "test_id":
+                    "62efa79fc637f3e88953b7c8"}
+          ]
+  500:
+    description: Server error
+    schema:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: "server error"
