@@ -6,12 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { regisRequest } from "../../utils/requests";
 import { asyncLocalStorage } from '../../utils/functions';
 import { message } from 'antd';
-import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span, TermTitle, UnderLine, UL} from "./Logincss";
+import { Newinput, Newform, Flexbox, Labelbox, Label, Head, Head2, Logoimg, Navbar, Atag, Bluetag, Span } from "./Logincss";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 import { Modal } from 'antd';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import Terms from "../../components/TermsAndConditions/Terms";
 
 const theme = createTheme({

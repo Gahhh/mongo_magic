@@ -15,7 +15,6 @@ const ImageContainer = styled.img`
 `;
 
 const Text404 = styled.p`
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 40px;
@@ -28,7 +27,6 @@ const Text404 = styled.p`
 `
 
 const TextDescription = styled.p`
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;

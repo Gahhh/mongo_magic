@@ -137,7 +137,6 @@ const AdminSignupPage = () => {
       .then(response => response.json())
       .then(body => {
         if (body.error) {
-          // message.error(body.error);
         } else {
           callback(body);
           return body;
@@ -171,8 +170,6 @@ const AdminSignupPage = () => {
         default:
           Api('users/register', 'POST', undefined, msg, (body) => {
             if (body.token) {
-              // localStorage.setItem('userToken', body.token);
-              // navigate(`/users/dashboard`);
               asyncLocalStorage.setItem('userToken', body.token).then(() =>
                 navigate(`/users/dashboard`)
               )

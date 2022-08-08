@@ -1,7 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-
 import SupportWindow from './SupportWindow'
-
 import Avatar from './Avatar'
 
 const SupportEngine = (props) => {

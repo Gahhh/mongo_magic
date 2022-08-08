@@ -3,8 +3,6 @@ import PostCodeInput from './PostCodeInput';
 import { Input, Radio, Checkbox, Col, Row, Slider } from 'antd';
 import { QuestionContext } from '../QuestionForm/QuestionForm';
 import { CheckOutlined } from '@ant-design/icons';
-import { SliderMark } from '@mui/material';
-import { SaveButton } from '../../pages/AssessmentPage/AssessmentPage';
 
 const Question = (props) => {
     const qType = props.question.question_type;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
 import { styles } from './styles'
-import support from './support.png'
+
 
 const Avatar = props => {
     const [hovered, setHovered] = useState(false)

@@ -40,7 +40,6 @@ const TopLogo = styled.img`
 const LogoText = styled.a`
     position:relative;
     left: 5%;
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;

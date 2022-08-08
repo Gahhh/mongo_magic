@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useMemo, useContext, useRef } from 'react';
+import React, { useEffect, useState, createContext, useMemo, useRef } from 'react';
 import { Button, Divider, Row, Col, Checkbox, message } from 'antd';
 import styled from 'styled-components';
 import themeColor from '../../config/theme';
@@ -368,10 +368,6 @@ const AssessmentPage = () => {
 
     const goPrevPage = () => {
         setPageStep(prev => prev - 1);
-    }
-
-    const savePage = () => {
-        setSaving(true);
     }
 
     const onPrivacyChange = (e) => {

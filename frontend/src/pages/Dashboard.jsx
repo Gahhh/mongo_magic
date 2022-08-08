@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { Layout, Button } from 'antd';
 import '../App.css';
 import TextEffect from '../components/TextEffect';

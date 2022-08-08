@@ -14,7 +14,6 @@ const ResultsContainer = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: 'Poppins';
     font-style: normal;
 `
 
