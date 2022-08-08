@@ -146,6 +146,8 @@ def engine(office, data):
     scaled_data_score = data_score/36
     if scaled_data_score != 0:
       total_score *= scaled_data_score
+  if total_score > 100:
+    total_score = 100
   score_detail['energy'] = energy_score
   tennis_area = calculate_tennis_area(habitat)
   score_detail = score_percent_process(score_detail)

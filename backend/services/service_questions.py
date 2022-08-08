@@ -142,7 +142,7 @@ def question_answer(req):
       db_analysis.update_one({'org': org}, {'$set': {'analysis_data':analysis_data, 'test_time': time_now}})
     else:
       db_analysis.insert_one({'org': org, 'analysis_data':analysis_data, 'test_time': time_now})
-    
+    result['test_time'] = time_now
     data_id = db_col.insert_one(result).inserted_id
     score_detail['test_id'] = str(data_id)
     score_detail_id = db_score.insert_one(score_detail).inserted_id
