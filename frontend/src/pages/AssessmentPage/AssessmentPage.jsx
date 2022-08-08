@@ -522,8 +522,8 @@ const AssessmentPage = () => {
                                                         </Row>
                                                         <Row style={{ marginTop: '30px' }}>
                                                             <Col span={32}>
-                                                                <Checkbox defaultChecked={termsAgreed} onChange={(e) => onTermsChange(e)}></Checkbox>
-                                                                I agree to the <a onClick={showModal}>Terms & Conditions</a> and the <a onClick={show}>Privacy Policy</a>.
+                                                                <Checkbox defaultChecked={termsAgreed} onChange={(e) => onTermsChange(e)} style={{paddingRight:'8px'}}></Checkbox>
+                                                                    I agree to the <a onClick={showModal}>Terms & Conditions</a> and the <a onClick={show}>Privacy Policy</a>.
                                                                 <Modal title="Terms & Conditions" style={{width: '60%', height: '80%'}} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                                                                     <Terms></Terms>
                                                                 </Modal>
