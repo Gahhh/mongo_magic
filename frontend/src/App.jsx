@@ -45,14 +45,8 @@ function App() {
         )
       }
       else {
-        res.json().then(
-          data => {
-            if (data.msg === 'Token has expired'){
               localStorage.removeItem('userToken');
               setProfile(null);
-            }
-          }
-        )
       }
     })
   }, []);
