@@ -24,10 +24,12 @@ the sustainability progress of their organisations. The platform will collect va
 |---Project File (Root Path)
 
  |---backend	(Backend file path)
+  |---cloud
   |---controller
   |---db
-  |---service
+  |---services
   |---docs
+  |---models
   |---__init_.py
   |---config.py
   |---requirements.txt
@@ -56,6 +58,7 @@ After installation, you can run the following command to install the dependencie
 Step 2:   
 After installation, you can run the following command to install the dependencies.
 ```sh
+$ cd /frontend
 $ yarn install
 ```
 Step 3:   
@@ -90,6 +93,7 @@ We use python 3.8 as the backend language. So before you start to use the backen
 Step 1: Install the dependencies.   
 In the backend folder, you can run the following command to install the dependencies. Depending on the pip version, you may try with pip3 or pip for the below commands.
 ```sh
+$ cd /backend
 $ pip3 install -r requirements.txt
 ```
 Step 2: Run the application.

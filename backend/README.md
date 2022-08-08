@@ -6,10 +6,9 @@ social, environmental and economic. As per the requirements, this model covers a
  -  Location (10%)
  -  Public Transport (20%)
  -  Energy (40%)
- -  Green Star Rating/NABERS (30%)
- -  Other measures (25%) (if rating is not available)   
+ -  Other measures (30%)
 
-From the weights schedule, the user will be in disadvantage if their office/data centre has not been rated by the NABERS or Green Building Council. For the final result, we will provide the user with a relative score. The score will be based on the current data and ranking in the database. The highest score will be 99, which means the user's result is in the top 1%.  
+Other measures will cover the certification and cloud services. Therefore, the user will be in disadvantage if their office/data centre has not been rated by the NABERS or Green Building Council. Also, if the users do not have any data/calculation services on cloud, they will not been given a high score. For the final result, we will provide the user with a raw score and its position in our database. The maximum raw score is 100, which is made up of the sum of the weights of all the questions.
 
 Reference:   
 Wagner, B. and Svensson, G. (2014), "A framework to navigate sustainability in business networks: The transformative business sustainability (TBS) model", European Business Review, Vol. 26 No. 4, pp. 340-367. https://doi.org/10.1108/EBR-12-2013-0146   
@@ -44,7 +43,10 @@ We will collect the electricity consumption data with the floor area and number 
 ## Question - Data Centre:
 We also collect the information about the data centre. 
 The questions will base on the electricity consumption and any sustainability measures. Also, we will ask if the data centre has a NABERS Rating. NABERS is a performance-based national rating system that measures the environmental performance of existing buildings, tenancies and homes. We encourage the user to get a NABERS rating for their data centre, therefore, we will give more weightage on the NABERS rating.
-If the user doesn't have a NABERS rating, our evluation will be based on the electricity consumption and the sustainability measures. 
+If the user doesn't have a NABERS rating, our evluation will be based on the electricity consumption and the sustainability measures.    
 
+## Question - Cloud Services:
+We will ask if the user's organisation has cloud services. The leading cloud service providers AWS, Google Cloud and Microsoft Azure have planned to turn to 100% renewable energy by 2025, which is a significant milestone for the future of the cloud. Therefore, organisations who are planning to move further in sustainability
+should consider migrating all their servers, data centres to cloud. Due to that reason, we will heavliy reward in the assessment if the user has cloud services.
 
 
