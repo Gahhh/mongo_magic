@@ -11,8 +11,6 @@ import analyticsLogo from '../assets/analyticsLogo.png';
 import analyticsLogoSelected from '../assets/analyticsLogoSelected.png';
 import profileLogo from '../assets/profileLogo.png';
 import profileLogoSelected from '../assets/profileLogoSelected.png';
-import settingsLogo from '../assets/settingsLogo.png';
-import settingsLogoSelected from '../assets/settingsLogoSelected.png';
 import '../App.css';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { userLogout } from '../utils/requests';
@@ -106,6 +104,9 @@ const NavBar = (props) =>{
     useEffect(() => {
         window.addEventListener("resize", getPosition);
         getPosition();
+        return _ => {
+            window.removeEventListener('resize', getPosition)
+    }
     }, []);
 
     useEffect(() => {
@@ -182,21 +183,15 @@ const NavBar = (props) =>{
                         <Menu.Item icon={<DashboardLogo id='3' src={(itemSelected === '3') ? (analyticsLogoSelected): (analyticsLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="3">
                             Analytics
                         </Menu.Item>
-                        <Menu.Item icon={<DashboardLogo id='4' src={(itemSelected === '4') ? (rankingSelected): (rankingimg) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemLast} key="4">
+                        <Menu.Item icon={<DashboardLogo id='4' src={(itemSelected === '4') ? (rankingSelected): (rankingimg) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="4">
                             Ranking
-                        </Menu.Item>
-                        <Menu.Item style={{ marginLeft:`${logoOffsetLeft}px`, fontWeight: 'bolder', pointerEvents: 'none'}} key="100">
-                            <b style={{ fontWeight: '700', fontSize:'16px'}}>Others</b>
                         </Menu.Item>
                         <Menu.Item icon={<DashboardLogo id='5' src={(itemSelected === '5') ? (profileLogoSelected): (profileLogo) } size={textOffsetLeft - logoOffsetLeft - 42} />} style={menuItemStyle} key="5">
                             Profile
                         </Menu.Item>
-                        <Menu.Item icon={<DashboardLogo id='6' src={(itemSelected === '6') ? (settingsLogoSelected): (settingsLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="6">
-                            Settings
-                        </Menu.Item>
                     </Menu>
                 </MainMenuContainer>
-                <div onClick={() => {userLogout()}} onPointerEnter={(e) => (handlePointerOn(e))} onPointerLeave={(e) => {handlePointerOn(e)}} style={{padding:'8px',cursor:'pointer', display:'flex', justifyContent:'right', position:'absolute', top:'700px', right:'5px'}}>
+                <div onClick={() => {userLogout()}} onPointerEnter={(e) => (handlePointerOn(e))} onPointerLeave={(e) => {handlePointerOn(e)}} style={{padding:'8px',cursor:'pointer', display:'flex', justifyContent:'right', position:'absolute', top:'500px', right:'5px'}}>
                     <b style={{ color:logoutHover, padding:'3px' }}>Logout</b>
                     <LogoutOutlined onPointerEnter={(e) => (handlePointerOn(e))} onPointerLeave={(e) => {handlePointerOn(e)}} style={{ padding:'3px', fontSize:'20px', color:logoutHover  }}></LogoutOutlined>
                 </div>

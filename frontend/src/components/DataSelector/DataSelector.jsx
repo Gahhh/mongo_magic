@@ -51,7 +51,7 @@ const DataSelector = (props) => {
             if (res.status === 200) {
                 setGettingData(false);
                 res.json().then(data=>{
-                    window.open(data.url, '_blank', 'toolbar=0,location=0,menubar=0');
+                    window.open(data.url, '_self', 'toolbar=0,location=0,menubar=0');
                 })
             }
         })
@@ -92,7 +92,7 @@ const DataSelector = (props) => {
                 </Row>
             </Checkbox.Group>
             <Checkbox onChange={onCheckAll} checked={checkAll}>Check All</Checkbox>
-            <Button onClick={getData} disabled={!(request.dateStart && request.dateEnd) || request.types?.length === 0}>Submit</Button>
+            <Button onClick={getData} disabled={!(request.dateStart && request.dateEnd) || request.types?.length === 0}>Download</Button>
         </Space>
     )
 }

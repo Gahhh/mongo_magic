@@ -102,7 +102,7 @@ const Bluetag = styled.a`
   font-size: 20px;
   line-height: 22px;
   text-align: center;
-  color: ##3865F3;
+  color: #3865F3;
 `
 
 const Span = styled.span`
@@ -137,7 +137,6 @@ const AdminSignupPage = () => {
       .then(response => response.json())
       .then(body => {
         if (body.error) {
-          console.log(body.error);
           // message.error(body.error);
         } else {
           callback(body);

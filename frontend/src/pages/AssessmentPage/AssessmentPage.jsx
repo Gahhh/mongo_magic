@@ -223,6 +223,9 @@ const AssessmentPage = () => {
         let dataCentreUnfinishFlag = false;
         const eleOffice = Object.keys(assessmentAnswer).filter(ele => ele.substring(0, 6) === 'office');
         const eleData = Object.keys(assessmentAnswer).filter(ele => ele.substring(0, 4) === 'data');
+        if (!Object.keys(assessmentAnswer).includes('privacy')) {
+            setAssessmentAnswer(prev => ({ ...prev, ['privacy']: false }))
+        }
         for (const office of eleOffice) {
             for (const officeAns in assessmentAnswer[`${office}`]) {
                 if (assessmentAnswer[`${office}`][officeAns]?.length === 0) {
@@ -305,7 +308,6 @@ const AssessmentPage = () => {
         const officeList = [];
         const datacentreList = [];
         let thisDepend = [];
-        console.log(data);
         for (const key in data) {
             if (JSON.stringify(data[key].depend) === '{}') {
                 switch (data[key].title) {
@@ -342,7 +344,6 @@ const AssessmentPage = () => {
                 datacentreList.splice(parseInt(dcIndex) + 1, 0, ...thisDepend);
             }
         }
-        console.log(officeList, datacentreList);
         setQuestionListOffice(officeList);
         setQuestionListDataCenter(datacentreList);
     }
@@ -365,7 +366,6 @@ const AssessmentPage = () => {
 
     const savePage = () => {
         setSaving(true);
-        console.log(assessmentAnswer);
     }
 
     const onPrivacyChange = (e) => {
@@ -409,7 +409,6 @@ const AssessmentPage = () => {
                 if (res.status === 200) {
                     message.success('Assessment submitted successfully');
                     res.json().then(data => {
-                        console.log(data);
                         const id = data.result_id;
                         navigate(`/assessment/result/${id}`);
                     })
@@ -523,8 +522,8 @@ const AssessmentPage = () => {
                                                         </Row>
                                                         <Row style={{ marginTop: '30px' }}>
                                                             <Col span={32}>
-                                                                <Checkbox defaultChecked={termsAgreed} onChange={(e) => onTermsChange(e)}></Checkbox>
-                                                                I agree to the <a onClick={showModal}>Terms & Conditions</a> and the <a onClick={show}>Privacy Policy</a>.
+                                                                <Checkbox defaultChecked={termsAgreed} onChange={(e) => onTermsChange(e)} style={{paddingRight:'8px'}}></Checkbox>
+                                                                    I agree to the <a onClick={showModal}>Terms & Conditions</a> and the <a onClick={show}>Privacy Policy</a>.
                                                                 <Modal title="Terms & Conditions" style={{width: '60%', height: '80%'}} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                                                                     <Terms></Terms>
                                                                 </Modal>
@@ -545,17 +544,17 @@ const AssessmentPage = () => {
                         }
                     </SaveButton.Provider>
                     <div style={{ marginBottom: '50px', display: 'flex', flexDirection: 'column', width: '50%', alignItems: 'center' }}>
-                        <div style={{ display:'flex', color: themeColor, textAlign: 'center', width:'50%', justifyContent:'space-evenly' }}>
+                        <div style={{ display: 'flex', color: themeColor, textAlign: 'center', width: '50%', justifyContent: 'space-evenly' }}>
                             <div>
-                                    <SaveFilled style={{ fontSize: '35px' }} onClick={saveAssessment}></SaveFilled>
-                                    <div>Save for later</div>
+                                <SaveFilled style={{ fontSize: '35px' }} onClick={saveAssessment}></SaveFilled>
+                                <div>Save for later</div>
                             </div>
                             <div>
-                                    <ClearOutlined style={{ fontSize: '35px' }} onClick={clearCurrentPage}/>
-                                    <div>Clear all answers</div>
+                                <ClearOutlined style={{ fontSize: '35px' }} onClick={clearCurrentPage} />
+                                <div>Clear all answers</div>
                             </div>
                         </div>
-                        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop:'20px' }}>
+                        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '20px' }}>
                             {<div onClick={goPrevPage} style={{ visibility: `${pageStep > 0 ? '' : 'hidden'}`, cursor: 'pointer', display: 'flex', textAlign: 'center', alignItems: 'center', order: '0', fontSize: '16px' }}>
                                 <CaretLeftFilled style={{ fontSize: '20px' }}></CaretLeftFilled> Prev
                             </div>}
@@ -567,7 +566,7 @@ const AssessmentPage = () => {
                                 opacity: `${pageStep === 0 ? officeFinished ? '1' : '0.2' : datacentreFinished ? '1' : '0.2'}`,
                                 order: '2', fontSize: '16px', cursor: `${pageStep === 0 ? officeFinished ? 'pointer' : 'not-allowed' : pageStep === 1 ? datacentreFinished ? 'pointer' : 'not-allowed' : ''}`, zIndex: '500'
                             }}>
-                                Next<CaretRightOutlined></CaretRightOutlined>
+                                {pageStep < 2 && `Next`} {pageStep < 2 &&<CaretRightOutlined></CaretRightOutlined>}
                             </div>
                         </div>
                         {

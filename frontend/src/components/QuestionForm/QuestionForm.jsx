@@ -42,7 +42,6 @@ const QuestionForm = (props) => {
                 props.assessmentSetter(prev => ({ ...prev, [`${type}${props.number}`]: answer }));
             };
             if (questionUnfinished.length > 0 && questionRender.length > 0) {
-                console.log(props.number);
                 props.assessmentSetter(prev => {
                     const copy = { ...prev };
                     delete copy[`${type}${props.number}`];
@@ -63,8 +62,6 @@ const QuestionForm = (props) => {
             }
         }
     }, [questionUnfinished]);
-
-    console.log(questionUnfinished);
 
     useEffect(() => {
         const type = props.type === 'office' ? 'office' : 'data';

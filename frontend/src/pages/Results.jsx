@@ -27,11 +27,12 @@ const Results = () => {
       if (res.ok) {
         res.json().then(
           data => {
-            if(data.length === 0){
-              setResults("empty");
-            } else {
-              setResults(data);
-            }
+            // setRanking(data);
+            console.log(data);
+            const avar = data[0]["certification/measures"];
+            console.log((avar * 100 <= 100) ? avar * 100 : 100);
+            // console.log(Array.from(data))
+            setResults(data);
           }
         )
       }
@@ -80,7 +81,7 @@ const Results = () => {
 
   const columns = [
     {
-      title: 'Company',
+      title: 'Organisation',
       dataIndex: 'org',
       key: 'Company',
       width: 400,
@@ -92,7 +93,7 @@ const Results = () => {
       width: 300,
     },
     {
-      title: 'Test time',
+      title: 'Date',
       dataIndex: 'test_time',
       key: 'test_time',
       width: 400,
@@ -115,8 +116,8 @@ const Results = () => {
           }}>
             <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                <h3 style={{ float: 'left', marginBottom: '0' }}>Tests Results List</h3>
-                <Button type="primary" style={{ float: 'right' }} onClick={() => Newtest()}>New test</Button>
+                <h3 style={{ float: 'left', marginBottom: '0' }}>Assessment Results List</h3>
+                <Button type="primary" style={{ float: 'right' }} onClick={() => Newtest()}>New Assessment</Button>
               </div>
 
 

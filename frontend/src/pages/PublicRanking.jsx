@@ -148,7 +148,7 @@ const PublicRanking = () => {
 
   const columns = [
     {
-      title: 'Company',
+      title: 'Organisation',
       dataIndex: 'company',
       key: 'Company',
       width: 400,
@@ -171,7 +171,7 @@ const PublicRanking = () => {
       width: 300,
     },
     {
-      title: 'Test time',
+      title: 'Date',
       dataIndex: 'date',
       key: 'date',
       width: 400,
@@ -204,30 +204,33 @@ const PublicRanking = () => {
         </Span>
       </Navbar>
       {(listData) ?
-        (<Content className="content" style={{display:'flex', justifyContent:'center', marginTop:'5rem', marginBottom:'2rem'}}>
-          <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px', maxWidth: '80%', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-              <h3 style={{ float: 'left', marginBottom: '0' }}>Ranking List</h3>
-              <Button type="primary" style={{ float: 'right' }} onClick={() => handleClick()}>New test</Button>
-            </div>
-            <Table
-              columns={columns}
-              pagination={{
-                pageSize: 7,
-              }}
-              size='large'
-              rowKey={'org'}
-              style={{
-                border: '1px',
-                borderStyle: 'solid',
-                borderRadius: '10px',
-                borderColor: 'rgb(240,242,245)',
-                padding: '30px',
-                backgroundColor: 'white'
-              }}
-              expandable={{
-                expandedRowRender: (record) => (
-                  <div style={{ display: 'flex' }}>
+        (<Content className="hi" style={{
+          margin: '10% 0% 0%', borderRadius: 20, width: '1200px',
+          overflow: "hidden"
+        }}>
+<div style={{backgroundColor: 'white', padding:'20px', borderRadius:'10px'}}>
+              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px'}}>
+                <h3 style={{float: 'left', marginBottom: '0'}}>Ranking List</h3>
+                <Button type="primary" style={{float: 'right'}} onClick={() => handleClick()}>New Assessment</Button>
+              </div>
+          <Table
+                columns={columns}
+                pagination={{
+                  pageSize: 7,
+                }}
+                size='large'
+                rowKey={'org'}
+                style = {{
+                  border:'1px',
+                  borderStyle:'solid',
+                  borderRadius:'10px',
+                  borderColor:'rgb(240,242,245)',
+                  padding:'30px',
+                  backgroundColor:'white'
+                }}
+                expandable={{
+                  expandedRowRender: (record) => (
+                    <div style={{ display: 'flex' }}>
                     <div style={{
                       display: "flex",
                       flexDirection: 'column',
