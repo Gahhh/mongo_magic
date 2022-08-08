@@ -71,10 +71,10 @@ def stats_data(req):
       ct += history['certification/measures']
   else:
     history_list.append(1)
-  avg_location = location / len(history_list)
-  avg_energy = energy / len(history_list)
-  avg_pt = pt / len(history_list)
-  avg_ct = ct / len(history_list)
+  avg_location = int(location / len(history_list) * 100)
+  avg_energy = int(energy / len(history_list) *100)
+  avg_pt = int(pt / len(history_list)*100)
+  avg_ct = int(ct / len(history_list)*100)
   pack = {
     'user_total': user_total,
     'result_total': result_total,
