@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { Layout, Avatar, Table } from 'antd'
 import styled from 'styled-components';
 import { Button, message, Progress } from 'antd';
-import { Parallax } from 'react-parallax';
 import { rankingRequest } from "../utils/requests";
 import noAvatar from '../assets/noAvatar.png'
 import LoadingIcon from "../components/LoadingIcon";
 import logo from '../assets/LogoBlue.png';
-import { maxWidth } from '@mui/system';
 
 
 
@@ -89,8 +87,6 @@ const PublicRanking = () => {
 
       const newData = Object.values(ranking);
       const rankIndex = Object.keys(ranking);
-      console.log(newData)
-      console.log(rankIndex)
       for (let i = 0; i < rankIndex.length; i++) {
         newData[i].date = newData[i].time.split(' ')[0];
         newData[i].rankIndex = rankIndex[i];
@@ -104,7 +100,6 @@ const PublicRanking = () => {
         }
         newData[i].company = company;
       }
-      console.log(newData)
       setData(newData);
 
     }

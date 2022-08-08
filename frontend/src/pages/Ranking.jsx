@@ -16,28 +16,11 @@ const Ranking = () => {
   const navigate = useNavigate();
   const [ranking, setRanking] = React.useState(null);
   const [listData, setData] = React.useState(null);
-  const getWindowSize = () => ({
-    innerWidth: (window.innerWidth <= 1920) ? window.innerWidth : 1920,
-  });
-
-  const [windowSize, setWindowSize] = React.useState(getWindowSize());
-  const handleResize = () => {
-    setWindowSize(getWindowSize());
-  };
-  console.log(window.innerWidth);
-  React.useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    console.log(windowSize.innerWidth)
-    return () => window.removeEventListener('resize', handleResize)
-  }, []);
   React.useEffect(() => {
     rankingRequest().then(res => {
       if (res.ok) {
         res.json().then(
           data => {
-            // setRanking(data);
-            // console.log(ranking);
-            // console.log(Array.from(data))
             setRanking(data);
           }
         )
@@ -63,8 +46,7 @@ const Ranking = () => {
 
       const newData = Object.values(ranking);
       const rankIndex = Object.keys(ranking);
-      console.log(newData)
-      console.log(rankIndex)
+
       for (let i = 0; i < rankIndex.length; i++) {
         newData[i].date = newData[i].time.split(' ')[0];
         newData[i].rankIndex = rankIndex[i];
@@ -78,7 +60,6 @@ const Ranking = () => {
         }
         newData[i].company = company;
       }
-      console.log(newData)
       setData(newData);
 
     }
