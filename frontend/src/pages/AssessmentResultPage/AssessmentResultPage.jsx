@@ -110,16 +110,16 @@ const Span = styled.span`
 
 
 const AssessmentResultPage = () => {
-    const { id } = useParams();
-    const { Content } = Layout
-    const [value, setValue] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const [preparing, setPreparing] = useState(true);
-    const [data, setData] = useState({});
-    const navigate = useNavigate();
-    const [time, setTime] = useState('');
+  const { id } = useParams();
+  const { Content } = Layout
+  const [value, setValue] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [preparing, setPreparing] = useState(true);
+  const [data, setData] = useState({});
+  const navigate = useNavigate();
+  const [time, setTime] = useState('');
 
-    const themeColor_light = '#89c5d1';
+  const themeColor_light = '#89c5d1';
 
 
     useEffect(() => {
@@ -133,13 +133,11 @@ const AssessmentResultPage = () => {
         })
     }, [id]);
 
-    console.log(data);
-
-    useEffect(() => {
-        if (value < 100) {
-            addToOneHundred();
-        }
-    }, [value])
+  useEffect(() => {
+    if (value < 100) {
+      addToOneHundred();
+    }
+  }, [value])
 
     useEffect(() => {
         if (value >= 100) {
@@ -151,57 +149,65 @@ const AssessmentResultPage = () => {
             }, 600);
         }
 
-    }, [value])
+  }, [value])
 
-    const addToOneHundred = () => {
-        returnArbitraryTime().then(
-            res => {
-                setValue(prev => prev + res);
-            }
-        )
+  const addToOneHundred = () => {
+    returnArbitraryTime().then(
+      res => {
+        setValue(prev => prev + res);
+      }
+    )
+  }
+
+
+  const returnArbitraryTime = () => {
+    return new Promise(resolve => setTimeout(() =>
+      resolve(Math.floor(Math.random() * (20 - 1)) + 1)
+      , Math.random() * (600 - 1) + 1));
+  }
+
+
+  const turnToLogin = () => {
+    navigate('/login');
+  }
+
+  const turnToRegister = () => {
+    navigate('/signup');
+  }
+
+  const handleClick = () => {
+    if (localStorage.getItem('userToken')) {
+      navigate('/assessment');
     }
-
-
-    const returnArbitraryTime = () => {
-        return new Promise(resolve => setTimeout(() =>
-            resolve(Math.floor(Math.random() * (20 - 1)) + 1)
-            , Math.random() * (600 - 1) + 1));
+    else {
+      turnToLogin();
     }
+  }
 
-
-    const turnToLogin = () => {
-        navigate('/login');
+  const turnToDashboard = () => {
+    if (localStorage.getItem('userType') === "1") {
+      navigate('/users/dashboard');
+    } else if (localStorage.getItem('userType') === "0") {
+      navigate('/admin/dashboard');
     }
+  }
 
-    const turnToRegister = () => {
-        navigate('/signup');
-    }
+  const logout = () => {
+    localStorage.removeItem('userToken');
+    navigate('/');
+  }
 
-    const handleClick = () => {
-        if (localStorage.getItem('userToken')) {
-            navigate('/assessment');
-        }
-        else {
-            turnToLogin();
-        }
-    }
+  const turnToRanking = () => {
+    navigate('/publicranking')
+  }
 
-    const turnToDashboard = () => {
-        navigate('/users/dashboard');
-    }
+  const turnToAbout = () => {
+    navigate('/about')
+  }
 
-    const logout = () => {
-        localStorage.removeItem('userToken');
-        navigate('/');
-    }
-
-    const turnToAbout = () => {
-        navigate('/about')
-    }
-
-    const turnToHelp = () => {
-        navigate('/help')
-    }
+  const turnToHelp = () => {
+    navigate('/help')
+  }
 
 
     const bulletPoints = () => {
@@ -210,11 +216,11 @@ const AssessmentResultPage = () => {
             Object.keys(data['suggestion']).map((key, index) => {
                 return (
                     suggestion[key].length > 0 && <div key={`container${index}`}>
-                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0', fontSize:'16px'}}>{key}</ul>
+                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
                             {   
                                 suggestion[key].map((item, index) => {
                                     return (
-                                        <li key={index} style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px', fontSize:'16px' }}>{item}</li>
+                                        <li key={index} style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
                                     )
                                 })
                             }
@@ -272,6 +278,31 @@ const AssessmentResultPage = () => {
 
     }
 
+
+
+    const tempData = {
+        "score": "99",
+        "co2": "1500",
+        "natural_habitat": "500",
+        "roughly_size": "20",
+        "suggestion": {
+            "Location Location Location": [
+],
+            "Reduce, reuse, recycle": [
+                "You may need to consider go forward with LED lighting in your offices",
+                "Your data centre may need a passive cooling system in order to reduce the energy consumption"
+            ],
+            "Go cloud, go greens": [
+                "A physical data centre is not the best place to store your data and servers, considering a cloud solution",
+                "You may consider to increase the percentage of renewable sources in your electricity bill"
+            ],
+            "Get certified, get ahead": [
+                "You may consider to get certified for your offices with Green Star Rating",
+                "You may consider to get certified for your data centre with NABERS"
+            ]
+        }
+    }
+
     return (
         <>
             <Parallax className='image' blur={0} bgImage={require('../../assets/banner1.jpg')} strength={800} bgImageStyle={{ minHeight: "100vh" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -309,9 +340,9 @@ const AssessmentResultPage = () => {
                                         <Button style={{ borderRadius: '5px', width: '150px', alignSelf: 'end', marginRight: '10px', color: '#4D7393', borderColor: '#89c5d1' }} onClick={downloadPdf} data-html2canvas-ignore="true">Save as PDF</Button>
                                     </div>
                                     <div style={{ marginLeft: '25px', height: '400px', width: '100%', backgroundColor: `${themeColor_light}` }}>
-                                        <Image style={{ height: '400px', width:'100%'}} src={'https://localtenniscourtresurfacing.com/wp-content/uploads/2014/01/Tennis-Court-Resurfacing-Milwaukee-672x372.jpg'}></Image>
+                                        <Image style={{ height: '400px', width:'100%'}} src={'/publicAssets/resultBack.jpg'}></Image>
                                     </div>
-                                    <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600', fontSize:'16px' }}>
+                                    <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
                                         Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext>Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
                                         To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
                                     </TextContext>

@@ -100,7 +100,7 @@ def question_answer(req):
     office_data = data_process(office_list, question_set)
     data_centre_data = data_process(data_list, question_set)[0]
 
-    if data_centre_data["is_data_centre"] == "F":
+    if data_centre_data["is_data_centre"] == "F" or data_centre_data["cloud_percent"] == "100":
       data_centre_data = {}
     result = engine(office_data, data_centre_data)
     time_now = str(datetime.datetime.now())
@@ -127,6 +127,10 @@ def question_answer(req):
     score_list.append(result['score'])
     score_list = sorted(score_list,reverse=True)
     position = score_list.index(result['score']) / len(score_list) * 100
+    if position > 100:
+      position = 100
+    if position < 1:
+      position = 1
     result['position'] = position
     db_score_rank.update_one({'_id': "rank"}, {'$set': {'list': score_list}})
 

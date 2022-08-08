@@ -3,9 +3,9 @@ from db.database import db_connect
 from flask import make_response
 import pandas as pd
 import datetime
-import re
 from services.utils import get_dataframe
 from cloud.S3_access import get_s3_url
+from flask_jwt_extended import get_jwt_identity
 
 db = db_connect()
 def analysis_data(req):
@@ -30,3 +30,15 @@ def analysis_data(req):
     return make_response(json.dumps({'url': url}), 200)
   except:
     return make_response(json.dumps({'message': 'Input Error'}), 400)
+  
+def digram_data(req):
+  try:
+    db_result = db['score_history']
+    email = get_jwt_identity()
+    result = list(db_result.find({'email': email}, {'_id': 0}))
+    result = sorted(result, key=lambda x: x['test_time'], reverse=True)
+    result = result[:10]
+    return make_response(json.dumps({'result': result}), 200)
+  except:
+    return make_response(json.dumps({'message': 'Server Error'}), 500)
+  

@@ -37,5 +37,45 @@ const Span = styled.span`
   display: flex;
   flex-direction: row;
 `
+const HelpContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
-export { Logoimg, Navbar, Atag, Span};
+const Title = styled.h1`
+  color: #4D7393;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 58px;
+  letter-spacing: 0em;
+  line-height: 1.1em;
+  text-transform: none;
+`
+
+const Contents = styled.div`
+  display: block;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  letter-spacing: 0em;
+  line-height: 1.8em;
+  text-transform: none;
+  color: #878787;
+  min-width: 40px;
+  max-width: 800px;
+  margin: 50px;
+`
+
+const SubTitle = styled.h3`
+  color: #4D7393;
+  font-weight: 700;
+`
+
+const HelpUL = styled.ul`
+  list-style-position: outside;
+`
+
+export { Logoimg, Navbar, Atag, Span, Contents, HelpUL, SubTitle, Title, HelpContainer};

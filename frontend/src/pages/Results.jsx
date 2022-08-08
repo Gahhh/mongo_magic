@@ -27,7 +27,11 @@ const Results = () => {
       if (res.ok) {
         res.json().then(
           data => {
+            // setRanking(data);
+            console.log(data);
             const avar = data[0]["certification/measures"];
+            console.log((avar * 100 <= 100) ? avar * 100 : 100);
+            // console.log(Array.from(data))
             setResults(data);
           }
         )
@@ -35,9 +39,6 @@ const Results = () => {
       else {
         res.json().then(
           body => {
-            if (body.message === 'User has no results') {
-              setResults("empty");
-            }
             message.error({
               content: body.message,
               duration: 1.2,
@@ -72,7 +73,6 @@ const Results = () => {
         results[i]['public_transport'] = (results[i]['public_transport'] * 100 <= 100) ? parseInt(results[i]['public_transport'] * 100) : 100;
         results[i]['test_time'] = results[i]['test_time'].split(' ')[0];
       }
-      console.log(results)
       setData(results);
     } else if(results === 'empty'){
       setData('empty')
@@ -196,8 +196,6 @@ const Results = () => {
                   (<h1>Result Content</h1>)}
           </ResultsContainer>
       </Content>)}
-
-        {/* </Content> */}
       </>
     );
   } else {

@@ -24,8 +24,10 @@ const Ranking = () => {
   const handleResize = () => {
     setWindowSize(getWindowSize());
   };
+  console.log(window.innerWidth);
   React.useEffect(() => {
     window.addEventListener('resize', handleResize);
+    console.log(windowSize.innerWidth)
     return () => window.removeEventListener('resize', handleResize)
   }, []);
   React.useEffect(() => {
@@ -58,6 +60,8 @@ const Ranking = () => {
 
       const newData = Object.values(ranking);
       const rankIndex = Object.keys(ranking);
+      console.log(newData)
+      console.log(rankIndex)
       for (let i = 0; i < rankIndex.length; i++) {
         newData[i].date = newData[i].time.split(' ')[0];
         newData[i].rankIndex = rankIndex[i];

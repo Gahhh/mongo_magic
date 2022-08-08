@@ -137,7 +137,6 @@ const AdminSignupPage = () => {
       .then(response => response.json())
       .then(body => {
         if (body.error) {
-          console.log(body.error);
           // message.error(body.error);
         } else {
           callback(body);

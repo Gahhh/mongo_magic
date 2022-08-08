@@ -1,9 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Layout, Avatar,Table } from 'antd'
+import { Layout, Avatar, Table } from 'antd'
 import styled from 'styled-components';
 import { Button, message, Progress } from 'antd';
-import { Parallax } from 'react-parallax';
 import { rankingRequest } from "../utils/requests";
 import noAvatar from '../assets/noAvatar.png'
 import LoadingIcon from "../components/LoadingIcon";
@@ -38,7 +37,7 @@ const Atag = styled.a`
     line-height: 22px;
     /* identical to box height */
     text-align: center;
-    color: #ffffff;
+    color: #183B56;
     margin: 1rem;
 `
 
@@ -154,8 +153,8 @@ const PublicRanking = () => {
       key: 'Company',
       width: 400,
       render: (data) => {
-        return(
-          <div style={{display: 'flex',alignItems:'center'}}><Avatar src={data.photo?data.photo:noAvatar} /><div style={{marginLeft:'5px'}}>{data.org}</div></div>
+        return (
+          <div style={{ display: 'flex', alignItems: 'center' }}><Avatar src={data.photo ? data.photo : noAvatar} /><div style={{ marginLeft: '5px' }}>{data.org}</div></div>
         )
       },
     },
@@ -180,8 +179,7 @@ const PublicRanking = () => {
   ];
 
   return (
-    <Parallax className='image' blur={0} bgImage={require('../assets/banner1.jpg')} strength={800} bgImageStyle={{ minHeight: "100vh" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Navbar>
+    <div  >      <Navbar>
         <div className='logo-title'>
           <Logoimg src={logo} alt="logo" />
           <div className='title'>G'Tracker </div>
@@ -238,7 +236,7 @@ const PublicRanking = () => {
                       flexDirection: 'column',
                       margin: 'auto'
                     }}>Energy Score:
-                      <Progress type="circle"  strokeColor={{
+                      <Progress type="circle" strokeColor={{
                         '0%': '#108ee9',
                         '100%': '#87d068',
                       }} percent={record.energy} />
@@ -274,17 +272,15 @@ const PublicRanking = () => {
                       }} percent={record.Certification} />
                     </div>
                   </div>
-                  ),
-                  rowExpandable: (record) => record.name !== 'Not Expandable',
-                }}
-                dataSource={listData}
-              />
-              </div>
-        </Content>) : (<Layout style={{
-          margin: '10% 0% 0%', borderRadius: 20, width: '1200px', height: "200px", display: 'flex', justifyContent: 'center',
-          overflow: "hidden"
-        }}><LoadingIcon></LoadingIcon></Layout>)}
-    </Parallax>
+                ),
+                rowExpandable: (record) => record.name !== 'Not Expandable',
+              }}
+              dataSource={listData}
+            />
+          </div>
+        </Content>) : (<div className='content'style={{display:'flex', justifyContent:'center', marginTop:'20rem', marginBottom:'2rem'}} >
+          <LoadingIcon></LoadingIcon></div>)}
+   </div>
   )
 }
 

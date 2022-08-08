@@ -71,7 +71,6 @@ export default function AdminLogin() {
   }
 
   const handleSubmit = async (e) => {
-    console.log("clicked");
     e.preventDefault();
     const check = userCheck.current.value;
     const msg = {
@@ -204,11 +203,6 @@ export default function AdminLogin() {
           <Labelbox style={{display: 'flex', flexDirection:'row'}}>
             <FormControlLabel style={{width: '20px', marginBottom: '10px'}}
               control={<Checkbox value="remember" color="primary" required/>}
-              // label={
-              //   <Typography sx={{ fontSize: 16, fontWeight: 'bold' }}>
-              //     I agree to the Terms & Conditions
-              //   </Typography>
-              // } sx={{ marginBottom: '10px' } }
             />
             <Typography sx={{ fontSize: 16, fontWeight: 'bold', marginTop:'10px'}} style={{display:'flex'}}>
               I agree to the&nbsp;<a onClick={showModal}>Terms & Conditions</a>
