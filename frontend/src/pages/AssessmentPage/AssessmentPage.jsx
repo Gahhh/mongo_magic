@@ -446,7 +446,6 @@ const AssessmentPage = () => {
         }
     }
 
-    console.log(assessmentAnswer);
 
     return (
         <PageContainer>
