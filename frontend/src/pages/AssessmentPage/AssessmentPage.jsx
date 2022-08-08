@@ -428,11 +428,12 @@ const AssessmentPage = () => {
     const clearCurrentPage = () => {
         setAssessmentAnswer({});
         setPageStep(0);
-        setOfficeList(['1']);
+        setOfficeList([]);
         setdatacentreList(['1']);
         setRemoveAnsweredQuestions(true);
         setCollapseNumber(1);
         setTimeout(() => {
+            setOfficeList(['1']);
             setRemoveAnsweredQuestions(false);
         }, 200);
     }
@@ -444,6 +445,8 @@ const AssessmentPage = () => {
             navigate('/admin/dashboard');
         }
     }
+
+    console.log(assessmentAnswer);
 
     return (
         <PageContainer>
@@ -475,12 +478,12 @@ const AssessmentPage = () => {
                                     {
                                         (pageStep === 0) ?
                                             <>{officeList.map((office) =>
-                                                <QuestionForm type={'office'} setRemoveAnsweredQuestions={setRemoveAnsweredQuestions} setRemover={setRemover} key={`office${office}`} collapseNumber={collapseNumber} officeList={officeList} number={parseInt(office)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListOffice}></QuestionForm>
+                                                <QuestionForm type={'office'} removeAnsweredQuestions={removeAnsweredQuestions} setRemoveAnsweredQuestions={setRemoveAnsweredQuestions} setRemover={setRemover} key={`office${office}`} collapseNumber={collapseNumber} officeList={officeList} number={parseInt(office)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListOffice}></QuestionForm>
                                             )}</> :
                                             (pageStep === 1) ?
                                                 <>
                                                     {datacentreList.map((datacentre) =>
-                                                        <QuestionForm type={'datacentre'} key={`Data Centre`} setRemoveAnsweredQuestions={setRemoveAnsweredQuestions} collapseNumber={1} datacentreList={datacentreList} number={parseInt(datacentre)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListDataCenter}></QuestionForm>
+                                                        <QuestionForm type={'datacentre'} key={`Data Centre`} removeAnsweredQuestions={removeAnsweredQuestions} setRemoveAnsweredQuestions={setRemoveAnsweredQuestions} collapseNumber={1} datacentreList={datacentreList} number={parseInt(datacentre)} assessmentSetter={setAssessmentAnswer} assessment={assessmentAnswer} qList={questionListDataCenter}></QuestionForm>
                                                     )}
                                                 </> :
                                                 (pageStep === 2) ?

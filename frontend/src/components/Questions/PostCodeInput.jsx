@@ -4,7 +4,6 @@ import { isAustralianPostCode } from '../../utils/functions';
 import { LoadingOutlined } from '@ant-design/icons';
 import { australianPostCode } from '../../utils/requests';
 import { QuestionContext } from '../QuestionForm/QuestionForm';
-import { australianPostCodeWithRetry } from '../../utils/requests';
 import './QuestionStyle.css';
 
 const PostCodeInput = (props) => {
@@ -14,6 +13,7 @@ const PostCodeInput = (props) => {
     const [connectionError, setConnectionError] = React.useState(false);
     const ans = React.useContext(QuestionContext);
     const inputRef = React.useRef();
+
 
     const inputOnchange = (e) => {
         setIsValid(isAustralianPostCode(e));

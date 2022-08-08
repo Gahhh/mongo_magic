@@ -67,7 +67,7 @@ const QuestionForm = (props) => {
         if (props.setRemoveAnsweredQuestions){
             setAnswer({});
         }
-    },[props.setRemoveAnsweredQuestions])
+    },[props.removeAnsweredQuestions])
 
     useEffect(() => {
         const type = props.type === 'office' ? 'office' : 'data';
