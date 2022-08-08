@@ -136,3 +136,31 @@ li.ant-menu-item {
   color: #4D7393;
 }
 
+.admin-dashboard-circle-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-dashboard-circle {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+}
+
+.admin-dashboard-circle-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4D7393;
+  padding-bottom: 20px;
+}
+
+.admin-dashboard-total-card {
+  max-width: 900px;
+  padding: 50px 0;
+  margin: auto;
+}
