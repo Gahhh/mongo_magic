@@ -211,7 +211,7 @@ def energy_score_calculate(avg_energy):
   if 3.5 < avg_energy <= 7.5:
     return (7.5-avg_energy)*5+20
   if 7.5 < avg_energy <= 17.5:
-    return 20 - (17.5-avg_energy)*2
+    return (17.5-avg_energy)*2
   return 0
   
 def calculate_tennis_area(habitat):

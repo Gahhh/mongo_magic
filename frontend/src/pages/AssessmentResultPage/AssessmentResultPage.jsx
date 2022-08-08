@@ -280,7 +280,7 @@ const AssessmentResultPage = () => {
                     </div>
                     <Span>
                         <Atag onClick={() => (navigate('/'))}>Home</Atag>
-                        <Atag>Ranking</Atag>
+                        <Atag onClick={() => (navigate('/publicranking'))}>Ranking</Atag>
                         <Atag onClick={turnToHelp}>Help</Atag>
                         <Atag onClick={turnToAbout}>About</Atag>
                         {
