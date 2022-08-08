@@ -118,4 +118,4 @@ This project's database is an online database on MongoDB Atlas, you don't need i
 This project's backend is hosted on AWS server, the access url is: https://d1c543cslxqz58.cloudfront.net.   
 
 The frontend is also have a cloud access on AWS server, the address is:   
-https://aws-deployment.dr6mpjsbodgkw.amplifyapp.com/
+https://main.d2tkai59xc2o9w.amplifyapp.com/
