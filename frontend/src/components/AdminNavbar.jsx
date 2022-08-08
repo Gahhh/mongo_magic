@@ -9,15 +9,12 @@ import resultsLogo from '../assets/resultsLogo.png';
 import resultsLogoSelected from '../assets/resultsLogoSelected.png';
 import analyticsLogo from '../assets/analyticsLogo.png';
 import analyticsLogoSelected from '../assets/analyticsLogoSelected.png';
-import rankingLogo from '../assets/rankingLogo.png';
-import rankingLogoSelected from '../assets/rankingLogoSelected.png';
 import profileLogo from '../assets/profileLogo.png';
 import profileLogoSelected from '../assets/profileLogoSelected.png';
-import settingsLogo from '../assets/settingsLogo.png';
-import settingsLogoSelected from '../assets/settingsLogoSelected.png';
+import rankingimg from '../assets/rankingimg.jpg'
+import rankingSelected from '../assets/rankingSelected.png'
 import '../App.css';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { checkToken } from '../utils/functions';
+import { useNavigate, useLocation} from 'react-router-dom';
 import { userLogout } from '../utils/requests';
 import themeColor from "../config/theme";
 
@@ -179,9 +176,9 @@ const AdminNavbar = (props) =>{
                     <Menu.Item icon={<DashboardLogo id='3' src={(itemSelected === '3') ? (analyticsLogoSelected): (analyticsLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="3">
                       Analytics
                     </Menu.Item>
-                    <Menu.Item icon={<DashboardLogo id='4' src={(itemSelected === '4') ? (rankingLogoSelected): (rankingLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="4">
-                      Ranking
-                    </Menu.Item>
+                    <Menu.Item icon={<DashboardLogo id='4' src={(itemSelected === '4') ? (rankingSelected): (rankingimg) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="4">
+                            Ranking
+                      </Menu.Item>
                     <Menu.Item icon={<DashboardLogo id='5' src={(itemSelected === '5') ? (profileLogoSelected): (profileLogo) } size={textOffsetLeft - logoOffsetLeft - 42} />} style={menuItemStyle} key="5">
                       Profile
                     </Menu.Item>

@@ -33,7 +33,6 @@ function Profile() {
     useEffect(() => {
         let flag = false;
         for(const key of Object.keys(change)) {
-            console.log(change[key], prof.providerProfile.profile[key]);
             if (change[key] !== prof.providerProfile.profile[key]){
                 flag = true;
             }
@@ -41,17 +40,11 @@ function Profile() {
         setHasDiff(flag);
     },[change, prof.providerProfile.profile])
 
-    console.log(hasDiff);
-
     let contentStyle = {
         padding: '24px',
-        // background: '#fff',
-        // minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        // backgroundColor: 'rgb(241,241,241)',
-        // height: '100vh',
     };
 
     let avatarStyle = {
