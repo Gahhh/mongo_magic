@@ -14,12 +14,12 @@ def get_analysis_data():
 
 @analysis_blueprint.route('/analysis/user_diagram', methods=['GET'])
 @jwt_required()
-# @swag_from('../docs/analysis/get_analysis_data.yml', methods=['GET'])
+@swag_from('../docs/analysis/user_diagram.yml', methods=['GET'])
 def get_diagram_data():
     return diagram_data(request)
 
 @analysis_blueprint.route('/analysis/admin_stats', methods=['GET'])
-# @jwt_required()
-# @swag_from('../docs/analysis/get_stats_data.yml', methods=['GET'])
+@jwt_required()
+@swag_from('../docs/analysis/get_stats_data.yml', methods=['GET'])
 def get_stats_data():
     return stats_data(request)
