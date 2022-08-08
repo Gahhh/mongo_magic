@@ -61,7 +61,6 @@ export default function LoginPage() {
       password: userpwd.current.value,
       user_type: "1",
     };
-    console.log(msg);
     await loginRequest(msg).then(res => {
       if (!res.ok) {
         res.json().then(body => {
