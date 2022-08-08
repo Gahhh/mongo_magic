@@ -89,10 +89,10 @@ const ImageOne = () => {
   const turnToHelp = () => {
     navigate('/help')
   }
+
   const turnToRanking = () => {
     navigate('/publicranking')
   }
-
 
   return <Parallax className='image' blur={0} bgImage={require('../assets/banner1.jpg')} strength={800} bgImageStyle={{minHeight:"100vh"}}>
   <Navbar>

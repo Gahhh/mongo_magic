@@ -74,11 +74,10 @@ const Help = () => {
           <li>Location (10%)</li>
           <li>Public Transport (20%)</li>
           <li>Energy (40%)</li>
-          <li>Green Star Rating/NABERS (30%)</li>
-          <li>Other measures (25%) (if rating is not available)</li>
+          <li>Other measures (30%)</li>
         </HelpUL>
         <p>
-          From the weights schedule, the user will be in disadvantage if their office/data centre has not been rated by the NABERS or Green Building Council. For the final result, we will provide the user with a relative score. The score will be based on the current data and ranking in the database. The highest score will be 99, which means the user's result is in the top 1%.
+          Other measures will cover the certification and cloud services. Therefore, the user will be in disadvantage if their office/data centre has not been rated by the NABERS or Green Building Council. Also, if the users do not have any data/calculation services on cloud, they will not been given a high score. For the final result, we will provide the user with a raw score and its position in our database. The maximum raw score is 100, which is made up of the sum of the weights of all the questions.
         </p>
         <SubTitle>Question - Postcode:</SubTitle>
         <p>
@@ -89,7 +88,7 @@ const Help = () => {
           We will give 1 point for each public transport option in the user's area. Based on the article below(Kennedy et al., 2002), the CO2 emission of an private car (7L/100km) is between 47g/person-km. But for metro train, the emission is between 7.5-11g/person-km. Based on this, with no public transport option, the user will get a score of 0, and with public transport option, the user will get a maximum score of 20.
         </p>
         <SubTitle>Question - Green star rating:</SubTitle>
-        <p>Today, 44 per cent of Australia’s CBD office space and 40 per cent of retail space is Green Star certified. source: Green Star 2019/20.</p>
+        <p>Today, 44 per cent of Australia's CBD office space and 40 per cent of retail space is Green Star certified.(source: Green Star 2019/20).</p>
         <p>
           Therefore, we will heavily reward the user if the user's office building is Green Star certified.
         </p>
@@ -103,6 +102,12 @@ const Help = () => {
         <SubTitle>Question - Data Centre:</SubTitle>
         <p>
           We also collect the information about the data centre. The questions will base on the electricity consumption and any sustainability measures. Also, we will ask if the data centre has a NABERS Rating. NABERS is a performance-based national rating system that measures the environmental performance of existing buildings, tenancies and homes. We encourage the user to get a NABERS rating for their data centre, therefore, we will give more weightage on the NABERS rating. If the user doesn't have a NABERS rating, our evluation will be based on the electricity consumption and the sustainability measures.
+        </p>
+
+        <SubTitle>Question - Cloud Service:</SubTitle>
+        <p>
+          We will ask if the user's organisation has cloud services. The leading cloud service providers AWS, Google Cloud and Microsoft Azure have planned to turn to 100% renewable energy by 2025, which is a significant milestone for the future of the cloud. Therefore, organisations who are planning to move further in sustainability
+          should consider migrating all their servers, data centres to cloud. Due to that reason, we will heavliy reward in the assessment if the user has cloud services.
         </p>
         <SubTitle>References:</SubTitle>
         <p>
