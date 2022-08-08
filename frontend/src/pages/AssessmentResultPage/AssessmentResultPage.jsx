@@ -279,31 +279,6 @@ const AssessmentResultPage = () => {
 
     }
 
-
-
-    const tempData = {
-        "score": "99",
-        "co2": "1500",
-        "natural_habitat": "500",
-        "roughly_size": "20",
-        "suggestion": {
-            "Location Location Location": [
-],
-            "Reduce, reuse, recycle": [
-                "You may need to consider go forward with LED lighting in your offices",
-                "Your data centre may need a passive cooling system in order to reduce the energy consumption"
-            ],
-            "Go cloud, go greens": [
-                "A physical data centre is not the best place to store your data and servers, considering a cloud solution",
-                "You may consider to increase the percentage of renewable sources in your electricity bill"
-            ],
-            "Get certified, get ahead": [
-                "You may consider to get certified for your offices with Green Star Rating",
-                "You may consider to get certified for your data centre with NABERS"
-            ]
-        }
-    }
-
     return (
         <>
             <Parallax className='image' blur={0} bgImage={require('../../assets/banner1.jpg')} strength={800} bgImageStyle={{ minHeight: "100vh" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

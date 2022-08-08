@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import {Layout, message} from 'antd';
-import themeColor from "../config/theme";
-import { Card } from 'antd';
-import { getSupportQuestions } from '../utils/requests';
+import { Layout } from 'antd';
 import SupportCards from "../components/SupportCards/SupportCards";
 
 const { Content } = Layout;
@@ -24,7 +21,7 @@ const AdminSupport = () => {
     <>
       <Content style={{ display: 'flex', flexDirection: 'column', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
         <SupportContainer>
-          <SupportCards />
+          <SupportCards/>
         </SupportContainer>
       </Content>
     </>

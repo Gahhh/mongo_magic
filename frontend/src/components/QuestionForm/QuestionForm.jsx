@@ -64,6 +64,12 @@ const QuestionForm = (props) => {
     }, [questionUnfinished]);
 
     useEffect(() => {
+        if (props.setRemoveAnsweredQuestions){
+            setAnswer({});
+        }
+    },[props.setRemoveAnsweredQuestions])
+
+    useEffect(() => {
         const type = props.type === 'office' ? 'office' : 'data';
         if (type === 'office') {
             if (props.assessment[`office${props.number}`]) {

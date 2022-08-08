@@ -3,6 +3,8 @@ import { Layout } from 'antd';
 import '../App.css';
 import { Card, Progress, Statistic } from 'antd';
 import { getStatsData } from "../utils/requests";
+import LoadingIcon from "../components/LoadingIcon";
+
 const { Content } = Layout;
 
 const AdminDashboard = (props) => {
@@ -23,10 +25,13 @@ const AdminDashboard = (props) => {
   React.useEffect(() => {
     getStats();
   } , []);
+
+  console.log(JSON.stringify(stats))
   return (
     <>
       <Content >
-        <div className="admin-dashboard-total-card">
+        {JSON.stringify(stats) === '{}' ? <div style={{height:'100%', display:'flex', justifyContent:'center', alignItems:'center' }}><LoadingIcon/></div> :
+        (<div className="admin-dashboard-total-card">
           <div>
             <Card
               title="Total Users Registered"
@@ -94,7 +99,7 @@ const AdminDashboard = (props) => {
               </div>
             </div>
             </Card>
-        </div>
+        </div>)}
       </Content>
     </>
   )
