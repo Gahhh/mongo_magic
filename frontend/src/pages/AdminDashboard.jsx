@@ -1,29 +1,103 @@
-import { React } from "react";
+import React from "react";
 import { Layout } from 'antd';
 import '../App.css';
-import { checkToken } from '../utils/functions';
-import TextEffect from '../components/TextEffect';
-import { useContext } from 'react';
-import { ProfileContext } from "../App";
-import HeaderBar from '../components/HeaderBar';
-import LoadingIcon from '../components/LoadingIcon';
-import themeColor from '../config/theme';
-
+import { Card, Progress, Statistic } from 'antd';
+import { getStatsData } from "../utils/requests";
 const { Content } = Layout;
 
 const AdminDashboard = (props) => {
-  const profile = useContext(ProfileContext);
+  const [stats, setStats] = React.useState({});
 
+  const getStats = async () => {
+    await getStatsData().then(res => {
+      if (res.ok) {
+        res.json().then(
+          data => {
+            console.log(data)
+            setStats(data);
+          }
+        )
+      }
+    })
+  }
+  React.useEffect(() => {
+    getStats();
+  } , []);
   return (
     <>
-      <Content style={{ minWidth:'500px',display:'flex', alignItems:'center', justifyContent:'center' }}>
-        {(profile?.providerProfile?.profile?.email == undefined) ? (<LoadingIcon></LoadingIcon>) :
-          (<>
-              <TextEffect textColor={themeColor} /></>
-          )}
+      <Content >
+        <div className="admin-dashboard-total-card">
+          <div>
+            <Card
+              title="Total Users Registered"
+              bordered={false}
+            >
+            <Statistic value={stats.user_total} />
+            </Card>
+            <Card
+              title="Total Assessments Taken"
+              bordered={false}
+            >
+            <Statistic value={stats.result_total} />
+            </Card>
+            <Card
+              title="Average Score"
+              bordered={false}
+            >
+            <Statistic value={stats.avg_score} />
+            </Card>
+          </div>
+          <Card
+              title="Detailed Average Performance"
+              bordered={false}
+            >
+          <div className="admin-dashboard-circle-group">
+            <div className="admin-dashboard-circle">
+                <div className="admin-dashboard-circle-text">Energy</div>
+                <Progress
+                  type="circle"
+                  strokeColor={{
+                    '0%': '#108ee9',
+                    '100%': '#87d068',
+                  }}
+                  percent={stats.avg_energy} />
+              </div>
+              <div className="admin-dashboard-circle">
+                <div className="admin-dashboard-circle-text">Location</div>
+                <Progress
+                  type="circle"
+                  strokeColor={{
+                    '0%': '#108ee9',
+                    '100%': '#87d068',
+                  }}
+                  percent={stats.avg_location} />
+              </div>
+              <div className="admin-dashboard-circle">
+                <div className="admin-dashboard-circle-text">Public Transport</div>
+                <Progress
+                  type="circle"
+                  strokeColor={{
+                    '0%': '#108ee9',
+                    '100%': '#87d068',
+                  }}
+                  percent={stats.avg_pt} />
+              </div>
+              <div className="admin-dashboard-circle">
+                <div className="admin-dashboard-circle-text">Certification</div>
+                <Progress
+                  type="circle"
+                  strokeColor={{
+                    '0%': '#108ee9',
+                    '100%': '#87d068',
+                  }}
+                  percent={stats.avg_ct} />
+              </div>
+            </div>
+            </Card>
+        </div>
       </Content>
     </>
-  );
+  )
 
 }
 export default AdminDashboard;

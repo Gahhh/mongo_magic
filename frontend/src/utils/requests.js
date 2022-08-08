@@ -115,3 +115,7 @@ export const resultListRequest = () => {
 export const getUserDiagramData = () => {
     return apiRequest({ url: '/analysis/user_diagram' });
 }
+
+export const getStatsData = () => {
+    return apiRequest({ url: '/analysis/admin_stats' });
+}
