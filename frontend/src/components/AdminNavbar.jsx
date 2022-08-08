@@ -42,7 +42,7 @@ const LogoText = styled.a`
     left: 5%;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 30px;
     line-height: 40px;
     letter-spacing: 0.04em;
     color: #4D7393;
@@ -166,17 +166,17 @@ const AdminNavbar = (props) =>{
                     <Menu.Item style={{ marginLeft:`${logoOffsetLeft}px`, fontWeight: 'bolder', pointerEvents: 'none'}} key="200"  >
                       <b style={{ fontWeight: '700', fontSize:'16px'}}>Main Menu</b>
                     </Menu.Item>
-                    <Menu.Item icon={<DashboardLogo id='1' src={(itemSelected === '1') ? (dashboardLogoSelected): (dashboardLogo) } size={textOffsetLeft - logoOffsetLeft - 42} />} style={menuItemStyle} key="1">
+                    <Menu.Item icon={<DashboardLogo id='1' src={(itemSelected === '1') ? (resultsLogoSelected): (resultsLogo) } size={textOffsetLeft - logoOffsetLeft - 42} />} style={menuItemStyle} key="1">
                       Dashboard
                     </Menu.Item>
-                    <Menu.Item icon={<DashboardLogo id='2' src={(itemSelected === '2') ? (resultsLogoSelected): (resultsLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="2">
+                    <Menu.Item icon={<DashboardLogo id='2' src={(itemSelected === '2') ? (dashboardLogoSelected): (dashboardLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="2">
                       Support
                     </Menu.Item>
                     <Menu.Item icon={<DashboardLogo id='3' src={(itemSelected === '3') ? (analyticsLogoSelected): (analyticsLogo) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="3">
                       Analytics
                     </Menu.Item>
                     <Menu.Item icon={<DashboardLogo id='4' src={(itemSelected === '4') ? (rankingSelected): (rankingimg) } size={textOffsetLeft - logoOffsetLeft - 42}/>} style={menuItemStyle} key="4">
-                            Ranking
+                        Ranking
                       </Menu.Item>
                     <Menu.Item icon={<DashboardLogo id='5' src={(itemSelected === '5') ? (profileLogoSelected): (profileLogo) } size={textOffsetLeft - logoOffsetLeft - 42} />} style={menuItemStyle} key="5">
                       Profile

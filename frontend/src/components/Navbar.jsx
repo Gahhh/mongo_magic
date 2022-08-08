@@ -42,7 +42,7 @@ const LogoText = styled.a`
     left: 5%;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 30px;
     line-height: 40px;
     letter-spacing: 0.04em;
     color: #4D7393;

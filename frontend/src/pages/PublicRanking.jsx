@@ -208,7 +208,7 @@ const PublicRanking = () => {
           margin: '5% 0% 5%', borderRadius: 20, display:'flex', alignItems:'center', flexDirection:'column',
           overflow: "hidden"
         }}>
-<div style={{backgroundColor: 'white', padding:'20px', borderRadius:'10px', width:'80%'}}>
+<div style={{backgroundColor: 'white', padding:'20px', borderRadius:'10px', width:'80%', maxWidth: '1200px'}}>
               <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px'}}>
                 <h3 style={{float: 'left', marginBottom: '0'}}>Ranking List</h3>
                 <Button type="primary" style={{float: 'right'}} onClick={() => handleClick()}>New Assessment</Button>
