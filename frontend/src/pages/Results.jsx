@@ -73,6 +73,7 @@ const Results = () => {
         results[i]['public_transport'] = (results[i]['public_transport'] * 100 <= 100) ? parseInt(results[i]['public_transport'] * 100) : 100;
         results[i]['test_time'] = results[i]['test_time'].split(' ')[0];
       }
+      results.reverse();
       setData(results);
     } else if(results === 'empty'){
       setData('empty')
