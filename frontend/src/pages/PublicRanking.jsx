@@ -88,8 +88,6 @@ const PublicRanking = () => {
 
       const newData = Object.values(ranking);
       const rankIndex = Object.keys(ranking);
-      console.log(newData)
-      console.log(rankIndex)
       for (let i = 0; i < rankIndex.length; i++) {
         newData[i].date = newData[i].time.split(' ')[0];
         newData[i].rankIndex = rankIndex[i];
@@ -103,7 +101,6 @@ const PublicRanking = () => {
         }
         newData[i].company = company;
       }
-      console.log(newData)
       setData(newData);
 
     }
@@ -152,7 +149,7 @@ const PublicRanking = () => {
 
   const columns = [
     {
-      title: 'Company',
+      title: 'Organisation',
       dataIndex: 'company',
       key: 'Company',
       width: 400,
@@ -175,7 +172,7 @@ const PublicRanking = () => {
       width: 300,
     },
     {
-      title: 'Test time',
+      title: 'Date',
       dataIndex: 'date',
       key: 'date',
       width: 400,
@@ -216,7 +213,7 @@ const PublicRanking = () => {
 <div style={{backgroundColor: 'white', padding:'20px', borderRadius:'10px'}}>
               <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'10px'}}>
                 <h3 style={{float: 'left', marginBottom: '0'}}>Ranking List</h3>
-                <Button type="primary" style={{float: 'right'}} onClick={() => handleClick()}>New test</Button>
+                <Button type="primary" style={{float: 'right'}} onClick={() => handleClick()}>New Assessment</Button>
               </div>
           <Table
                 columns={columns}

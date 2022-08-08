@@ -12,7 +12,6 @@ const apiRequest = async ({ method = undefined, url, body = undefined }) => {
         body: body ? JSON.stringify(body) : undefined,
     };
     try {
-        console.log((requestOptions));
         const response = await fetch(`${backend_url}${url}`, requestOptions);
         return response;
     } catch (error) {
@@ -51,7 +50,6 @@ export const australianPostCode = async (postCode) => {
         method: 'GET',
     };
     try {
-        // console.log(`https://secure.geonames.org/postalCodeSearch?postalcode=${postCode}&username=jinl9667&country=AU`);
         const response = await fetch(`https://secure.geonames.org/postalCodeSearchJSON?postalcode=${postCode}&username=jinl9667&country=AU`, request);
         return response;
     } catch (error) {
@@ -101,15 +99,19 @@ export const rankingRequest = () => {
 }
 
 export const solveSupportQuestion = (body) => {
-    const res = apiRequest({method: 'POST', url: '/support/solve', body: body});
+    const res = apiRequest({ method: 'POST', url: '/support/solve', body: body });
     return res;
 }
 
 export const getAnalysis = (body) => {
-    return apiRequest({ method:'POST', url: '/analysis/data', body:body });
+    return apiRequest({ method: 'POST', url: '/analysis/data', body: body });
 }
 
 export const resultListRequest = () => {
-    const res = apiRequest({ method: 'GET', url: '/users/result'});
+    const res = apiRequest({ method: 'GET', url: '/users/result' });
     return res;
-  }
+}
+
+export const getUserDiagramData = () => {
+    return apiRequest({ url: '/analysis/user_diagram' });
+}

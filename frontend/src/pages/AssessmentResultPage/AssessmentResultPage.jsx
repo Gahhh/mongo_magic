@@ -133,6 +133,8 @@ const AssessmentResultPage = () => {
         })
     }, [id]);
 
+    console.log(data);
+
     useEffect(() => {
         if (value < 100) {
             addToOneHundred();
@@ -208,11 +210,11 @@ const AssessmentResultPage = () => {
             Object.keys(data['suggestion']).map((key, index) => {
                 return (
                     suggestion[key].length > 0 && <div key={`container${index}`}>
-                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0'}}>{key}</ul>
+                        <ul key={`list${index}`} style={{ color: '#4D7393', fontWeight: '700', paddingTop:'10px',lineHeight:'2', paddingInlineStart:'20px', marginBlockEnd:'0', fontSize:'16px'}}>{key}</ul>
                             {   
                                 suggestion[key].map((item, index) => {
                                     return (
-                                        <li key={index} style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px' }}>{item}</li>
+                                        <li key={index} style={{  marginRight: '20px', color: '#89c5d1', paddingInlineStart:'20px', fontSize:'16px' }}>{item}</li>
                                     )
                                 })
                             }
@@ -270,31 +272,6 @@ const AssessmentResultPage = () => {
 
     }
 
-
-
-    const tempData = {
-        "score": "99",
-        "co2": "1500",
-        "natural_habitat": "500",
-        "roughly_size": "20",
-        "suggestion": {
-            "Location Location Location": [
-],
-            "Reduce, reuse, recycle": [
-                "You may need to consider go forward with LED lighting in your offices",
-                "Your data centre may need a passive cooling system in order to reduce the energy consumption"
-            ],
-            "Go cloud, go greens": [
-                "A physical data centre is not the best place to store your data and servers, considering a cloud solution",
-                "You may consider to increase the percentage of renewable sources in your electricity bill"
-            ],
-            "Get certified, get ahead": [
-                "You may consider to get certified for your offices with Green Star Rating",
-                "You may consider to get certified for your data centre with NABERS"
-            ]
-        }
-    }
-
     return (
         <>
             <Parallax className='image' blur={0} bgImage={require('../../assets/banner1.jpg')} strength={800} bgImageStyle={{ minHeight: "100vh" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -332,9 +309,9 @@ const AssessmentResultPage = () => {
                                         <Button style={{ borderRadius: '5px', width: '150px', alignSelf: 'end', marginRight: '10px', color: '#4D7393', borderColor: '#89c5d1' }} onClick={downloadPdf} data-html2canvas-ignore="true">Save as PDF</Button>
                                     </div>
                                     <div style={{ marginLeft: '25px', height: '400px', width: '100%', backgroundColor: `${themeColor_light}` }}>
-                                        <Image style={{ height: '400px', width:'100%'}} src={'/publicAssets/resultBack.jpg'}></Image>
+                                        <Image style={{ height: '400px', width:'100%'}} src={'https://localtenniscourtresurfacing.com/wp-content/uploads/2014/01/Tennis-Court-Resurfacing-Milwaukee-672x372.jpg'}></Image>
                                     </div>
-                                    <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600' }}>
+                                    <TextContext style={{ marginLeft: '25px', display: 'block', whiteSpace: 'normal', overflowWrap: 'break-word', color: '#89c5d1', fontWeight: '600', fontSize:'16px' }}>
                                         Your organisation's annual carbon footprint is <ParamContext style={{ color: '#4D7393' }}>{data.co2}</ParamContext>Kg of Carbon Dioxide equivalent (KgCO<sub>2</sub>e).
                                         To compensate for your emissions, around <ParamContext>{data.natural_habitat}</ParamContext>m<sup>2</sup> of natural habitat must be restored. That is roughly the size of <ParamContext>{data.roughly_size}</ParamContext>  tennis courts.
                                     </TextContext>

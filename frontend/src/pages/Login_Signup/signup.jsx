@@ -81,7 +81,6 @@ export default function AdminLogin() {
       org: userOrg.current.value,
       user_type: "1",
     };
-    console.log(msg);
     if (msg.password === check) {
     await regisRequest(msg).then(res => {
         if (!res.ok) {

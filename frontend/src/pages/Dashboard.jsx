@@ -1,19 +1,22 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { Layout, Button } from 'antd';
 import '../App.css';
-import { checkToken } from '../utils/functions';
 import TextEffect from '../components/TextEffect';
 import { useContext } from 'react';
 import { ProfileContext } from "../App";
-import HeaderBar from '../components/HeaderBar';
 import LoadingIcon from '../components/LoadingIcon';
 import themeColor from '../config/theme';
+import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
 
 const Dashboard = (props) => {
     const profile = useContext(ProfileContext);
-    // console.log((profile?.providerProfile?.profile?.email == undefined));
+    const navigate = useNavigate();
+
+    const goAssessment = () => {
+        navigate('/assessment');
+    }
 
     return (
         <>  
@@ -22,7 +25,7 @@ const Dashboard = (props) => {
                     (<>
                     <TextEffect textColor={themeColor} />
                     <span style={{ fontSize:'20px' }}>
-                                    <a href='/assessment' style= {{ color:`${themeColor}` }}> Get Tested Now >></a>
+                                    <Button style={{ backgroundColor:'#7395AE', color:'#FFFDFF', height:'48px', width:'200px', fontSize:'20px' }} onClick={goAssessment}>Get Assessed Now</Button>
                                 </span>
                     </>
                     )}
@@ -31,4 +34,4 @@ const Dashboard = (props) => {
     );
 
 }
-export default Dashboard;
+export default Dashboard
