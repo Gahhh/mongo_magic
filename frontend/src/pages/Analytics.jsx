@@ -93,7 +93,7 @@ const Analytics = () => {
         return (
             <>
                 {prof.providerProfile.profile && !loading && sortedResults!==null ? (
-                    <Content style={{ display: 'flex',  alignItems: 'center', flexDirection:'column' }}>
+                    <Content style={{ display: 'flex',  alignItems: 'center', flexDirection:'column', justifyContent:'center' }}>
                         {valueList.length > 0 ? (
                         <>
                             <ReactECharts option={getOption()} style={{ minHeight: '500px', minWidth: '800px', marginTop: '100px' }}></ReactECharts>
