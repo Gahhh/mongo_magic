@@ -101,7 +101,7 @@ Run the command below to start the app in backend folder:
 ```sh
 $ python3 app.py
 ```
-4) The server shoud be able to run on local server when you see the following information in the terminal.
+The server shoud be able to run on local server when you see the following information in the terminal.
 ```sh
 ------------------------------------------------
  * Debug mode: on
