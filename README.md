@@ -6,6 +6,13 @@ The goal of our project is to develop a cloud-based sustainability assessment pl
 the sustainability progress of their organisations. The platform will collect various consumption and preservation metrics and then provide a sustainability score with suggestions on how to improve the business operations further to the users. 
 
 
+## Cloud Access
+This project's backend is hosted on AWS server, the access url is: https://d1c543cslxqz58.cloudfront.net.   
+
+The frontend is also have a cloud access on AWS server, the address is:   
+https://main.d2tkai59xc2o9w.amplifyapp.com/
+
+
 **This document describes the following points.**
 
 ```sh
@@ -114,8 +121,3 @@ The server shoud be able to run on local server when you see the following infor
 ## Database
 This project's database is an online database on MongoDB Atlas, you don't need implement database on localhost for testing. 
 
-## Cloud Access
-This project's backend is hosted on AWS server, the access url is: https://d1c543cslxqz58.cloudfront.net.   
-
-The frontend is also have a cloud access on AWS server, the address is:   
-https://main.d2tkai59xc2o9w.amplifyapp.com/
