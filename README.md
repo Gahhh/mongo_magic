@@ -1,10 +1,17 @@
 # Mongo Magic Project
 
-------
-
 The goal of our project is to develop a cloud-based sustainability assessment platform for industry organisations. The platform will help the decision maker of organisations to track
 the sustainability progress of their organisations. The platform will collect various consumption and preservation metrics and then provide a sustainability score with suggestions on how to improve the business operations further to the users. 
 
+**This document describes the following points.**
+
+```sh
+> * Cloud Access
+> * System Articture
+> * Front-End setup on localhost
+> * Back-End setup on localhost
+> * Database
+```
 
 ## Cloud Access
 This project's backend is hosted on AWS server, the access url is: https://d1c543cslxqz58.cloudfront.net.   
@@ -12,16 +19,6 @@ This project's backend is hosted on AWS server, the access url is: https://d1c54
 The frontend is also have a cloud access on AWS server, the address is:   
 https://main.d2tkai59xc2o9w.amplifyapp.com/
 
-
-**This document describes the following points.**
-
-```sh
-> * System Articture
-> * Front-End setup on localhost
-> * Back-End setup on localhost
-> * Database
-> * Cloud Access
-```
 ## System Articture
 
 > Frontend  ------  React   
